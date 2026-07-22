@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<!-- ⚠ ГЕНЕРУЄТЬСЯ з _src/ через ./build.sh — НЕ редагувати цей файл напряму. Правити _src/header.html, _src/footer.html або _src/pages/*.html і запустити ./build.sh -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>__TITLE__</title>
+<meta name="description" content="__DESC__">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/styles.css">
+</head>
+<body data-page="__PAGE__">
+<header class="site-header">
+  <div class="container nav" id="nav">
+    <a class="brand" href="/">Sofon<span>.</span></a>
+    <nav class="nav-links">
+      <span class="has-drop">
+        <a href="/products/" data-nav="products">Продукти ▾</a>
+        <span class="drop">
+          <a class="flag" href="/products/osnastka/"><b>Оснастка</b><small>Форматні деталі для переведення лінії на нову пляшку</small></a>
+          <a href="/products/equipment-supply/"><b>Обладнання ліній розливу</b><small>Підбір, відновлення, запуск</small></a>
+          <a href="/products/conveyor-systems/"><b>Конвеєрні системи</b><small>Проєкт, виготовлення, монтаж</small></a>
+          <a href="/products/automation/"><b>Автоматика й керування</b><small>Блоки керування, диспетчеризація</small></a>
+          <a href="/products/spare-parts/"><b>Запасні частини</b><small>До обладнання ліній розливу</small></a>
+          <a href="/products/custom-equipment/"><b>Нестандартне обладнання</b><small>Під ТЗ замовника, у т.ч. палетизатор 19 л</small></a>
+        </span>
+      </span>
+      <a href="/products/osnastka/" data-nav="osnastka">Оснастка</a>
+      <a href="/contract-manufacturing/" data-nav="contract">Контрактне виробництво</a>
+      <a href="/about/" data-nav="about">Про нас</a>
+      <a href="/contact/" data-nav="contact">Контакти</a>
+    </nav>
+    <div class="nav-right">
+      <span class="lang"><a class="on" href="/">UA</a><span>/</span><a href="/en/">EN</a></span>
+      <a class="btn btn--primary" href="/contact/">Отримати прорахунок</a>
+    </div>
+    <button class="nav-toggle" aria-label="Меню" onclick="document.getElementById('nav').parentElement.parentElement.classList.toggle('mobile-open')"><span></span></button>
+  </div>
+</header>
+<main>
