@@ -35,5 +35,14 @@ invent from scratch.
   unlinked media, or pages not in the main nav are missing.
 - No alt text / structured data / WordPress metadata extracted yet, only visible
   copy and images.
-- If a fuller WordPress/media export becomes available, prefer it over this crawl
-  and treat this folder as a fallback.
+- No database dump was available, so page/product text can't be recovered beyond
+  what's rendered in `pages/*.html` — that HTML remains the best source of copy.
+
+## `media-library/` — fuller image set from a hosting backup
+
+2026-07-22: the user provided a full cPanel hosting-account backup (`cagefs.zip`).
+Only `public_html/wp-content/uploads/` was extracted from it (317 original images,
+see `media-library/README.md`) — it's a superset of `images/` above, including photos
+not currently linked from any live page. Everything else in that backup (mailbox,
+`wp-config.php` credentials, SSL keys, an unrelated second site) was deliberately left
+alone — not relevant here, and some of it is sensitive.
