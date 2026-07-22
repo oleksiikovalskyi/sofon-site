@@ -65,8 +65,9 @@
 Contact (обрати механізм форми: mailto/Formspree/Getform) → повне дзеркало EN під `/en/` →
 favicon/OG + реальні фото машин замість плейсхолдер-блоків.
 
-Повний план і бренд-гайд — поза репо: `Sophon/brand/PLAN_brand-identity-sofon.md`,
-`Sophon/brand/Sofon-Brand-Guidelines-v1.0.html`.
+Повний план айдентики й сайту (8 фаз, статус, відкриті питання) — тепер у репо:
+`docs/PLAN_brand-identity-sofon.md`. Джерело — Claude Design проєкт «Sofon brand
+guidelines» (там і оригінал, і сам brand-guide `Sofon-Brand-Guidelines-v1.0.html`).
 
 ## Деплой
 Будь-яка правка → коміт → пуш у `main` → Vercel пересобирає за секунди.
