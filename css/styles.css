@@ -162,6 +162,15 @@ a.card:hover .more{color:var(--amber)}
 .crumb{font-family:var(--fm);font-size:12.5px;letter-spacing:.06em;color:var(--steel);
   text-transform:uppercase;margin-bottom:var(--s16)}
 .crumb a:hover{color:var(--amber)}
+/* ---------- page hero — photo variant ---------- */
+.phero--photo{position:relative;background:var(--graphite);border-bottom:none;overflow:hidden}
+.phero--photo .phero-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.45}
+.phero--photo::after{content:'';position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(18,21,26,.35) 0%,rgba(18,21,26,.85) 100%)}
+.phero--photo .container{position:relative;z-index:2}
+.phero--photo h1,.phero--photo .crumb,.phero--photo .crumb a{color:#fff}
+.phero--photo .crumb{opacity:.8}
+.phero--photo .lead{color:rgba(255,255,255,.82)}
 /* ---------- footer ---------- */
 .site-footer{background:var(--footer);color:rgba(255,255,255,.7);padding:var(--s64) 0 var(--s32)}
 .foot-top{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:var(--s48);padding-bottom:var(--s48);
