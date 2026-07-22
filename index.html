@@ -1,20 +1,196 @@
 <!doctype html>
-<html lang="ru">
+<html lang="uk">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Визитка — в разработке</title>
-  <style>
-    body { font-family: system-ui, sans-serif; margin: 0; padding: 4rem 2rem; background: #0f1115; color: #eaeaea; }
-    .box { max-width: 640px; margin: 0 auto; text-align: center; }
-    h1 { font-size: 2rem; margin-bottom: 0.5rem; }
-    p { color: #9aa0a6; }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sofon — обладнання для ліній розливу напоїв і води</title>
+<meta name="description" content="Проєктуємо та виготовляємо оснастку, нестандартне обладнання, конвеєри та автоматику для ліній розливу під ваше технічне завдання.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/styles.css">
 </head>
-<body>
-  <div class="box">
-    <h1>Сайт в разработке</h1>
-    <p>Это заглушка. Как только будет готов дизайн — здесь появится настоящий контент.</p>
+<body data-page="home">
+<header class="site-header">
+  <div class="container nav" id="nav">
+    <a class="brand" href="/">Sofon<span>.</span></a>
+    <nav class="nav-links">
+      <span class="has-drop">
+        <a href="/products/" data-nav="products">Продукти ▾</a>
+        <span class="drop">
+          <a class="flag" href="/products/osnastka/"><b>Оснастка</b><small>Форматні деталі для переведення лінії на нову пляшку</small></a>
+          <a href="/products/equipment-supply/"><b>Обладнання ліній розливу</b><small>Підбір, відновлення, запуск</small></a>
+          <a href="/products/conveyor-systems/"><b>Конвеєрні системи</b><small>Проєкт, виготовлення, монтаж</small></a>
+          <a href="/products/automation/"><b>Автоматика й керування</b><small>Блоки керування, диспетчеризація</small></a>
+          <a href="/products/spare-parts/"><b>Запасні частини</b><small>До обладнання ліній розливу</small></a>
+          <a href="/products/custom-equipment/"><b>Нестандартне обладнання</b><small>Під ТЗ замовника, у т.ч. палетизатор 19 л</small></a>
+        </span>
+      </span>
+      <a href="/products/osnastka/" data-nav="osnastka">Оснастка</a>
+      <a href="/contract-manufacturing/" data-nav="contract">Контрактне виробництво</a>
+      <a href="/about/" data-nav="about">Про нас</a>
+      <a href="/contact/" data-nav="contact">Контакти</a>
+    </nav>
+    <div class="nav-right">
+      <span class="lang"><a class="on" href="/">UA</a><span>/</span><a href="/en/">EN</a></span>
+      <a class="btn btn--primary" href="/contact/">Отримати прорахунок</a>
+    </div>
+    <button class="nav-toggle" aria-label="Меню" onclick="document.getElementById('nav').parentElement.parentElement.classList.toggle('mobile-open')"><span></span></button>
   </div>
+</header>
+<main>
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
+    <span class="eyebrow">Обладнання для ліній розливу</span>
+    <h1>Переводимо лінію розливу на нову пляшку — швидко й точно</h1>
+    <p class="lead">Проєктуємо та виготовляємо оснастку, нестандартне обладнання, конвеєри та автоматику під конкретний цех. Інженерна кастомізація замість каталожних компромісів.</p>
+    <div class="hero-cta">
+      <a class="btn btn--primary btn--lg" href="/contact/">Отримати прорахунок</a>
+      <a class="btn btn--onDark btn--lg" href="/products/osnastka/">Флагман: Оснастка →</a>
+    </div>
+    <div class="hero-figure"><span class="cap">// фото машини на виробництві — замінити реальним</span></div>
+  </div>
+</section>
+
+<!-- SECTOR GRID -->
+<section class="section">
+  <div class="container">
+    <div class="sec-head">
+      <span class="eyebrow eyebrow--muted">Що ми робимо</span>
+      <h2>Шість напрямів обладнання ліній розливу</h2>
+      <p>Від форматної оснастки до підбору й запуску цілих ліній — усе під ваше технічне завдання.</p>
+    </div>
+    <div class="grid grid--3">
+      <a class="card card--flag" href="/products/osnastka/">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M18.4 5.6l-2.1 2.1M7.7 16.3l-2.1 2.1"/><circle cx="12" cy="12" r="4"/></svg>
+        <h4>Оснастка (форматні деталі)</h4>
+        <p>Зірки, ліри напрямні, шнеки поділу потоку, турнікетні групи, системи роботи з пробкою, переносники етикетки.</p>
+        <span class="more">Докладніше →</span>
+      </a>
+      <a class="card" href="/products/equipment-supply/">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 7l9-4 9 4-9 4-9-4z"/><path d="M3 7v10l9 4 9-4V7"/><path d="M12 11v10"/></svg>
+        <h4>Обладнання ліній розливу</h4>
+        <p>Підбір, відновлення та запуск усього переліку обладнання — від автоматичних ліній до ручного дрібносерійного виробництва.</p>
+        <span class="more">Докладніше →</span>
+      </a>
+      <a class="card" href="/products/conveyor-systems/">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6" cy="15" r="2.5"/><circle cx="18" cy="15" r="2.5"/><path d="M6 12.5h12M4 18.5h16"/></svg>
+        <h4>Конвеєрні системи</h4>
+        <p>Від проєкту компоновки до монтажу: стрічкові конвеєри для упакованої продукції та санітарні — для сирих неупакованих продуктів.</p>
+        <span class="more">Докладніше →</span>
+      </a>
+      <a class="card" href="/products/automation/">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9h6v6H9z"/><path d="M9 2v2M15 2v2M9 20v2M15 20v2M2 9h2M2 15h2M20 9h2M20 15h2"/></svg>
+        <h4>Автоматика й керування</h4>
+        <p>Блоки керування обладнанням, системи обліку й диспетчеризації, автоматика технологічних процесів на базі Delta Electronics.</p>
+        <span class="more">Докладніше →</span>
+      </a>
+      <a class="card" href="/products/spare-parts/">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 15a3 3 0 100-6 3 3 0 000 6z"/><path d="M19.4 15a1.6 1.6 0 00.3 1.8l.1.1a2 2 0 11-2.8 2.8l-.1-.1a1.6 1.6 0 00-2.7 1.1V21a2 2 0 11-4 0v-.1A1.6 1.6 0 006.8 19a2 2 0 11-2.8-2.8l.1-.1a1.6 1.6 0 00-1-2.7H3a2 2 0 110-4h.1A1.6 1.6 0 005 6.8a2 2 0 112.8-2.8l.1.1a1.6 1.6 0 002.7-1H11a2 2 0 114 0v.1a1.6 1.6 0 002.7 1l.1-.1a2 2 0 112.8 2.8l-.1.1a1.6 1.6 0 00-.3 1.8z"/></svg>
+        <h4>Запасні частини</h4>
+        <p>Укупорочні головки, наливачі, ущільнювальні гумки, упори для укупорки PET, подушки для етикетувальних автоматів на клеї-розплаві.</p>
+        <span class="more">Докладніше →</span>
+      </a>
+      <a class="card" href="/products/custom-equipment/">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M14 4l6 6-9 9-6 0 0-6 9-9z"/><path d="M12 6l6 6"/></svg>
+        <h4>Нестандартне обладнання</h4>
+        <p>Вузли для вузькоспеціалізованих задач і реконструкція під новий тип продукції. Тут же — кейс «Палетизатор для бутлів 19 л».</p>
+        <span class="more">Докладніше →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="section section--dark">
+  <div class="container">
+    <div class="sec-head" style="margin-bottom:32px"><span class="eyebrow">Чому Sofon</span><h2>Інженерія, а не каталог</h2></div>
+    <div class="stats">
+      <div class="stat"><div class="n">під <span>ТЗ</span></div><div class="l">Кожне рішення проєктуємо під конкретний цех і задачу</div></div>
+      <div class="stat"><div class="n">Delta<span>·</span>Camozzi</div><div class="l">Якісна компонентна база: автоматика й пневматика преміум-класу</div></div>
+      <div class="stat"><div class="n">повний<span>&nbsp;цикл</span></div><div class="l">Проєкт → виготовлення → монтаж → запуск</div></div>
+      <div class="stat"><div class="n">1400<span> б/год</span></div><div class="l">Продуктивність палетизатора 19 л — приклад наших нестандартних кейсів</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FLAGSHIP SPOTLIGHT: OSNASTKA -->
+<section class="section section--mist">
+  <div class="container">
+    <div class="spot">
+      <div class="spot-media"><span class="cap">// оснастка: зірки, ліри, шнеки — замінити реальним фото</span></div>
+      <div>
+        <span class="eyebrow">Флагман</span>
+        <h2>Оснастка для переведення лінії на нову пляшку</h2>
+        <p class="muted" style="margin-top:16px">Змінили формат тари — і лінія стала. Ми виготовляємо комплекти форматних деталей, що переводять наявне обладнання на роботу з новою пляшкою, без заміни машин.</p>
+        <ul>
+          <li><b>Турнікетні групи</b> та зірки для поділу й синхронізації потоку</li>
+          <li><b>Ліри напрямні</b> й шнеки поділу потоку пляшок</li>
+          <li><b>Системи роботи з пробкою</b> та переносники паперової етикетки на холодному клеї</li>
+        </ul>
+        <a class="btn btn--primary" style="margin-top:32px" href="/products/osnastka/">Перейти до оснастки →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTRACT MANUFACTURING BAND -->
+<section class="section">
+  <div class="container">
+    <div class="band">
+      <div class="z">
+        <span class="eyebrow">Окремий напрям</span>
+        <h3>Контрактне виробництво</h3>
+        <p>Токарні та фрезерні роботи на замовлення — для клієнтів поза розливом. Виготовимо деталі за вашим кресленням або зразком.</p>
+      </div>
+      <div class="z"><a class="btn btn--primary btn--lg" href="/contract-manufacturing/">Розмістити замовлення →</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT TEASER -->
+<section class="section section--mist">
+  <div class="container" style="text-align:center">
+    <span class="eyebrow eyebrow--muted">Готові обговорити задачу?</span>
+    <h2 style="margin:16px auto;max-width:18ch">Опишіть, що потрібно перевести чи виготовити</h2>
+    <p class="muted" style="margin:0 auto 32px">Навіть якщо вашого напряму немає на сайті — напишіть, ймовірно ми вже це робимо або підкажемо, до кого звернутися.</p>
+    <a class="btn btn--primary btn--lg" href="/contact/">Отримати прорахунок</a>
+  </div>
+</section>
+</main>
+<footer class="site-footer">
+  <div class="container">
+    <div class="foot-top">
+      <div class="foot-brand">
+        <a class="brand" href="/">Sofon<span>.</span></a>
+        <p>Інженерно-виробничий завод обладнання для ліній розливу напоїв і води. Оснастка, нестандартне обладнання, автоматика, контрактне виробництво.</p>
+      </div>
+      <div class="foot-col">
+        <h5>Продукти</h5>
+        <a href="/products/osnastka/">Оснастка</a>
+        <a href="/products/equipment-supply/">Обладнання ліній розливу</a>
+        <a href="/products/conveyor-systems/">Конвеєрні системи</a>
+        <a href="/products/automation/">Автоматика й керування</a>
+        <a href="/products/spare-parts/">Запасні частини</a>
+        <a href="/products/custom-equipment/">Нестандартне обладнання</a>
+        <a href="/contract-manufacturing/">Контрактне виробництво</a>
+      </div>
+      <div class="foot-col">
+        <h5>Контакти</h5>
+        <a href="tel:+380672933066">+380 67 293 30 66</a>
+        <a href="mailto:les@immach.com">les@immach.com</a>
+        <p>ТОВ «СОФОН», Україна</p>
+        <h5 style="margin-top:24px">Мова</h5>
+        <a href="/">Українська</a>
+        <a href="/en/">English</a>
+      </div>
+    </div>
+    <div class="foot-bot">
+      <span>© 2026 ТОВ «СОФОН». Усі права захищені.</span>
+      <span class="mono">Обладнання для ліній розливу</span>
+    </div>
+  </div>
+</footer>
 </body>
 </html>
