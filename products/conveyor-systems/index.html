@@ -1,0 +1,366 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<!-- ⚠ ГЕНЕРУЄТЬСЯ з _src/ через ./build.sh — НЕ редагувати цей файл напряму. Правити _src/header.html, _src/footer.html або _src/pages/*.html і запустити ./build.sh -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Конвейерные системы — Sofon</title>
+<meta name="description" content="Конвейерные системы для линий розлива: проект компоновки в цеху, изготовление и поставка конвейеров, шефмонтаж и запуск.">
+<link rel="canonical" href="https://sofon.com.ua/products/conveyor-systems/">
+<!-- Open Graph: як сторінка виглядає, коли посилання кидають у Viber/Telegram/LinkedIn.
+     Без цього прилітає голий URL. Значення підставляє build.sh із масиву PAGES. -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Sofon">
+<meta property="og:locale" content="uk_UA">
+<meta property="og:title" content="Конвейерные системы — Sofon">
+<meta property="og:description" content="Конвейерные системы для линий розлива: проект компоновки в цеху, изготовление и поставка конвейеров, шефмонтаж и запуск.">
+<meta property="og:url" content="https://sofon.com.ua/products/conveyor-systems/">
+<meta property="og:image" content="https://sofon.com.ua/images/og/og-default.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<!-- ANALYTICS SLOT — сюди вставити GTM/GA4, коли буде доступ.
+     Зі старого сайту: GA4 G-CQC2Q1KBWN, GTM GTM-TD87WM8 (див. docs/tech-launch-checklist.md) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/styles.css">
+<link rel="stylesheet" href="/css/gallery.css">
+</head>
+<body data-page="conveyor">
+<header class="site-header">
+  <div class="container nav" id="nav">
+    <a class="brand" href="/">Sofon<span>.</span></a>
+    <nav class="nav-links">
+      <!-- Вкладений рівень: панель розкривається наведенням, клік по самому
+           пункту веде на хаб /products/. Розмітка однакова, тож свою панель
+           зможе мати й інший розділ. -->
+      <div class="nav-item has-sub" data-open="0">
+        <a class="nav-top" href="/products/" data-nav="products">Продукти <span class="car">▼</span></a>
+        <div class="sub" role="menu">
+          <span class="sub-eyebrow">Напрями обладнання</span>
+          <div class="sub-grid">
+            <a class="sub-i sub-i--main" role="menuitem" href="/products/osnastka/">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M18.4 5.6l-2.1 2.1M7.7 16.3l-2.1 2.1"/><circle cx="12" cy="12" r="4"/></svg>
+              <span class="tt"><b>Оснастка</b><i>форматні деталі під нову пляшку</i></span>
+            </a>
+            <a class="sub-i" role="menuitem" href="/products/equipment-supply/">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 7l9-4 9 4-9 4-9-4z"/><path d="M3 7v10l9 4 9-4V7"/><path d="M12 11v10"/></svg>
+              <span class="tt"><b>Обладнання ліній розливу</b><i>підбір і запуск</i></span>
+            </a>
+            <a class="sub-i" role="menuitem" href="/products/conveyor-systems/">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6" cy="15" r="2.5"/><circle cx="18" cy="15" r="2.5"/><path d="M6 12.5h12M4 18.5h16"/></svg>
+              <span class="tt"><b>Конвеєрні системи</b><i>проєкт і монтаж</i></span>
+            </a>
+            <a class="sub-i" role="menuitem" href="/products/automation/">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9h6v6H9z"/><path d="M9 2v2M15 2v2M9 20v2M15 20v2M2 9h2M2 15h2M20 9h2M20 15h2"/></svg>
+              <span class="tt"><b>Автоматика й керування</b><i>на базі Delta</i></span>
+            </a>
+            <a class="sub-i" role="menuitem" href="/products/spare-parts/">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.2 6l2.1 2.1M17.7 15.9l2.1 2.1M2 12h3M19 12h3M4.2 18l2.1-2.1M17.7 8.1l2.1-2.1"/></svg>
+              <span class="tt"><b>Запасні частини</b><i>до ліній розливу</i></span>
+            </a>
+            <a class="sub-i" role="menuitem" href="/products/custom-equipment/">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M14 4l6 6-9 9-6 0 0-6 9-9z"/><path d="M12 6l6 6"/></svg>
+              <span class="tt"><b>Нестандартне обладнання</b><i>під ТЗ + палетизатор</i></span>
+            </a>
+          </div>
+          <a class="sub-all" href="/products/">Усі напрями →</a>
+        </div>
+      </div>
+      <a href="/products/osnastka/" data-nav="osnastka">Оснастка</a>
+      <a href="/contract-manufacturing/" data-nav="contract">Контрактне виробництво</a>
+    </nav>
+    <div class="nav-right">
+      <span class="lang"><a class="on" href="/">UA</a><span>/</span><a href="/en/">EN</a></span>
+      <!-- Клік веде на /contact/ — цим знято дублювання з колишнім пунктом
+           меню «Контакти»; наведення розкриває швидкі канали. -->
+      <div class="cta" id="cta" data-open="0">
+        <a class="btn btn--primary cta-btn" href="/contact/" aria-expanded="false" aria-controls="cta-pop">Зв’язатися <span class="car">▼</span></a>
+        <div class="cta-pop" id="cta-pop" role="menu">
+          <div class="cta-two">
+            <a class="cta-i" role="menuitem" href="tel:+380672933066">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6A19.8 19.8 0 012.1 4.2 2 2 0 014.1 2h3a2 2 0 012 1.7c.1 1 .4 1.9.7 2.8a2 2 0 01-.4 2.1L8.1 9.9a16 16 0 006 6l1.3-1.3a2 2 0 012.1-.5c.9.4 1.8.6 2.8.7a2 2 0 011.7 2.1z"/></svg>
+              <span class="t"><b>Зателефонувати</b><span>+380 67 293 30 66</span></span>
+            </a>
+            <a class="cta-i" role="menuitem" href="mailto:les@immach.com">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 6 10-6"/></svg>
+              <span class="t"><b>Написати</b><span>les@immach.com</span></span>
+            </a>
+          </div>
+          <!-- ⚠ ПЕРЕВІРИТИ У ВЛАСНИКА: чи читають ці канали на цьому номері -->
+          <div class="cta-line">
+            <span class="cta-inline">
+              <a role="menuitem" href="viber://chat?number=%2B380672933066"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 11.5a8.4 8.4 0 01-9 8.4 9 9 0 01-2.6-.4L4 21l1.6-4.2A8.3 8.3 0 013 11.5 8.4 8.4 0 0112 3a8.4 8.4 0 019 8.5z"/></svg>Viber</a>
+              <a role="menuitem" href="https://t.me/+380672933066"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21.5 4.3L2.9 11.4c-.9.3-.9 1.5 0 1.8l4.6 1.5 1.8 5.4c.3.8 1.3 1 1.9.3l2.5-2.6 4.7 3.5c.7.5 1.7.1 1.9-.7l2.7-14.9c.2-.9-.7-1.6-1.5-1.4z"/><path d="M7.5 14.7L18 7.2l-7.6 8.6"/></svg>Telegram</a>
+              <a role="menuitem" href="https://wa.me/380672933066"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M20.5 11.6a8.4 8.4 0 01-12.4 7.4L3 20.5l1.6-4.9a8.4 8.4 0 1115.9-4z"/><path d="M8.6 8.4c.3-.5.6-.5.9-.5h.7c.2 0 .5 0 .7.6l.8 2c.1.3 0 .5-.1.7l-.5.6c-.1.2-.3.4-.1.7a7 7 0 003.3 2.8c.3.1.5.1.7-.1l.6-.7c.2-.2.4-.2.6-.1l1.9.9c.3.2.4.3.4.5 0 .3-.1.9-.4 1.2-.4.4-1.1.7-1.7.7-1 0-3-.6-4.8-2.3s-2.5-3.4-2.7-4.4c-.1-.8.2-1.6.7-2.1z"/></svg>WhatsApp</a>
+            </span>
+          </div>
+          <a class="cta-i cta-i--addr" role="menuitem" href="/contact/">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 1116 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span class="t"><b>Приїхати до нас</b><span>Київ, вул. Бориспільська, 9, корп. 111</span></span>
+          </a>
+        </div>
+      </div>
+    </div>
+    <button class="nav-toggle" aria-label="Меню" onclick="document.getElementById('nav').parentElement.parentElement.classList.toggle('mobile-open')"><span></span></button>
+  </div>
+</header>
+<main>
+<!-- ⚠ ТЕКСТ — ЗІ СТАРОГО САЙТУ ЯК Є (docs/legacy-site/pages/conveyors.html), російською
+     і без переписування. Повна UA-перезапис і EN-дзеркало відкладені свідомо: спершу
+     треба вирішити шапку внутрішніх сторінок і структуру, тексти — окремим заходом.
+     Українською тут тільки «оболонка»: крихти, надзаголовки, кнопки — так само, як на
+     /products/custom-equipment/. -->
+
+<!-- ШАПКА СТОРІНКИ, варіант «виріз» (.phead--bleed): текст ліворуч на чистому,
+     кадр праворуч іде на повний виліт до краю екрана. Кадр не додає смузі
+     висоти — розтягується на те, що набрав текст. -->
+<section class="phead phead--bleed">
+  <div class="container">
+    <div class="crumb"><a href="/">Головна</a> / <a href="/products/">Продукти</a> / Конвеєрні системи</div>
+    <div class="phead-in">
+      <div class="phead-say">
+        <span class="eyebrow">Напрям · транспортні системи</span>
+        <h1>Конвейерные системы</h1>
+        <p class="lead">Оснащение вашего производства конвейерными системами, начиная от разработки проекта компоновки заканчивая монтажом на предприятии.</p>
+        <div class="phead-cta"><a class="btn btn--primary" href="/contact/">Обговорити задачу</a></div>
+      </div>
+      <figure class="phead-cut">
+        <img src="/images/products/conveyor-systems/line-2.jpg" alt="Конвейерная развязка в цеху розлива">
+        <figcaption>Конвейерная развязка в цеху розлива</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ЩО РОБИМО — перелік зі старого сайту, порядок збережено. -->
+<section class="section">
+  <div class="container">
+    <div class="sec-head">
+      <span class="eyebrow eyebrow--muted">Что делаем</span>
+      <h2>Транспортные системы для цеха</h2>
+      <p>Возможно изготовление как обычных ленточных конвейеров для упакованной продукции, так и специальных, с повышенными санитарными требованиями для перемещения сырых неупакованных продуктов.</p>
+    </div>
+    <!-- Три обіцянки старого сайту — дослівно. Штамп той самий, що тримає низ
+         шапки-кресленика на оснастці: компонент один, місце застосування різне. -->
+    <div class="stamp" style="margin-bottom:var(--s48)">
+      <div><b>Проєкт</b><span>Разработаем компоновку конвейерных систем в цеху</span></div>
+      <div><b>Виготовлення</b><span>Изготовим и поставим необходимые конвейера</span></div>
+      <div><b>Запуск</b><span>Произведем шефмонтаж и запуск</span></div>
+    </div>
+    <div class="feat">
+      <div class="item"><h4><span class="k">01</span> Ленточные конвейера</h4><p>Упакованной и штучной продукции.</p></div>
+      <div class="item"><h4><span class="k">02</span> Системы подачи</h4><p>Воздушные или пневматические.</p></div>
+      <div class="item"><h4><span class="k">03</span> Рольганги</h4><p>И приводные роликовые транспортеры.</p></div>
+      <div class="item"><h4><span class="k">04</span> Конвейеры для сырых продуктов</h4><p>Для неупакованных продуктов, в исполнении для легкой мойки.</p></div>
+      <div class="item"><h4><span class="k">05</span> Автоматика</h4><p>Системы автоматики управления транспортными системами производства.</p></div>
+      <div class="item"><h4><span class="k">06</span> Накопительные столы</h4><p>Для участков перед оборудованием прерывистого режима.</p></div>
+      <div class="item"><h4><span class="k">07</span> Поворот и переворот</h4><p>Системы поворота и переворота продукции.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ГАЛЕРЕЯ — мозаїка (базовий варіант, docs/gallery-variants.md). Набір змішаний:
+     рендери на білому (data-fit="contain") і живі фото (data-fit="cover").
+     ⚠ Підписи чернеткові й російською — за мовою решти сторінки; звірити з власником
+     разом із підписами оснастки. -->
+<section class="section section--mist">
+  <div class="container">
+    <div class="sec-head"><span class="eyebrow eyebrow--muted">Наши работы</span><h2>Конвейеры в проекте и в цеху</h2></div>
+    <div class="gal gal--tiles gal--mosaic galh--dim">
+      <figure class="gal-i" data-fit="contain">
+        <img src="/images/products/conveyor-systems/modular-chain.png" alt="Конвейер с модульной цепью" loading="lazy">
+        <span class="gal-n">01</span>
+        <figcaption class="gal-cap"><b>Модульная цепь</b><i>полотно и звёздочки</i></figcaption>
+      </figure>
+      <figure class="gal-i" data-fit="cover">
+        <img src="/images/products/conveyor-systems/line-8.jpg" alt="Шнек и подача бутылок" loading="lazy">
+        <span class="gal-n">02</span>
+        <span class="gal-veil"></span>
+        <figcaption class="gal-cap"><b>Вход в машину</b><i>шнек и подача</i></figcaption>
+      </figure>
+      <figure class="gal-i" data-fit="cover">
+        <img src="/images/products/conveyor-systems/line-4.jpg" alt="Участок конвейера с направляющими" loading="lazy">
+        <span class="gal-n">03</span>
+        <span class="gal-veil"></span>
+        <figcaption class="gal-cap"><b>Направляющие</b><i>участок перед машиной</i></figcaption>
+      </figure>
+      <figure class="gal-i" data-fit="cover">
+        <img src="/images/products/conveyor-systems/line-1.jpg" alt="Подача упакованной продукции" loading="lazy">
+        <span class="gal-n">04</span>
+        <span class="gal-veil"></span>
+        <figcaption class="gal-cap"><b>Линия розлива</b><i>подача упакованной продукции</i></figcaption>
+      </figure>
+      <!-- Тут стояв габаритний рисунок; у плитці 1×1 він читався порожнім
+           білим квадратом. Креслення показуємо великим — нижче, у блоці
+           компоновки, де його справді видно. -->
+      <figure class="gal-i" data-fit="cover">
+        <img src="/images/products/conveyor-systems/line-7.jpg" alt="Подача бутылок по конвейеру" loading="lazy">
+        <span class="gal-n">05</span>
+        <span class="gal-veil"></span>
+        <figcaption class="gal-cap"><b>Подача тары</b><i>однорядный поток</i></figcaption>
+      </figure>
+      <figure class="gal-i" data-fit="contain">
+        <img src="/images/products/conveyor-systems/belt-render-1.jpg" alt="Двухрядный ленточный конвейер" loading="lazy">
+        <span class="gal-n">06</span>
+        <figcaption class="gal-cap"><b>Ленточный конвейер</b><i>двухрядный, с разворотом</i></figcaption>
+      </figure>
+      <figure class="gal-i" data-fit="cover">
+        <img src="/images/products/conveyor-systems/line-5.jpg" alt="Однорядный участок транспортера" loading="lazy">
+        <span class="gal-n">07</span>
+        <span class="gal-veil"></span>
+        <figcaption class="gal-cap"><b>Транспортер</b><i>однорядный участок</i></figcaption>
+      </figure>
+      <figure class="gal-i" data-fit="contain">
+        <img src="/images/products/conveyor-systems/belt-render-2.jpg" alt="Узлы конвейера в разборе" loading="lazy">
+        <span class="gal-n">08</span>
+        <figcaption class="gal-cap"><b>Узлы конвейера</b><i>оснастка снимается для мойки</i></figcaption>
+      </figure>
+      <figure class="gal-i" data-fit="cover">
+        <img src="/images/products/conveyor-systems/line-3.jpg" alt="Накопительный участок линии" loading="lazy">
+        <span class="gal-n">09</span>
+        <span class="gal-veil"></span>
+        <figcaption class="gal-cap"><b>Накопительный участок</b><i>перед оборудованием</i></figcaption>
+      </figure>
+      <figure class="gal-i" data-fit="cover">
+        <img src="/images/products/conveyor-systems/line-6.jpg" alt="Конвейер на участке розлива" loading="lazy">
+        <span class="gal-n">10</span>
+        <span class="gal-veil"></span>
+        <figcaption class="gal-cap"><b>Участок розлива</b><i>подача тары</i></figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ТИПИ КОНВЕЄРІВ — три блоки, тексти зі старого сайту дослівно. -->
+<section class="section">
+  <div class="container">
+    <div class="sec-head"><span class="eyebrow eyebrow--muted">Типы конвейеров</span><h2>Чем отличаются полотна</h2></div>
+
+    <div class="ctype">
+      <h3>Конвейеры с пластинчатыми цепями</h3>
+      <div class="ctype-body">
+      <p class="muted">Данный тип конвейеров применяется для перемещения как единичной продукции, бутылок, банок, так и продукции в лотках или ящиках. Может работать как на однорядных, так и на многорядных транспортерах, накопительных столах.</p>
+      <p class="muted">Пластинчатые цепи могут быть пластиковыми или стальными. Стальная цепь является наиболее прочной, износоустойчивой. Хорошо работает с продукцией обладающей абразивными свойствами. Пластиковая цепь используется для перемещения PET бутылок, алюминиевых банок, необоротной стеклянной тары, картонных коробок и продукции в термоусадочной пленке.</p>
+      <p class="muted">Пластинчатая цепь может иметь различное исполнение рабочей поверхности:</p>
+      <ul class="ctype-list">
+        <li><b>Плоская</b> — универсальная для большинства применений, допускает скольжение продукции.</li>
+        <li><b>С резиновыми накладками</b> — для транспортировки по наклонным участкам, обладает повышенным трением. В том числе с накладками перьевой формы для вертикальной транспортировки бутылок.</li>
+        <li><b>Со свободно вращающимися роликами</b> — для накопительных столов, участков перед оборудованием работающим в прерывистом режиме, для снижение давления продукции на стороне разгрузки.</li>
+      </ul>
+      </div>
+    </div>
+
+    <div class="ctype">
+      <h3>Конвейеры с модульной цепью</h3>
+      <div class="ctype-body">
+      <p class="muted">Применяются практически для всех задач конвейерной транспортировки, сочетая в себе прочность, разнообразие возможного конструктивного исполнения и высокие эксплуатационные качества.</p>
+      <p class="muted">Модульная цепь обладает меньшим по сравнению с пластинчатой цепью шагом, что в большинстве случаев позволяет применять линейные участки перехода между конвейерами. Такие переходы значительно упрощают компоновку, уменьшают площадь занимаемую конвейерами при сохранении пропускной способности и накопительной емкости.</p>
+      <p class="muted">Модульная цепь может быть как с полностью закрытой поверхностью для максимальной поддержки неустойчивого продукта, так и с частичным перекрытием для задач где необходимы стекание, продувка холодным или горячим воздухом, специальные гигиенические требования.</p>
+      </div>
+    </div>
+
+    <div class="ctype">
+      <h3>Конвейеры с полимерной лентой</h3>
+      <div class="ctype-body">
+      <p class="muted">Полимерные ленты часто применяются для решения задач перемещения в пищевой промышленности, особенно для сырых, неупакованных продуктов. Хорошо работают с продуктами мелкого размера, при этом за счет практически нулевого радиуса разворота позволяют линейные узлы передачи с минимальным зазором. Различные сочетания силового слоя ленты и рабочего покрытия позволяют подобрать ленту со свойствами, необходимыми для каждой конкретной задачи перемещения.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- КОМПОНОВКА — креслення розстановки на всю ширину. Перша обіцянка старого
+     сайту («разработаем компоновку в цеху») тут показана, а не переказана. -->
+<section class="section section--mist">
+  <div class="container">
+    <div class="sec-head"><span class="eyebrow eyebrow--muted">Проект компоновки</span><h2>Расстановка линии в цеху</h2></div>
+    <figure class="cplan">
+      <img src="/images/products/conveyor-systems/layout-plan.jpg" alt="Чертёж компоновки линии розлива в цеху" loading="lazy">
+      <figcaption>Компоновочный чертёж линии — из рабочего проекта</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ІНШІ НАПРЯМИ — текст-підводка зі старого сайту. -->
+<section class="section">
+  <div class="container">
+    <div class="sec-head">
+      <span class="eyebrow eyebrow--muted">Другие направления нашей работы</span>
+      <h2>Обратите внимание на весь перечень</h2>
+      <p>Если среди него вы не найдете того, что вас интересует – свяжитесь с нами. Возможно это новое направление нашей деятельности, о котором мы еще не успели рассказать на сайте. Даже если мы не сможем вам помочь, мы обязательно постараемся подсказать к кому лучше обратиться.</p>
+    </div>
+    <div class="grid grid--3">
+      <a class="card" href="/products/osnastka/">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M18.4 5.6l-2.1 2.1M7.7 16.3l-2.1 2.1"/><circle cx="12" cy="12" r="4"/></svg>
+        <h4>Форматные детали</h4>
+        <p>Производим комплекты деталей, необходимые для перевода оборудования на работу с новым форматом бутылки.</p>
+        <span class="more">Докладніше →</span>
+      </a>
+      <a class="card" href="/products/custom-equipment/">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M14 4l6 6-9 9-6 0 0-6 9-9z"/><path d="M12 6l6 6"/></svg>
+        <h4>Нестандартное оборудование</h4>
+        <p>Изготовление оборудования и узлов предназначенных для выполнения узкоспециализированных задач.</p>
+        <span class="more">Докладніше →</span>
+      </a>
+      <!-- ⚠ Сторінки /products/automation/ ще немає — поки ведемо на /contact/,
+           як зроблено з прикладами на /products/custom-equipment/. Коли сторінка
+           зʼявиться, поміняти адресу й підпис назад на «Докладніше». -->
+      <a class="card" href="/contact/">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9h6v6H9z"/><path d="M9 2v2M15 2v2M9 20v2M15 20v2M2 9h2M2 15h2M20 9h2M20 15h2"/></svg>
+        <h4>Системы автоматизации и управления</h4>
+        <p>Разрабатываем блоки управления оборудованием, системы учета и диспетчеризации, автоматику управления технологическими процессами.</p>
+        <span class="more">Обговорити →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="endcta">
+  <div class="container">
+    <span class="eyebrow">Наступний крок</span>
+    <h2>Опишите участок — предложим компоновку</h2>
+    <p>Пришлите план цеха или фото участка и требуемую производительность — вернёмся с проектом расстановки и расчётом.</p>
+    <a class="btn btn--primary btn--lg" href="/contact/">Обговорити задачу</a>
+  </div>
+</section>
+</main>
+<footer class="site-footer">
+  <div class="container">
+    <div class="foot-top">
+      <div class="foot-brand">
+        <a class="brand" href="/">Sofon<span>.</span></a>
+        <p>Інженерно-виробничий завод обладнання для ліній розливу напоїв і води. Оснастка, нестандартне обладнання, автоматика, контрактне виробництво.</p>
+      </div>
+      <div class="foot-col">
+        <h5>Продукти</h5>
+        <a href="/products/osnastka/">Оснастка</a>
+        <a href="/products/equipment-supply/">Обладнання ліній розливу</a>
+        <a href="/products/conveyor-systems/">Конвеєрні системи</a>
+        <a href="/products/automation/">Автоматика й керування</a>
+        <a href="/products/spare-parts/">Запасні частини</a>
+        <a href="/products/custom-equipment/">Нестандартне обладнання</a>
+        <a href="/contract-manufacturing/">Контрактне виробництво</a>
+      </div>
+      <div class="foot-col">
+        <h5>Контакти</h5>
+        <a href="tel:+380672933066">+380 67 293 30 66</a>
+        <a href="mailto:les@immach.com">les@immach.com</a>
+        <p>ТОВ «СОФОН», Україна</p>
+        <h5 style="margin-top:24px">Мова</h5>
+        <a href="/">Українська</a>
+        <a href="/en/">English</a>
+      </div>
+    </div>
+    <div class="foot-bot">
+      <span>© 2026 ТОВ «СОФОН». Усі права захищені.</span>
+      <span class="mono">Обладнання для ліній розливу</span>
+    </div>
+  </div>
+</footer>
+<script src="/js/site.js"></script>
+<script src="/js/gallery.js"></script>
+</body>
+</html>

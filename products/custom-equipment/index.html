@@ -6,35 +6,104 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Нестандартное оборудование линий розлива — Sofon</title>
 <meta name="description" content="Нестандартное оборудование под ТЗ: паллетизатор для бутылей 19 л и другие решения для линий розлива.">
+<link rel="canonical" href="https://sofon.com.ua/products/custom-equipment/">
+<!-- Open Graph: як сторінка виглядає, коли посилання кидають у Viber/Telegram/LinkedIn.
+     Без цього прилітає голий URL. Значення підставляє build.sh із масиву PAGES. -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Sofon">
+<meta property="og:locale" content="uk_UA">
+<meta property="og:title" content="Нестандартное оборудование линий розлива — Sofon">
+<meta property="og:description" content="Нестандартное оборудование под ТЗ: паллетизатор для бутылей 19 л и другие решения для линий розлива.">
+<meta property="og:url" content="https://sofon.com.ua/products/custom-equipment/">
+<meta property="og:image" content="https://sofon.com.ua/images/og/og-default.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<!-- ANALYTICS SLOT — сюди вставити GTM/GA4, коли буде доступ.
+     Зі старого сайту: GA4 G-CQC2Q1KBWN, GTM GTM-TD87WM8 (див. docs/tech-launch-checklist.md) -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/css/styles.css">
+<link rel="stylesheet" href="/css/gallery.css">
 </head>
 <body data-page="custom-equipment">
 <header class="site-header">
   <div class="container nav" id="nav">
     <a class="brand" href="/">Sofon<span>.</span></a>
     <nav class="nav-links">
-      <span class="has-drop">
-        <a href="/products/" data-nav="products">Продукти ▾</a>
-        <span class="drop">
-          <a class="flag" href="/products/osnastka/"><b>Оснастка</b><small>Форматні деталі для переведення лінії на нову пляшку</small></a>
-          <a href="/products/equipment-supply/"><b>Обладнання ліній розливу</b><small>Підбір, відновлення, запуск</small></a>
-          <a href="/products/conveyor-systems/"><b>Конвеєрні системи</b><small>Проєкт, виготовлення, монтаж</small></a>
-          <a href="/products/automation/"><b>Автоматика й керування</b><small>Блоки керування, диспетчеризація</small></a>
-          <a href="/products/spare-parts/"><b>Запасні частини</b><small>До обладнання ліній розливу</small></a>
-          <a href="/products/custom-equipment/"><b>Нестандартне обладнання</b><small>Під ТЗ замовника, у т.ч. палетизатор 19 л</small></a>
-        </span>
-      </span>
+      <!-- Вкладений рівень: панель розкривається наведенням, клік по самому
+           пункту веде на хаб /products/. Розмітка однакова, тож свою панель
+           зможе мати й інший розділ. -->
+      <div class="nav-item has-sub" data-open="0">
+        <a class="nav-top" href="/products/" data-nav="products">Продукти <span class="car">▼</span></a>
+        <div class="sub" role="menu">
+          <span class="sub-eyebrow">Напрями обладнання</span>
+          <div class="sub-grid">
+            <a class="sub-i sub-i--main" role="menuitem" href="/products/osnastka/">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M18.4 5.6l-2.1 2.1M7.7 16.3l-2.1 2.1"/><circle cx="12" cy="12" r="4"/></svg>
+              <span class="tt"><b>Оснастка</b><i>форматні деталі під нову пляшку</i></span>
+            </a>
+            <a class="sub-i" role="menuitem" href="/products/equipment-supply/">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 7l9-4 9 4-9 4-9-4z"/><path d="M3 7v10l9 4 9-4V7"/><path d="M12 11v10"/></svg>
+              <span class="tt"><b>Обладнання ліній розливу</b><i>підбір і запуск</i></span>
+            </a>
+            <a class="sub-i" role="menuitem" href="/products/conveyor-systems/">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6" cy="15" r="2.5"/><circle cx="18" cy="15" r="2.5"/><path d="M6 12.5h12M4 18.5h16"/></svg>
+              <span class="tt"><b>Конвеєрні системи</b><i>проєкт і монтаж</i></span>
+            </a>
+            <a class="sub-i" role="menuitem" href="/products/automation/">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9h6v6H9z"/><path d="M9 2v2M15 2v2M9 20v2M15 20v2M2 9h2M2 15h2M20 9h2M20 15h2"/></svg>
+              <span class="tt"><b>Автоматика й керування</b><i>на базі Delta</i></span>
+            </a>
+            <a class="sub-i" role="menuitem" href="/products/spare-parts/">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.2 6l2.1 2.1M17.7 15.9l2.1 2.1M2 12h3M19 12h3M4.2 18l2.1-2.1M17.7 8.1l2.1-2.1"/></svg>
+              <span class="tt"><b>Запасні частини</b><i>до ліній розливу</i></span>
+            </a>
+            <a class="sub-i" role="menuitem" href="/products/custom-equipment/">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M14 4l6 6-9 9-6 0 0-6 9-9z"/><path d="M12 6l6 6"/></svg>
+              <span class="tt"><b>Нестандартне обладнання</b><i>під ТЗ + палетизатор</i></span>
+            </a>
+          </div>
+          <a class="sub-all" href="/products/">Усі напрями →</a>
+        </div>
+      </div>
       <a href="/products/osnastka/" data-nav="osnastka">Оснастка</a>
       <a href="/contract-manufacturing/" data-nav="contract">Контрактне виробництво</a>
-      <a href="/about/" data-nav="about">Про нас</a>
-      <a href="/contact/" data-nav="contact">Контакти</a>
     </nav>
     <div class="nav-right">
       <span class="lang"><a class="on" href="/">UA</a><span>/</span><a href="/en/">EN</a></span>
-      <a class="btn btn--primary" href="/contact/">Отримати прорахунок</a>
+      <!-- Клік веде на /contact/ — цим знято дублювання з колишнім пунктом
+           меню «Контакти»; наведення розкриває швидкі канали. -->
+      <div class="cta" id="cta" data-open="0">
+        <a class="btn btn--primary cta-btn" href="/contact/" aria-expanded="false" aria-controls="cta-pop">Зв’язатися <span class="car">▼</span></a>
+        <div class="cta-pop" id="cta-pop" role="menu">
+          <div class="cta-two">
+            <a class="cta-i" role="menuitem" href="tel:+380672933066">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6A19.8 19.8 0 012.1 4.2 2 2 0 014.1 2h3a2 2 0 012 1.7c.1 1 .4 1.9.7 2.8a2 2 0 01-.4 2.1L8.1 9.9a16 16 0 006 6l1.3-1.3a2 2 0 012.1-.5c.9.4 1.8.6 2.8.7a2 2 0 011.7 2.1z"/></svg>
+              <span class="t"><b>Зателефонувати</b><span>+380 67 293 30 66</span></span>
+            </a>
+            <a class="cta-i" role="menuitem" href="mailto:les@immach.com">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 6 10-6"/></svg>
+              <span class="t"><b>Написати</b><span>les@immach.com</span></span>
+            </a>
+          </div>
+          <!-- ⚠ ПЕРЕВІРИТИ У ВЛАСНИКА: чи читають ці канали на цьому номері -->
+          <div class="cta-line">
+            <span class="cta-inline">
+              <a role="menuitem" href="viber://chat?number=%2B380672933066"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 11.5a8.4 8.4 0 01-9 8.4 9 9 0 01-2.6-.4L4 21l1.6-4.2A8.3 8.3 0 013 11.5 8.4 8.4 0 0112 3a8.4 8.4 0 019 8.5z"/></svg>Viber</a>
+              <a role="menuitem" href="https://t.me/+380672933066"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21.5 4.3L2.9 11.4c-.9.3-.9 1.5 0 1.8l4.6 1.5 1.8 5.4c.3.8 1.3 1 1.9.3l2.5-2.6 4.7 3.5c.7.5 1.7.1 1.9-.7l2.7-14.9c.2-.9-.7-1.6-1.5-1.4z"/><path d="M7.5 14.7L18 7.2l-7.6 8.6"/></svg>Telegram</a>
+              <a role="menuitem" href="https://wa.me/380672933066"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M20.5 11.6a8.4 8.4 0 01-12.4 7.4L3 20.5l1.6-4.9a8.4 8.4 0 1115.9-4z"/><path d="M8.6 8.4c.3-.5.6-.5.9-.5h.7c.2 0 .5 0 .7.6l.8 2c.1.3 0 .5-.1.7l-.5.6c-.1.2-.3.4-.1.7a7 7 0 003.3 2.8c.3.1.5.1.7-.1l.6-.7c.2-.2.4-.2.6-.1l1.9.9c.3.2.4.3.4.5 0 .3-.1.9-.4 1.2-.4.4-1.1.7-1.7.7-1 0-3-.6-4.8-2.3s-2.5-3.4-2.7-4.4c-.1-.8.2-1.6.7-2.1z"/></svg>WhatsApp</a>
+            </span>
+          </div>
+          <a class="cta-i cta-i--addr" role="menuitem" href="/contact/">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 1116 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span class="t"><b>Приїхати до нас</b><span>Київ, вул. Бориспільська, 9, корп. 111</span></span>
+          </a>
+        </div>
+      </div>
     </div>
     <button class="nav-toggle" aria-label="Меню" onclick="document.getElementById('nav').parentElement.parentElement.classList.toggle('mobile-open')"><span></span></button>
   </div>
@@ -237,5 +306,7 @@ document.querySelectorAll('img.zoomable').forEach(function(img){
     </div>
   </div>
 </footer>
+<script src="/js/site.js"></script>
+<script src="/js/gallery.js"></script>
 </body>
 </html>
