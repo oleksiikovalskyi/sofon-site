@@ -720,6 +720,8 @@ a.card:hover .fig img{transform:scale(1.05)}
 /* Шапка згортається в бургер РАНІШЕ за решту layout-а: повне меню потребує
    ~1100px вьюпорта, тож нижче цього тримати його в рядок неможливо. */
 @media(max-width:1099px){
+  /* Текст, який має сенс лише за наявності курсора (підказки про наведення). */
+  .wide-only{display:none}
   .nav-links,.nav-right .lang,.nav-right .btn{display:none}
   .cta-pop{display:none}
   .nav-toggle{display:flex}
