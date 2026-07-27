@@ -29,54 +29,130 @@ GAP = 26              # просвіт між силуетами
 PAD_TOP, PAD_BOT = 26, 54
 
 
-def profile(h, a, b):
-    """Півконтур пляшки: список (y_від_дна, півширина) знизу вгору.
+# ---------------------------------------------------------------------------
+# ФОРМИ. Раніше тут був один архетип — циліндричний корпус під корок, і на
+# лінійці всі формати виглядали однією пляшкою в різних пропорціях. Тепер
+# родин шість, і вибір родини йде НЕ навмання, а з тих самих наших чисел:
+#   стрункість  = H / A  (наскільки висока відносно ширини)
+#   плоска      = B / A < 0.85  (флакон-фляга проти круглої)
+# У наборі стрункість гуляє від 2.1 до 4.4, а плоских майже половина, тож
+# різні форми — це прочитані дані, а не домальована фантазія.
+# ---------------------------------------------------------------------------
 
-    Дві родини. Кругла (B≈A) має вужчі плечі й довшу шийку; плоска
-    (B значно менше за A) — широкі похилі плечі, як у фляги. Різницю
-    видно на лінійці, і вона справжня: саме через неї оснастка під
-    однаковий об'єм буває різна.
+# Типи вінця. Каталог склозаводу-постачальника (Vetropack) розрізняє тару не
+# лише за корпусом, а й за вінцем: cork, crown, twist off, BVS, Guala, PP,
+# широке горло. Саме через одне-єдине горло на всіх у мене спершу «всі пляшки
+# виглядали циліндричними під корок».
+# ⚠ Тип вінця в наших даних Є РІВНО В ОДНОГО запису з 63, тож вивести його з
+# фактів не можна. Тут він ілюстративний і прив'язаний до родини корпусу —
+# як і решта профілю, це схема, а не паспорт виробу. Висота й ширина лишаються
+# справжніми, бо саме вони й важать для оснастки.
+FINISH = {"squat": "wide", "flask": "twist", "burgundy": "cork",
+          "bordeaux": "crown", "square": "twist", "slim": "bvs"}
+
+
+def finish_nodes(kind, nw, h, fh):
+    """Верхівка контуру: від верху шийки до зрізу вінця."""
+    if kind == "wide":            # широке горло — банка, харчова тара
+        return [(nw * 1.34, h - fh * 0.72, None), (nw * 1.34, h, None)]
+    if kind == "crown":           # кроненпробка — короткий вузький валик
+        return [(nw * 1.14, h - fh * 0.62, None), (nw * 1.14, h, None)]
+    if kind == "twist":           # twist off — два валики, ширший зріз
+        return [(nw * 1.2, h - fh * 0.8, None), (nw * 1.06, h - fh * 0.46, None),
+                (nw * 1.2, h - fh * 0.34, None), (nw * 1.2, h, None)]
+    if kind == "bvs":             # довга різьбова горловина під алкоголь
+        return [(nw * 1.1, h - fh * 1.5, None), (nw * 1.1, h, None)]
+    return [(nw * 1.2, h - fh * 0.5, None), (nw * 1.2, h, None)]   # cork
+
+
+def outline(h, a, b):
+    """Права половина контуру знизу вгору: список вузлів (x, y, ctrl).
+
+    x — півширина в мм, y — висота від дна в мм, ctrl — контрольна точка
+    квадратичної кривої від попереднього вузла (або None для прямої).
+    Тільки прямі та Q-криві: так половину легко віддзеркалити у зворотному
+    порядку й не тримати окремий опис лівого боку.
     """
+    half = a / 2
     flat = (b / a) < 0.85
-    nw = min(a * 0.34, 32) / 2          # півширина шийки
-    fw = nw * 1.22                      # півширина вінця
-    hb = h * (0.50 if flat else 0.55)   # де закінчується корпус
-    hs = h * (0.76 if flat else 0.72)   # де починається шийка
-    fh = h * 0.055                      # висота вінця
-    return dict(flat=flat, nw=nw, fw=fw, hb=hb, hs=hs, fh=fh, half=a / 2)
+    slim = h / a                      # стрункість
+
+    if slim < 2.35:
+        family = "squat"              # присадкувата банка
+    elif flat and slim < 2.9:
+        family = "flask"              # фляга з покатими плечима
+    elif slim < 2.9:
+        family = "burgundy"           # плече переходить у шийку без злому
+    elif flat:
+        family = "square"             # прямі боки, майже горизонтальне плече
+    elif slim < 3.8:
+        family = "bordeaux"           # циліндр і різке плече
+    else:
+        family = "slim"               # висока вузька, довга шийка
+
+    heel = min(half * 0.16, h * 0.028)
+
+    if family == "squat":
+        nw, fh = min(half * 0.55, 19), h * 0.05
+        sh, nk = h * 0.70, h * 0.86
+        n = [(half - heel, 0, None), (half, heel, (half, 0)),
+             (half, sh, None), (nw, nk, (half, nk * .97)),
+             (nw, h - fh, None)] + finish_nodes(FINISH[family], nw, h, fh)
+    elif family == "flask":
+        nw, fh = min(half * 0.30, 16), h * 0.05
+        sh, nk = h * 0.52, h * 0.84
+        n = [(half - heel, 0, None), (half, heel, (half, 0)),
+             (half, sh, None),
+             (nw, nk, (half * 0.99, nk * 0.93)),        # широка покала дуга
+             (nw, h - fh, None)] + finish_nodes(FINISH[family], nw, h, fh)
+    elif family == "burgundy":
+        nw, fh = min(half * 0.34, 16), h * 0.05
+        n = [(half - heel, 0, None), (half, heel, (half, 0)),
+             (half, h * 0.42, None),
+             (nw, h * 0.80, (half, h * 0.70)),          # суцільна дуга, без злому
+             (nw, h - fh, None)] + finish_nodes(FINISH[family], nw, h, fh)
+    elif family == "square":
+        nw, fh = min(half * 0.32, 15), h * 0.045
+        sh = h * 0.62
+        n = [(half - heel * .5, 0, None), (half, heel * .5, (half, 0)),
+             (half, sh, None), (half * 0.9, sh + h * .05, None),
+             (nw, sh + h * 0.09, None),                 # плече майже горизонтальне
+             (nw, h - fh, None)] + finish_nodes(FINISH[family], nw, h, fh)
+    elif family == "bordeaux":
+        nw, fh = min(half * 0.32, 15), h * 0.05
+        sh = h * 0.56
+        n = [(half - heel, 0, None), (half, heel, (half, 0)),
+             (half, sh, None),
+             (nw, sh + h * 0.16, (half * .92, sh + h * .12)),   # різке плече
+             (nw, h - fh, None)] + finish_nodes(FINISH[family], nw, h, fh)
+    else:  # slim
+        nw, fh = min(half * 0.30, 13), h * 0.045
+        sh = h * 0.44
+        n = [(half - heel, 0, None), (half, heel, (half, 0)),
+             (half, sh, None),
+             (nw, sh + h * 0.20, (half * .85, sh + h * .15)),
+             (nw, h - fh, None)] + finish_nodes(FINISH[family], nw, h, fh)
+    return n, family
 
 
 def path(h, a, b):
-    p = profile(h, a, b)
-    half, nw, fw, hb, hs, fh = p["half"], p["nw"], p["fw"], p["hb"], p["hs"], p["fh"]
-    heel = min(half * 0.18, h * 0.03)   # завал п'ятки
-    top = h - fh
+    n, _ = outline(h, a, b)
 
-    def y(v):  # мм від дна -> координата SVG (вісь вниз)
-        return round((h - v) * PX_PER_MM, 2)
-
-    def x(v):
+    def X(v):
         return round(v * PX_PER_MM, 2)
 
-    # права половина знизу вгору, потім дзеркало
-    d = []
-    d.append(f"M {x(-half + heel)} {y(0)}")
-    d.append(f"L {x(half - heel)} {y(0)}")
-    d.append(f"Q {x(half)} {y(0)} {x(half)} {y(heel)}")       # п'ятка
-    d.append(f"L {x(half)} {y(hb)}")                          # корпус
-    # плечі: у плоскої — крутіша дуга, у круглої — м'якша
-    cy = hb + (hs - hb) * (0.62 if p["flat"] else 0.5)
-    d.append(f"C {x(half)} {y(cy)} {x(nw)} {y(cy)} {x(nw)} {y(hs)}")
-    d.append(f"L {x(nw)} {y(top - h * 0.012)}")               # шийка
-    d.append(f"L {x(fw)} {y(top)}")                           # вінець
-    d.append(f"L {x(fw)} {y(h)}")
-    d.append(f"L {x(-fw)} {y(h)}")
-    d.append(f"L {x(-fw)} {y(top)}")
-    d.append(f"L {x(-nw)} {y(top - h * 0.012)}")
-    d.append(f"L {x(-nw)} {y(hs)}")
-    d.append(f"C {x(-nw)} {y(cy)} {x(-half)} {y(cy)} {x(-half)} {y(hb)}")
-    d.append(f"L {x(-half)} {y(heel)}")
-    d.append(f"Q {x(-half)} {y(0)} {x(-half + heel)} {y(0)}")
+    def Y(v):
+        return round((h - v) * PX_PER_MM, 2)
+
+    d = ["M %s %s" % (X(-n[0][0]), Y(n[0][1])), "L %s %s" % (X(n[0][0]), Y(n[0][1]))]
+    for x, y, c in n[1:]:                                   # правий бік угору
+        d.append("Q %s %s %s %s" % (X(c[0]), Y(c[1]), X(x), Y(y)) if c
+                 else "L %s %s" % (X(x), Y(y)))
+    d.append("L %s %s" % (X(-n[-1][0]), Y(n[-1][1])))        # через вінець
+    for i in range(len(n) - 1, 0, -1):                      # лівий бік униз
+        x, y, c = n[i - 1][0], n[i - 1][1], n[i][2]
+        d.append("Q %s %s %s %s" % (X(-c[0]), Y(c[1]), X(-x), Y(y)) if c
+                 else "L %s %s" % (X(-x), Y(y)))
     d.append("Z")
     return " ".join(d)
 
@@ -126,7 +202,11 @@ def band(kit):
         s = rng.uniform(0.72, 1.0)                 # різний масштаб
         h = r["h"] * PX_PER_MM * s
         w = r["_a"] * PX_PER_MM * s
-        y = rng.uniform(0.04, 0.30) * (H - h)      # гуляє по вертикалі
+        # ДНО НА ОДНОМУ РІВНІ. Спершу я розкидав і по вертикалі — вийшло, що
+        # пляшки висять у повітрі, і вся картинка читалась як помилка, а не як
+        # розсип. Розбіг лишається в масштабі, інтервалах, формі й порядку;
+        # низ у всіх спільний, як на полиці.
+        y = H - h
         parts.append(
             f'  <g transform="translate({x + w / 2:.1f} {y:.1f}) scale({s:.3f})"'
             f' opacity="{rng.uniform(.5, 1):.2f}">'
