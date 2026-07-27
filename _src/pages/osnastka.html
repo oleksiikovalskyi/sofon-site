@@ -1,11 +1,34 @@
-<section class="phero phero--photo">
-  <img class="phero-bg" src="/images/products/osnastka/hero-bg.jpg" alt="">
+<!-- ШАПКА СТОРІНКИ, варіант «кресленик» (.phead--sheet): смуга-аркуш із
+     креслярською сіткою, деталь лежить просто на ній без рамки, низ підбитий
+     штампом. Фактурний геройський екран лишається тільки на головній. -->
+<!-- .phead--collage: тлом іде колаж наших складань, а не згенерована штриховка.
+     Сітку власник відхилив остаточно (26-07). Клас лишається на цій сторінці,
+     бо креслення тут — про цей самий розділ. -->
+<section class="phead phead--sheet phead--collage">
   <div class="container">
     <div class="crumb"><a href="/">Головна</a> / <a href="/products/">Продукти</a> / Оснастка</div>
-    <span class="eyebrow">Флагман · форматні деталі</span>
-    <h1>Оснастка для переведення лінії розливу на нову пляшку</h1>
-    <p class="lead" style="margin-top:16px">Комплекти форматних деталей, що переводять наявне обладнання на роботу з новою тарою — без заміни машин і без простою на місяці.</p>
-    <div class="hero-cta" style="margin-top:24px"><a class="btn btn--primary btn--lg" href="/contact/">Замовити комплект оснастки</a></div>
+    <div class="phead-in">
+      <div class="phead-say">
+        <span class="eyebrow">Головний напрям · форматні деталі</span>
+        <h1>Оснастка для переведення лінії розливу на нову пляшку</h1>
+        <p class="lead">Комплекти форматних деталей, що переводять наявне обладнання на роботу з новою тарою — без заміни машин і без простою на місяці.</p>
+        <!-- Кнопки тут свідомо немає: на цьому ж екрані вже стоїть «Зв'язатися»
+             в шапці сайту, а окремої дії відвідувач по ній не отримує. Заклик
+             живе в кінці сторінки, коли є що обговорювати. -->
+      </div>
+      <figure class="phead-part">
+        <!-- PNG з альфою, зроблений із hero-bg.jpg через .claude/cutout.py:
+             біле тло рендера вирізане, тож штриховка йде за деталлю. -->
+        <img src="/images/products/osnastka/screw-cut.png" alt="Шнек поділу потоку пляшок">
+        <figcaption>Шнек поділу потоку — під крок вашої тари</figcaption>
+      </figure>
+    </div>
+    <div class="stamp">
+      <div><b>Що входить</b><span>Зірки, ліри, шнеки, турнікети</span></div>
+      <div><b>Вихідні дані</b><span>Тип машини і зразок нової тари</span></div>
+      <div><b>Виготовлення</b><span>Власний верстатний парк</span></div>
+      <div><b>Сумісність</b><span>Під наявне обладнання лінії</span></div>
+    </div>
   </div>
 </section>
 
@@ -27,13 +50,192 @@
   </div>
 </section>
 
+<!-- ⚗ ПОРІВНЯННЯ ВАРІАНТІВ КОЛАЖУ (26-07). Три способи одночасно на одній
+     сторінці, щоб порівняти в контексті: смуга тут, тло шапки за `?head=collage`,
+     підкладка темної смуги в кінці. Після вибору зайві прибрати. -->
+<!-- Варіант Б: полотно як тло, а поверх — ТЕКСТ. Порожня смуга виглядала добре,
+     але ні про що; картинки поверх закрили б поле намертво, а рядки лишають
+     його видимим між собою. Сюди переїхали кроки роботи — раніше вони стояли
+     нижче звичайними картками на сірому. -->
+<section class="cband">
+  <div class="container">
+    <div class="cband-head">
+      <span class="eyebrow eyebrow--muted">Як працюємо</span>
+      <h2>Від вашого формату — до готового комплекту</h2>
+    </div>
+    <ol class="cband-steps">
+      <li>
+        <b>01</b>
+        <h4>Вихідні дані</h4>
+        <p>Тип машини, наявні деталі, зразок нової тари або креслення. За потреби — виїзд і замір.</p>
+      </li>
+      <li>
+        <b>02</b>
+        <h4>Проєкт і виготовлення</h4>
+        <p>Проєктуємо геометрію під формат, узгоджуємо, виготовляємо на власному верстатному парку.</p>
+      </li>
+      <li>
+        <b>03</b>
+        <h4>Встановлення й наладка</h4>
+        <p>Передаємо комплект, за потреби допомагаємо з встановленням і виведенням лінії на режим.</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- ГАЛЕРЕЯ. Той самий набір і ті самі підписи, що в секції оснастки на
+     головній: там це анонс, тут — повний показ. Свідомо не заводимо другий
+     набір підписів, доки перший не звірено з власником (docs/gallery-variants.md). -->
+<section class="section">
+  <div class="container">
+    <div class="sec-head"><span class="eyebrow eyebrow--muted">Що виготовляємо</span><h2>Деталі, з яких збирається комплект</h2></div>
+    <div class="gal gal--bay">
+      <div class="gal-row">
+        <figure class="gal-i" data-fit="contain">
+          <img src="/docs/legacy-site/images/format-4.jpg" alt="Зірка" loading="lazy">
+          <span class="gal-n">01</span>
+          <figcaption class="gal-cap"><b>Зірка</b><i>транспортна</i></figcaption>
+        </figure>
+        <figure class="gal-i" data-fit="contain">
+          <img src="/docs/legacy-site/images/format-1.jpg" alt="Шнек поділу потоку" loading="lazy">
+          <span class="gal-n">02</span>
+          <figcaption class="gal-cap"><b>Шнек поділу потоку</b><i>вхід у карусель</i></figcaption>
+        </figure>
+        <figure class="gal-i" data-fit="contain">
+          <img src="/docs/legacy-site/images/format-3.jpg" alt="Комплект пластин" loading="lazy">
+          <span class="gal-n">03</span>
+          <figcaption class="gal-cap"><b>Комплект пластин</b><i>дугові напрямні</i></figcaption>
+        </figure>
+        <figure class="gal-i" data-fit="contain">
+          <img src="/docs/legacy-site/images/format-18.jpg" alt="Ланцюгове кільце" loading="lazy">
+          <span class="gal-n">04</span>
+          <figcaption class="gal-cap"><b>Ланцюгове кільце</b><i>поворотний вузол</i></figcaption>
+        </figure>
+        <figure class="gal-i" data-fit="contain">
+          <img src="/docs/legacy-site/images/format-17.jpg" alt="Ліра напрямна" loading="lazy">
+          <span class="gal-n">05</span>
+          <figcaption class="gal-cap"><b>Ліра напрямна</b><i>секція</i></figcaption>
+        </figure>
+      </div>
+      <div class="gal-row">
+        <figure class="gal-i" data-fit="contain">
+          <img src="/docs/legacy-site/images/format-5.jpg" alt="Зубчастий вінець" loading="lazy">
+          <span class="gal-n">06</span>
+          <figcaption class="gal-cap"><b>Зубчастий вінець</b><i>привід каруселі</i></figcaption>
+        </figure>
+        <figure class="gal-i" data-fit="contain" style="--bri:1.16">
+          <img src="/docs/legacy-site/images/format-parts-24.jpg" alt="Кронштейн у зборі" loading="lazy">
+          <span class="gal-n">07</span>
+          <figcaption class="gal-cap"><b>Кронштейн у зборі</b><i>кріплення напрямної</i></figcaption>
+        </figure>
+        <figure class="gal-i" data-fit="contain">
+          <img src="/docs/legacy-site/images/format-13-otmfoo694a30fu1bfu6rzdjj8m0qd5ar70nkf8pse8.jpg" alt="Турнікетна група" loading="lazy">
+          <span class="gal-n">08</span>
+          <figcaption class="gal-cap"><b>Турнікетна група</b><i>поділ потоку</i></figcaption>
+        </figure>
+        <figure class="gal-i" data-fit="contain">
+          <img src="/docs/legacy-site/images/format-6.jpg" alt="Турнікетний вузол" loading="lazy">
+          <span class="gal-n">09</span>
+          <figcaption class="gal-cap"><b>Турнікетний вузол</b><i>з підпорами</i></figcaption>
+        </figure>
+        <figure class="gal-i" data-fit="contain">
+          <img src="/docs/legacy-site/images/format-8.jpg" alt="Переносна група" loading="lazy">
+          <span class="gal-n">10</span>
+          <figcaption class="gal-cap"><b>Переносна група</b><i>дві зірки</i></figcaption>
+        </figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ⚗ ДРУГИЙ КАНДИДАТ: СТРІЧКА ВІД КУРСОРА («акордеон» у нашій розмові).
+     Прототип — home-ab/gal/strip.html. Полотно ширше за екран і їде за
+     курсором; зупинився — решта гасне і з'являється підпис. Єдина розкладка,
+     якій потрібен js/gallery.js (він уже підключений у футері).
+     Ряди чотири, тож набір має бути кратний семи — звідси 14 плиток:
+     десять рендерів плюс чотири аркуші наших складань.
+     ⚠ Підписи креслень тимчасові: як називаються ці вузли — питання до власника.
+     Касета лишається вище, щоб порівняти бік у бік. Після вибору зайве прибрати. -->
 <section class="section section--mist">
   <div class="container">
-    <div class="sec-head"><span class="eyebrow eyebrow--muted">Як працюємо</span><h2>Від вашого формату — до готового комплекту</h2></div>
-    <div class="grid grid--3">
-      <div class="card"><h4>1 · Вихідні дані</h4><p>Тип машини, наявні деталі, зразок нової тари або креслення. За потреби — виїзд/замір.</p></div>
-      <div class="card"><h4>2 · Проєкт і виготовлення</h4><p>Проєктуємо геометрію під формат, узгоджуємо, виготовляємо на власному верстатному парку.</p></div>
-      <div class="card"><h4>3 · Встановлення й наладка</h4><p>Передаємо комплект, за потреби допомагаємо з встановленням і виведенням лінії на режим.</p></div>
+    <div class="sec-head">
+      <span class="eyebrow eyebrow--muted">Те саме стрічкою</span>
+      <h2>Деталі, з яких збирається комплект</h2>
+      <p>Ведіть курсор — полотно їде за ним. Зупиніться на деталі: решта гасне, з'являється підпис.</p>
+    </div>
+    <div class="gal-strip">
+      <div class="gal gal--strip gal--tiles4 galh--pop">
+        <figure class="gal-i" data-fit="contain">
+          <img src="/docs/legacy-site/images/format-4.jpg" alt="Зірка" loading="lazy">
+          <span class="gal-n">01</span>
+          <figcaption class="gal-cap"><b>Зірка</b><i>транспортна</i></figcaption>
+        </figure>
+        <figure class="gal-i" data-fit="contain">
+          <img src="/docs/legacy-site/images/format-1.jpg" alt="Шнек поділу потоку" loading="lazy">
+          <span class="gal-n">02</span>
+          <figcaption class="gal-cap"><b>Шнек поділу потоку</b><i>вхід у карусель</i></figcaption>
+        </figure>
+        <figure class="gal-i" data-fit="contain">
+          <img src="/docs/legacy-site/images/format-3.jpg" alt="Комплект пластин" loading="lazy">
+          <span class="gal-n">03</span>
+          <figcaption class="gal-cap"><b>Комплект пластин</b><i>дугові напрямні</i></figcaption>
+        </figure>
+        <figure class="gal-i" data-fit="contain">
+          <img src="/docs/legacy-site/images/format-18.jpg" alt="Ланцюгове кільце" loading="lazy">
+          <span class="gal-n">04</span>
+          <figcaption class="gal-cap"><b>Ланцюгове кільце</b><i>поворотний вузол</i></figcaption>
+        </figure>
+        <figure class="gal-i" data-fit="contain">
+          <img src="/docs/legacy-site/images/format-17.jpg" alt="Ліра напрямна" loading="lazy">
+          <span class="gal-n">05</span>
+          <figcaption class="gal-cap"><b>Ліра напрямна</b><i>секція</i></figcaption>
+        </figure>
+        <figure class="gal-i" data-fit="contain">
+          <img src="/docs/legacy-site/images/format-5.jpg" alt="Зубчастий вінець" loading="lazy">
+          <span class="gal-n">06</span>
+          <figcaption class="gal-cap"><b>Зубчастий вінець</b><i>привід каруселі</i></figcaption>
+        </figure>
+        <figure class="gal-i" data-fit="contain">
+          <img src="/docs/legacy-site/images/format-parts-24.jpg" alt="Кронштейн у зборі" loading="lazy">
+          <span class="gal-n">07</span>
+          <figcaption class="gal-cap"><b>Кронштейн у зборі</b><i>кріплення напрямної</i></figcaption>
+        </figure>
+        <figure class="gal-i" data-fit="contain">
+          <img src="/docs/legacy-site/images/format-13-otmfoo694a30fu1bfu6rzdjj8m0qd5ar70nkf8pse8.jpg" alt="Турнікетна група" loading="lazy">
+          <span class="gal-n">08</span>
+          <figcaption class="gal-cap"><b>Турнікетна група</b><i>поділ потоку</i></figcaption>
+        </figure>
+        <figure class="gal-i" data-fit="contain">
+          <img src="/docs/legacy-site/images/format-6.jpg" alt="Турнікетний вузол" loading="lazy">
+          <span class="gal-n">09</span>
+          <figcaption class="gal-cap"><b>Турнікетний вузол</b><i>з підпорами</i></figcaption>
+        </figure>
+        <figure class="gal-i" data-fit="contain">
+          <img src="/docs/legacy-site/images/format-8.jpg" alt="Переносна група" loading="lazy">
+          <span class="gal-n">10</span>
+          <figcaption class="gal-cap"><b>Переносна група</b><i>дві зірки</i></figcaption>
+        </figure>
+        <figure class="gal-i" data-fit="contain">
+          <img src="/images/products/osnastka/dwg/sm/dwg-03.png" alt="Рознесене складання вузла" loading="lazy">
+          <span class="gal-n">11</span>
+          <figcaption class="gal-cap"><b>Креслення вузла</b><i>рознесене складання</i></figcaption>
+        </figure>
+        <figure class="gal-i" data-fit="contain">
+          <img src="/images/products/osnastka/dwg/sm/dwg-19.png" alt="Рознесене складання вузла" loading="lazy">
+          <span class="gal-n">12</span>
+          <figcaption class="gal-cap"><b>Креслення вузла</b><i>рознесене складання</i></figcaption>
+        </figure>
+        <figure class="gal-i" data-fit="contain">
+          <img src="/images/products/osnastka/dwg/sm/dwg-32.png" alt="Рознесене складання вузла" loading="lazy">
+          <span class="gal-n">13</span>
+          <figcaption class="gal-cap"><b>Креслення вузла</b><i>рознесене складання</i></figcaption>
+        </figure>
+        <figure class="gal-i" data-fit="contain">
+          <img src="/images/products/osnastka/dwg/sm/dwg-01.png" alt="Рознесене складання вузла" loading="lazy">
+          <span class="gal-n">14</span>
+          <figcaption class="gal-cap"><b>Креслення вузла</b><i>рознесене складання</i></figcaption>
+        </figure>
+      </div>
     </div>
   </div>
 </section>
@@ -77,10 +279,15 @@
   </div>
 </section>
 
-<section class="section">
-  <div class="container" style="text-align:center">
-    <h2 style="max-width:20ch;margin:0 auto 16px">Розкажіть, на яку пляшку переводите лінію</h2>
-    <p class="muted" style="margin:0 auto 32px">Надішліть тип обладнання й зразок тари — підготуємо прорахунок комплекту оснастки.</p>
+<!-- Темний акорд у кінці — той самий, що завершує головну смугою контрактного
+     виробництва. Внутрішня сторінка не має обриватись на білому. -->
+<section class="endcta">
+  <!-- Варіант В: той самий колаж, інвертований — біла лінія на графіті. -->
+  <span class="endcta-bg" aria-hidden="true"></span>
+  <div class="container">
+    <span class="eyebrow">Наступний крок</span>
+    <h2>Розкажіть, на яку пляшку переводите лінію</h2>
+    <p>Надішліть тип обладнання й зразок тари — підготуємо прорахунок комплекту оснастки.</p>
     <a class="btn btn--primary btn--lg" href="/contact/">Отримати прорахунок</a>
   </div>
 </section>
