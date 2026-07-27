@@ -18,6 +18,7 @@
   var REST_MS = 260;   // скільки курсор має простояти, щоб це рахувалось зупинкою
   var REST_PX = 3;     // менші зсуви — тремтіння руки, а не рух
   var EASE = 0.12;     // частка шляху за кадр: це і є ті ~0.3 с
+  var POP = 38;        // на скільки піднята плитка вилазить убік (див. paint)
 
   function initStrip(win) {
     var inner = win.querySelector('.gal--strip');
@@ -48,10 +49,17 @@
       inner.style.transform = 'translate3d(' + (start - cur).toFixed(2) + 'px,0,0)';
       // гасіння живе тільки з того боку, де за межею справді щось є
       var f = G ? G.fade : 200, inn = G ? G.inn : 0;
-      win.style.setProperty('--gal-in-l', inn + 'px');
-      win.style.setProperty('--gal-out-l', (inn - Math.min(f, cur)) + 'px');
-      win.style.setProperty('--gal-in-r', inn + 'px');
-      win.style.setProperty('--gal-out-r', (inn - Math.min(f, max - cur)) + 'px');
+      // Запас під підняту плитку. У спокої перша плитка стоїть рівно на межі
+      // чистої зони, і за нею гасіння нульової ширини — тобто жорсткий обріз.
+      // Піднята плитка вилазить убік на половину приросту масштабу (найширша
+      // плитка 506px × 0.07 ≈ 35px) і зрізалась би по вертикалі. Тому поки за
+      // краєм порожньо, зсуваємо початок непрозорої зони назовні: там усе одно
+      // видно лише тло стрічки, а воно збігається з тлом секції.
+      var padL = Math.max(0, POP - cur), padR = Math.max(0, POP - (max - cur));
+      win.style.setProperty('--gal-in-l', (inn - padL) + 'px');
+      win.style.setProperty('--gal-out-l', (inn - padL - Math.min(f, cur)) + 'px');
+      win.style.setProperty('--gal-in-r', (inn - padR) + 'px');
+      win.style.setProperty('--gal-out-r', (inn - padR - Math.min(f, max - cur)) + 'px');
     }
     function tick() {
       cur += (target - cur) * EASE;
