@@ -18,7 +18,7 @@
   var REST_MS = 260;   // скільки курсор має простояти, щоб це рахувалось зупинкою
   var REST_PX = 3;     // менші зсуви — тремтіння руки, а не рух
   var EASE = 0.12;     // частка шляху за кадр: це і є ті ~0.3 с
-  var POP = 38;        // на скільки піднята плитка вилазить убік (див. paint)
+  var POP_SCALE = 1.14; // масштаб підйому — той самий, що в css/styles.css
 
   function initStrip(win) {
     var inner = win.querySelector('.gal--strip');
@@ -49,17 +49,30 @@
       inner.style.transform = 'translate3d(' + (start - cur).toFixed(2) + 'px,0,0)';
       // гасіння живе тільки з того боку, де за межею справді щось є
       var f = G ? G.fade : 200, inn = G ? G.inn : 0;
-      // Запас під підняту плитку. У спокої перша плитка стоїть рівно на межі
-      // чистої зони, і за нею гасіння нульової ширини — тобто жорсткий обріз.
-      // Піднята плитка вилазить убік на половину приросту масштабу (найширша
-      // плитка 506px × 0.07 ≈ 35px) і зрізалась би по вертикалі. Тому поки за
-      // краєм порожньо, зсуваємо початок непрозорої зони назовні: там усе одно
-      // видно лише тло стрічки, а воно збігається з тлом секції.
-      var padL = Math.max(0, POP - cur), padR = Math.max(0, POP - (max - cur));
-      win.style.setProperty('--gal-in-l', (inn - padL) + 'px');
-      win.style.setProperty('--gal-out-l', (inn - padL - Math.min(f, cur)) + 'px');
-      win.style.setProperty('--gal-in-r', (inn - padR) + 'px');
-      win.style.setProperty('--gal-out-r', (inn - padR - Math.min(f, max - cur)) + 'px');
+      win.style.setProperty('--gal-in-l', inn + 'px');
+      win.style.setProperty('--gal-out-l', (inn - Math.min(f, cur)) + 'px');
+      win.style.setProperty('--gal-in-r', inn + 'px');
+      win.style.setProperty('--gal-out-r', (inn - Math.min(f, max - cur)) + 'px');
+    }
+
+    // Підсув піднятої плитки, щоб вона не вилазила у смугу гасіння.
+    // Полотно видно тільки в межах чистої зони, тож плитка біля її краю при
+    // підйомі виходить убік на half*(POP_SCALE-1) і там її зрізає. Пробував
+    // натомість розсувати саму зону гасіння — але тоді запас є лише поки
+    // полотно стоїть рівно в краю, а щойно воно рушить, зріз повертається.
+    // Тому рухаємо не зону, а плитку: рівно настільки, щоб вона вмістилась.
+    function nudge(el) {
+      var r = el.getBoundingClientRect(), wr = win.getBoundingClientRect();
+      var gx = r.width * (POP_SCALE - 1) / 2, inn = G ? G.inn : 0;
+      var lim = { l: wr.left + inn, r: wr.right - inn }, dx = 0;
+      if (r.left - gx < lim.l) dx = lim.l - (r.left - gx);
+      else if (r.right + gx > lim.r) dx = lim.r - (r.right + gx);
+      // Більше ніж на приріст рухати не можна, і це не перестраховка.
+      // Плитка, що лежить за чистою зоною, дала б зсув у сотні пікселів —
+      // тобто стрибок через пів екрана. Компенсуємо рівно приріст масштабу:
+      // рівно стільки бракує плитці, яка стоїть упритул до межі.
+      dx = Math.max(-gx, Math.min(gx, dx));
+      if (dx) el.style.setProperty('--pop-dx', dx.toFixed(1) + 'px');
     }
     function tick() {
       cur += (target - cur) * EASE;
@@ -73,7 +86,11 @@
     }
 
     function clearHot() {
-      if (hotEl) { hotEl.classList.remove('is-hot'); hotEl = null; }
+      if (hotEl) {
+        hotEl.classList.remove('is-hot');
+        hotEl.style.removeProperty('--pop-dx');
+        hotEl = null;
+      }
       inner.classList.remove('has-hot');
     }
     function armRest(x, y) {
@@ -85,7 +102,9 @@
         var el = document.elementFromPoint(x, y);
         el = el && el.closest ? el.closest('.gal-i') : null;
         if (!el) return;
-        hotEl = el; el.classList.add('is-hot'); inner.classList.add('has-hot');
+        // міряємо ДО класу: після нього плитка вже масштабована
+        hotEl = el; nudge(el);
+        el.classList.add('is-hot'); inner.classList.add('has-hot');
       }, REST_MS);
     }
 
