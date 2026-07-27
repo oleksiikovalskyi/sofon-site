@@ -1,5 +1,12 @@
 # Headless screenshots of local pages -> PNG, so Claude can review layout visually.
 # Usage:  powershell -File .claude\shoot.ps1 [-Width 1440] [-Height 1600] [-Only osnastka]
+#
+# ⚠ МІНІМАЛЬНА ШИРИНА — 500px. Windows не дає вікну бути вужчим, тож при
+#   -Width 390 сторінка верстається на 500, а PNG виходить 390 — тобто ти
+#   дивишся на обрізаний кадр ширшої верстки й бачиш «переповнення», якого
+#   насправді немає. Скрипт тепер сам піднімає ширину й попереджає.
+#   Для справжніх 360-390px міряй через JS у панелі браузера: вона віддає
+#   будь-яку ширину, просто не рендерить картинку.
 param(
   [int]$Width = 1440,
   [int]$Height = 1600,
@@ -9,6 +16,14 @@ param(
   [string]$OutDir = "$env:LOCALAPPDATA\Temp\claude\shots",
   [string]$Base = "http://localhost:8123"
 )
+
+# Текст повідомлення навмисно чистий ASCII: файл без BOM, PowerShell 5.1 читає
+# його як ANSI, і довге тире всередині рядка перетворюється на друкарську лапку,
+# яку парсер приймає за кінець рядка. У коментарях це нешкідливо, у рядках - ні.
+if ($Width -lt 500) {
+  Write-Host "WARNING: width $Width raised to 500 (Windows minimum window width). A narrower shot would be a cropped frame of a 500px-wide layout." -ForegroundColor Yellow
+  $Width = 500
+}
 
 $chrome = "C:\Program Files\Google\Chrome\Application\chrome.exe"
 if (-not (Test-Path $chrome)) { $chrome = "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe" }
