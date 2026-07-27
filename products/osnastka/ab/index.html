@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>A/B порівняння — Оснастка — Sofon</title>
+<meta name="description" content="Порівняння прототипів сторінки Оснастка: каталог деталей проти технологічної карти.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/styles.css">
+<style>
+.hub-hero{background:var(--graphite);color:#fff;padding:var(--s64) 0}
+.hub-hero .eyebrow{color:var(--amber)}
+.hub-hero h1{max-width:20ch;margin:var(--s16) 0}
+.hub-hero .lead{color:rgba(255,255,255,.72);max-width:62ch}
+.hub-note{margin-top:var(--s24);font-family:var(--fm);font-size:13px;color:rgba(255,255,255,.55);
+  border-left:2px solid var(--amber);padding-left:var(--s16);max-width:64ch;line-height:1.6}
+.cmp{display:flex;flex-direction:column;gap:var(--s64)}
+.cmp-card{border:1px solid var(--border);border-radius:var(--radius-soft);overflow:hidden;background:#fff}
+.cmp-bar{display:flex;align-items:center;gap:var(--s16);flex-wrap:wrap;padding:var(--s24) var(--s32);
+  border-bottom:1px solid var(--border);background:var(--mist)}
+.cmp-key{font-family:var(--fm);font-size:13px;font-weight:600;letter-spacing:.08em;color:#fff;
+  background:var(--graphite);width:34px;height:34px;display:flex;align-items:center;justify-content:center;border-radius:var(--radius);flex:none}
+.cmp-ttl{font-size:20px;font-weight:600}
+.cmp-sub{font-family:var(--fm);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--steel)}
+.cmp-actions{margin-left:auto}
+.cmp-body{display:grid;grid-template-columns:.9fr 1.1fr;gap:0}
+.cmp-meta{padding:var(--s32);border-right:1px solid var(--border)}
+.cmp-meta .lbl{font-family:var(--fm);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--amber);margin-bottom:var(--s8);display:block}
+.cmp-meta p{font-size:15px;color:var(--steel);line-height:24px;margin-bottom:var(--s24)}
+.cmp-meta ul{list-style:none;display:flex;flex-direction:column;gap:8px;margin-bottom:var(--s24)}
+.cmp-meta li{position:relative;padding-left:22px;font-size:14.5px;color:var(--graphite)}
+.cmp-meta li::before{content:'';position:absolute;left:0;top:10px;width:10px;height:2px;background:var(--amber)}
+.cmp-frame{position:relative;background:var(--mist)}
+.cmp-frame iframe{width:100%;height:580px;border:0;display:block;background:#fff}
+.cmp-frame .hint{position:absolute;top:12px;right:12px;font-family:var(--fm);font-size:11px;letter-spacing:.06em;
+  text-transform:uppercase;color:var(--steel);background:rgba(255,255,255,.9);padding:5px 10px;border:1px solid var(--border);border-radius:100px;pointer-events:none}
+.orig{display:flex;align-items:center;gap:var(--s24);flex-wrap:wrap;border:1px dashed var(--border);
+  border-radius:var(--radius-soft);padding:var(--s24) var(--s32);background:var(--mist);margin-bottom:var(--s48)}
+.orig .t{font-weight:600}.orig .d{color:var(--steel);font-size:15px}.orig a{margin-left:auto}
+.nav-lab{display:flex;gap:var(--s16);flex-wrap:wrap;margin-top:var(--s24)}
+.nav-lab a{font-family:var(--fm);font-size:12.5px;color:rgba(255,255,255,.6)}
+.nav-lab a:hover{color:var(--amber)}
+@media(max-width:900px){.cmp-body{grid-template-columns:1fr}.cmp-meta{border-right:0;border-bottom:1px solid var(--border)}}
+</style>
+</head>
+<body>
+<section class="hub-hero">
+  <div class="container">
+    <span class="eyebrow">Внутрішній прототип · A/B · Оснастка</span>
+    <h1>Сторінка «Оснастка» — два підходи до багатого контенту</h1>
+    <p class="lead">У legacy-сайті по форматних деталях зібрано багато матеріалу: типи деталей, матеріали, технологія, процес переходу. Питання — як його подати. Варіант A робить героєм каталог деталей; варіант B веде клієнта процесом переходу й акцентує якість виготовлення.</p>
+    <p class="hub-note">Продакшн-сторінка не змінена. Тексти взято з наявного legacy-контенту (структуровано, не вигадано). Живцем краще дивитися у своєму браузері — наведення, розкриття й анімація не видно в статичних превʼю.</p>
+    <div class="nav-lab">
+      <a href="/products/custom-equipment/ab/">← Нестандартне обладнання (A/B)</a>
+      <a href="/contract-manufacturing/ab/">Контрактне виробництво (A/B) →</a>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="orig">
+      <div><div class="t">Оригінал — як зараз</div>
+        <div class="d">Сітка з 6 напрямів (.feat), картки процесу, таблиця. Точка відліку.</div></div>
+      <a class="btn btn--ghost" href="/products/osnastka/" target="_blank" rel="noopener">Відкрити поточну →</a>
+    </div>
+
+    <div class="cmp">
+      <div class="cmp-card">
+        <div class="cmp-bar"><span class="cmp-key">A</span>
+          <div><div class="cmp-ttl">Каталог деталей</div><div class="cmp-sub">Категорії · картки з розкриттям</div></div>
+          <div class="cmp-actions"><a class="btn btn--ghost" href="/products/osnastka/ab/a.html" target="_blank" rel="noopener">Відкрити →</a></div>
+        </div>
+        <div class="cmp-body">
+          <div class="cmp-meta">
+            <span class="lbl">Ідея</span>
+            <p>Героєм стає сам каталог оснастки. Вкладки-категорії (Потік / Пробка / Етикетка / Допоміжне) фільтрують сітку, а будь-яка картка розкривається на місці й показує, за що деталь відповідає. Максимум показаної глибини асортименту.</p>
+            <span class="lbl">Що в композиції</span>
+            <ul>
+              <li>Лічильники в герої: 14 деталей · 4 групи · 30–45 днів</li>
+              <li>Липкі вкладки-категорії з підрахунком у кожній</li>
+              <li>Окремий блок «Матеріали й якість» (PE500, капролон, Kipp…)</li>
+            </ul>
+            <span class="lbl">Кому пасує</span>
+            <p style="margin-bottom:0">Інженеру, який хоче швидко оцінити, що саме ви робите й наскільки широко.</p>
+          </div>
+          <div class="cmp-frame"><span class="hint">Превʼю · гортайте всередині</span>
+            <iframe loading="lazy" src="/products/osnastka/ab/a.html" title="Оснастка A"></iframe>
+          </div>
+        </div>
+      </div>
+
+      <div class="cmp-card">
+        <div class="cmp-bar"><span class="cmp-key">B</span>
+          <div><div class="cmp-ttl">Технологічна карта</div><div class="cmp-sub">Процес переходу + якість</div></div>
+          <div class="cmp-actions"><a class="btn btn--ghost" href="/products/osnastka/ab/b.html" target="_blank" rel="noopener">Відкрити →</a></div>
+        </div>
+        <div class="cmp-body">
+          <div class="cmp-meta">
+            <span class="lbl">Ідея</span>
+            <p>Хребет сторінки — процес переходу на нову пляшку у вигляді таймлайну з реальними орієнтирами (1 день на заміри, 30–45 днів виробництва, 50–100 пляшок для випробувань). Далі — темний блок про матеріали та якість як головний козир. Перелік деталей — компактний довідник.</p>
+            <span class="lbl">Що в композиції</span>
+            <ul>
+              <li>Вертикальний таймлайн із появою кроків при прокрутці</li>
+              <li>Темна «сигнатурна» смуга якості (ресурс, гігієна, монтаж)</li>
+              <li>Довідник деталей на 4 колонки — сканується за секунди</li>
+            </ul>
+            <span class="lbl">Кому пасує</span>
+            <p style="margin-bottom:0">Власнику виробництва, для якого головне питання — простій і надійність переходу.</p>
+          </div>
+          <div class="cmp-frame"><span class="hint">Превʼю · гортайте всередині</span>
+            <iframe loading="lazy" src="/products/osnastka/ab/b.html" title="Оснастка B"></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="foot-bot" style="border-top:1px solid rgba(255,255,255,.1);padding-top:var(--s24)">
+      <span>© 2026 ТОВ «СОФОН». Внутрішній A/B прототип.</span><span class="mono">osnastka · layout A/B</span>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

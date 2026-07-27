@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>A/B сравнение — Нестандартное оборудование — Sofon</title>
+<meta name="description" content="Сравнение прототипов раздела «Примеры реализованных решений» страницы custom-equipment.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/styles.css">
+<style>
+.hub-hero{background:var(--graphite);color:#fff;padding:var(--s64) 0}
+.hub-hero .eyebrow{color:var(--amber)}
+.hub-hero h1{max-width:20ch;margin:var(--s16) 0}
+.hub-hero .lead{color:rgba(255,255,255,.72);max-width:60ch}
+.hub-note{margin-top:var(--s24);font-family:var(--fm);font-size:13px;color:rgba(255,255,255,.55);
+  border-left:2px solid var(--amber);padding-left:var(--s16);max-width:64ch;line-height:1.6}
+
+.cmp{display:flex;flex-direction:column;gap:var(--s64)}
+.cmp-card{border:1px solid var(--border);border-radius:var(--radius-soft);overflow:hidden;background:#fff}
+.cmp-bar{display:flex;align-items:center;gap:var(--s16);flex-wrap:wrap;
+  padding:var(--s24) var(--s32);border-bottom:1px solid var(--border);background:var(--mist)}
+.cmp-key{font-family:var(--fm);font-size:13px;font-weight:600;letter-spacing:.08em;color:#fff;
+  background:var(--graphite);width:34px;height:34px;display:flex;align-items:center;justify-content:center;
+  border-radius:var(--radius);flex:none}
+.cmp-ttl{font-size:20px;font-weight:600}
+.cmp-sub{font-family:var(--fm);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--steel)}
+.cmp-actions{margin-left:auto;display:flex;gap:var(--s8)}
+.cmp-body{display:grid;grid-template-columns:.9fr 1.1fr;gap:0}
+.cmp-meta{padding:var(--s32);border-right:1px solid var(--border)}
+.cmp-meta h4{font-size:16px;margin-bottom:var(--s8)}
+.cmp-meta p{font-size:15px;color:var(--steel);line-height:24px;margin-bottom:var(--s24)}
+.cmp-meta .lbl{font-family:var(--fm);font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--amber);margin-bottom:var(--s8);display:block}
+.cmp-meta ul{list-style:none;display:flex;flex-direction:column;gap:8px;margin-bottom:var(--s24)}
+.cmp-meta li{position:relative;padding-left:22px;font-size:14.5px;color:var(--graphite)}
+.cmp-meta li::before{content:'';position:absolute;left:0;top:10px;width:10px;height:2px;background:var(--amber)}
+.cmp-frame{position:relative;background:var(--mist)}
+.cmp-frame iframe{width:100%;height:560px;border:0;display:block;background:#fff}
+.cmp-frame .hint{position:absolute;top:12px;right:12px;font-family:var(--fm);font-size:11px;
+  letter-spacing:.06em;text-transform:uppercase;color:var(--steel);background:rgba(255,255,255,.9);
+  padding:5px 10px;border:1px solid var(--border);border-radius:100px;pointer-events:none}
+@media(max-width:900px){.cmp-body{grid-template-columns:1fr}.cmp-meta{border-right:0;border-bottom:1px solid var(--border)}}
+
+.orig{display:flex;align-items:center;gap:var(--s24);flex-wrap:wrap;
+  border:1px dashed var(--border);border-radius:var(--radius-soft);padding:var(--s24) var(--s32);background:var(--mist)}
+.orig .t{font-weight:600}
+.orig .d{color:var(--steel);font-size:15px}
+.orig a{margin-left:auto}
+</style>
+</head>
+<body>
+<section class="hub-hero">
+  <div class="container">
+    <span class="eyebrow">Внутренний прототип · A/B</span>
+    <h1>Раздел «Примеры реализованных решений» — три подхода</h1>
+    <p class="lead">Одна и та же страница нестандартного оборудования, но раздел с примерами решён тремя разными способами. Каждый превращает статичную сетку карточек в интерактив, который раскрывает детали по клику. Композиция страницы тоже слегка меняется от варианта к варианту.</p>
+    <p class="hub-note">Продакшн-страница не тронута — это отдельные файлы для сравнения. Тексты в деталях составлены из описаний, уже присутствующих на странице (структурированы, не выдуманы), и служат для оценки макета. Живьё лучше смотреть в своём браузере: наведение, клики и анимация не видны в статичных превью.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+
+    <div class="orig" style="margin-bottom:var(--s48)">
+      <div>
+        <div class="t">Оригинал — как сейчас</div>
+        <div class="d">Сетка из 7 карточек, каждая ведёт на страницу контактов. Точка отсчёта для сравнения.</div>
+      </div>
+      <a class="btn btn--ghost" href="/products/custom-equipment/" target="_blank" rel="noopener">Открыть текущую →</a>
+    </div>
+
+    <div class="cmp">
+
+      <!-- A -->
+      <div class="cmp-card">
+        <div class="cmp-bar">
+          <span class="cmp-key">A</span>
+          <div><div class="cmp-ttl">Индекс узлов</div><div class="cmp-sub">Список слева · деталь справа</div></div>
+          <div class="cmp-actions">
+            <a class="btn btn--ghost" href="/products/custom-equipment/ab/a.html" target="_blank" rel="noopener">Открыть →</a>
+          </div>
+        </div>
+        <div class="cmp-body">
+          <div class="cmp-meta">
+            <span class="lbl">Идея</span>
+            <p>Раздел читается как технический указатель: слева — компактный перечень узлов с меткой участка линии, справа — панель, которая мгновенно меняется при выборе. Сдержанно, по-инженерному, без лишнего движения.</p>
+            <span class="lbl">Что нового в композиции</span>
+            <ul>
+              <li>Фото-герой + mono-«тикет» с этапами полного цикла</li>
+              <li>Метки участка (этикетирование / паллетизация / пищевое) вместо декоративной нумерации</li>
+              <li>Клавиатурная навигация стрелками по списку</li>
+            </ul>
+            <span class="lbl">Сильная сторона</span>
+            <p style="margin-bottom:0">Быстрое сканирование всех решений глазами; ноль «прыжков» макета.</p>
+          </div>
+          <div class="cmp-frame"><span class="hint">Превью · листайте внутри</span>
+            <iframe loading="lazy" src="/products/custom-equipment/ab/a.html" title="Вариант A"></iframe>
+          </div>
+        </div>
+      </div>
+
+      <!-- B -->
+      <div class="cmp-card">
+        <div class="cmp-bar">
+          <span class="cmp-key">B</span>
+          <div><div class="cmp-ttl">Раскрывающиеся полосы</div><div class="cmp-sub">Аккордеон во всю ширину</div></div>
+          <div class="cmp-actions">
+            <a class="btn btn--ghost" href="/products/custom-equipment/ab/b.html" target="_blank" rel="noopener">Открыть →</a>
+          </div>
+        </div>
+        <div class="cmp-body">
+          <div class="cmp-meta">
+            <span class="lbl">Идея</span>
+            <p>Каждое решение — широкая полоса. Клик плавно разворачивает её в детальный блок с текстом и врезкой. Вертикальный ритм и амбер-грань слева ведут читателя сверху вниз, подталкивая раскрывать одну за другой.</p>
+            <span class="lbl">Что нового в композиции</span>
+            <ul>
+              <li>Светлый редакторский герой: заголовок + «полный цикл» цифрами</li>
+              <li>Плавная анимация высоты, «плюс» превращается в активный маркер</li>
+              <li>Открыта всегда одна полоса — фокус на текущем узле</li>
+            </ul>
+            <span class="lbl">Сильная сторона</span>
+            <p style="margin-bottom:0">Максимум места под детали; ощущается как «разворачиваешь чертёж».</p>
+          </div>
+          <div class="cmp-frame"><span class="hint">Превью · листайте внутри</span>
+            <iframe loading="lazy" src="/products/custom-equipment/ab/b.html" title="Вариант B"></iframe>
+          </div>
+        </div>
+      </div>
+
+      <!-- C -->
+      <div class="cmp-card">
+        <div class="cmp-bar">
+          <span class="cmp-key">C</span>
+          <div><div class="cmp-ttl">Мозаика + инспектор</div><div class="cmp-sub">Сетка карточек · панель под строкой</div></div>
+          <div class="cmp-actions">
+            <a class="btn btn--ghost" href="/products/custom-equipment/ab/c.html" target="_blank" rel="noopener">Открыть →</a>
+          </div>
+        </div>
+        <div class="cmp-body">
+          <div class="cmp-meta">
+            <span class="lbl">Идея</span>
+            <p>Ближе всего к текущей сетке — но карточка по клику выдвигает тёмную панель-инспектор прямо под своей строкой, с амбер-указателем на выбранную. Сверху — фильтр по участку линии. Самый динамичный из трёх.</p>
+            <span class="lbl">Что нового в композиции</span>
+            <ul>
+              <li>Фильтр-чипы: этикетирование / паллетизация / пищевое</li>
+              <li>Инспектор пристыковывается к концу строки с «клювиком»</li>
+              <li>Знакомая сетка — минимальный риск при переходе с текущей</li>
+            </ul>
+            <span class="lbl">Сильная сторона</span>
+            <p style="margin-bottom:0">Эволюция текущего дизайна, а не слом; фильтр помогает при росте числа кейсов.</p>
+          </div>
+          <div class="cmp-frame"><span class="hint">Превью · листайте внутри</span>
+            <iframe loading="lazy" src="/products/custom-equipment/ab/c.html" title="Вариант C"></iframe>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="foot-bot" style="border-top:1px solid rgba(255,255,255,.1);padding-top:var(--s24)">
+      <span>© 2026 ТОВ «СОФОН». Внутренний A/B прототип.</span>
+      <span class="mono">custom-equipment · examples section</span>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Оформлення зображень — варіанти — Sofon</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/styles.css">
+<style>
+.hub-hero{background:var(--graphite);color:#fff;padding:var(--s64) 0 var(--s48)}
+.hub-hero .eyebrow{color:var(--amber)}
+.hub-hero h1{max-width:22ch;margin:var(--s16) 0}
+.hub-hero .lead{color:rgba(255,255,255,.74);max-width:64ch}
+.hub-hero .note{margin-top:var(--s24);font-family:var(--fm);font-size:13px;color:rgba(255,255,255,.6);
+  border-left:2px solid var(--amber);padding-left:var(--s16);max-width:66ch;line-height:1.6}
+
+.opt{border-top:1px solid var(--border);padding-top:var(--s32);margin-top:var(--s64)}
+.opt:first-of-type{margin-top:var(--s32)}
+.opt-head{display:flex;align-items:baseline;gap:var(--s16);flex-wrap:wrap;margin-bottom:var(--s8)}
+.opt-key{font-family:var(--fm);font-size:12px;font-weight:600;letter-spacing:.08em;color:#fff;
+  background:var(--graphite);border-radius:var(--radius);padding:4px 10px}
+.opt h2{font-size:26px}
+.opt .why{color:var(--steel);font-size:15.5px;line-height:24px;max-width:70ch;margin-bottom:var(--s24)}
+.opt .verdict{font-family:var(--fm);font-size:12.5px;color:var(--amber-dk);
+  border:1px dashed var(--amber);border-radius:var(--radius);padding:8px 12px;display:inline-block;margin-bottom:var(--s32)}
+.row{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--gutter)}
+.cap{font-family:var(--fm);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--steel);margin-top:8px}
+.cap b{color:var(--graphite);font-weight:600}
+@media(max-width:900px){.row{grid-template-columns:repeat(2,1fr)}}
+
+/* ============ БАЗА: спільна рамка для всіх варіантів ============ */
+.fig{position:relative;overflow:hidden;border-radius:var(--radius-soft);
+  border:1px solid var(--border);aspect-ratio:4/3;background:#fff;display:block;
+  transition:border-color .22s ease,box-shadow .22s ease,transform .22s ease}
+.fig img{width:100%;height:100%;display:block;transition:transform .45s cubic-bezier(.2,.6,.2,1),filter .3s ease}
+.fig:hover{border-color:var(--amber);box-shadow:0 18px 40px -26px rgba(27,30,35,.5);transform:translateY(-2px)}
+.fig:hover img{transform:scale(1.045)}
+/* два режими вмісту — рендер на білому vs жива фотографія */
+.fig--product img{object-fit:contain;padding:10%}
+.fig--scene img{object-fit:cover}
+
+/* ---- 1. Біла плита (рекомендовано) ---- */
+.v1 .fig{background:#fff}
+.v1 .fig--product img{padding:8%}
+
+/* ---- 2. Мист-плита ---- */
+.v2 .fig{background:var(--mist)}
+.v2 .fig--product img{mix-blend-mode:multiply;padding:8%}
+
+/* ---- 3. Градієнтна «студія» ---- */
+.v3 .fig{background:linear-gradient(180deg,#fff 0%,#fff 55%,var(--mist) 100%)}
+.v3 .fig--product img{mix-blend-mode:multiply;padding:7% 8% 9%}
+.v3 .fig--scene::after{content:'';position:absolute;inset:auto 0 0 0;height:45%;
+  background:linear-gradient(180deg,transparent,rgba(18,21,26,.35));pointer-events:none}
+
+/* ---- 4. Технічна плита з кутовими мітками ---- */
+.v4 .fig{background:var(--mist);border-color:var(--border)}
+.v4 .fig--product img{mix-blend-mode:multiply;padding:9%}
+.v4 .fig::before,.v4 .fig::after{content:'';position:absolute;width:14px;height:14px;pointer-events:none;
+  border-color:var(--amber);opacity:.85;transition:.22s ease;z-index:2}
+.v4 .fig::before{top:10px;left:10px;border-top:2px solid;border-left:2px solid}
+.v4 .fig::after{bottom:10px;right:10px;border-bottom:2px solid;border-right:2px solid}
+.v4 .fig:hover::before{top:6px;left:6px}
+.v4 .fig:hover::after{bottom:6px;right:6px}
+
+/* ---- 5. Дуотон → колір при наведенні ---- */
+.v5 .fig{background:var(--mist)}
+.v5 .fig img{filter:grayscale(1) contrast(1.05)}
+.v5 .fig:hover img{filter:none}
+.v5 .fig--product img{mix-blend-mode:multiply;padding:8%}
+
+/* forced-hover демонстрація */
+.hoverdemo .fig{border-color:var(--amber);box-shadow:0 18px 40px -26px rgba(27,30,35,.5);transform:translateY(-2px)}
+.hoverdemo .fig img{transform:scale(1.045)}
+.hoverdemo.v5 .fig img{filter:none}
+.hoverdemo.v4 .fig::before{top:6px;left:6px}
+.hoverdemo.v4 .fig::after{bottom:6px;right:6px}
+</style>
+</head>
+<body>
+<div style="background:#12151A;color:#fff;font-family:var(--fm,monospace);font-size:12px;letter-spacing:.08em;text-align:center;padding:7px 12px">
+  ВНУТРІШНЯ ЛАБОРАТОРІЯ · ОФОРМЛЕННЯ ЗОБРАЖЕНЬ · <a href="/lab/" style="color:#F07C1A">← до лабораторії</a>
+</div>
+
+<section class="hub-hero">
+  <div class="container">
+    <span class="eyebrow">Заміна штрихованої заглушки</span>
+    <h1>Як вставляти зображення, щоб рендери й фото жили в одному стилі</h1>
+    <p class="lead">Наша бібліотека — це переважно 3D-рендери на білому тлі з мʼякою тінню, і лише подекуди «живі» цехові фотографії з щільним фоном. Тому одного режиму вставки недостатньо: рендер треба вписати цілком, фотографію — заповнити кадр. Нижче — пʼять варіантів однієї системи.</p>
+    <p class="note">У кожному варіанті ліві дві картки — рендери на білому, праві дві — щільні фото. Дивимося, чи виглядають вони як один стиль. Рамка, радіус, пропорція й анімація наведення спільні для всіх — змінюється лише підкладка та обробка.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+
+    <!-- 1 -->
+    <div class="opt v1">
+      <div class="opt-head"><span class="opt-key">1</span><h2>Біла плита</h2></div>
+      <p class="why">Підкладка — чистий білий. Рендер лягає «в себе»: його власне біле тло зливається з плитою, видно лише деталь і її тінь. Фото заповнює кадр повністю. Межу задає волосяна рамка, тож обидва типи читаються як картки одного набору.</p>
+      <span class="verdict">Найбезпечніший варіант: нічого не спотворює, працює навіть із неідеальними вихідними</span>
+      <div class="row">
+        <div><a class="fig fig--product"><img src="/docs/legacy-site/images/format-3.jpg" alt=""></a><div class="cap"><b>рендер</b> · форматні деталі</div></div>
+        <div><a class="fig fig--product"><img src="/docs/legacy-site/images/pe-labeling-plate-2.jpg" alt=""></a><div class="cap"><b>рендер</b> · плита етикетувальника</div></div>
+        <div><a class="fig fig--scene"><img src="/docs/legacy-site/images/19-liter-palletizer-auxiliary-equipment01.jpg" alt=""></a><div class="cap"><b>фото</b> · цех</div></div>
+        <div><a class="fig fig--scene"><img src="/images/products/custom-equipment/palletizer-overview.jpg" alt=""></a><div class="cap"><b>фото</b> · щільний фон</div></div>
+      </div>
+    </div>
+
+    <!-- 2 -->
+    <div class="opt v2">
+      <div class="opt-head"><span class="opt-key">2</span><h2>Мист-плита + multiply</h2></div>
+      <p class="why">Підкладка — фірмовий світло-сірий <span class="mono">#F3F4F6</span>. Щоб біле тло рендера не лишалося білим прямокутником, картинка накладається режимом <span class="mono">multiply</span> — біле стає прозорим, лишається сама деталь із тінню. Фото заповнює кадр як завжди.</p>
+      <span class="verdict">Найчистіший вигляд для рендерів — але multiply трохи притлумлює світлі деталі</span>
+      <div class="row">
+        <div><a class="fig fig--product"><img src="/docs/legacy-site/images/format-3.jpg" alt=""></a><div class="cap"><b>рендер</b> · форматні деталі</div></div>
+        <div><a class="fig fig--product"><img src="/docs/legacy-site/images/pe-labeling-plate-2.jpg" alt=""></a><div class="cap"><b>рендер</b> · плита етикетувальника</div></div>
+        <div><a class="fig fig--scene"><img src="/docs/legacy-site/images/19-liter-palletizer-auxiliary-equipment01.jpg" alt=""></a><div class="cap"><b>фото</b> · цех</div></div>
+        <div><a class="fig fig--scene"><img src="/images/products/custom-equipment/palletizer-overview.jpg" alt=""></a><div class="cap"><b>фото</b> · щільний фон</div></div>
+      </div>
+    </div>
+
+    <!-- 3 -->
+    <div class="opt v3">
+      <div class="opt-head"><span class="opt-key">3</span><h2>Градієнтна «студія»</h2></div>
+      <p class="why">Підкладка — ледь помітний градієнт від білого до сірого знизу: деталь ніби стоїть на студійному столі, а не висить у порожнечі. Для фото працює дзеркально — донизу йде легка затемнювальна вуаль, на якій добре читається підпис.</p>
+      <span class="verdict">Найбільш «дорогий» вигляд; додає глибини, не чіпаючи саму картинку</span>
+      <div class="row">
+        <div><a class="fig fig--product"><img src="/docs/legacy-site/images/format-3.jpg" alt=""></a><div class="cap"><b>рендер</b> · форматні деталі</div></div>
+        <div><a class="fig fig--product"><img src="/docs/legacy-site/images/gravity-filling-head-4-9-16.jpg" alt=""></a><div class="cap"><b>рендер</b> · наливна головка</div></div>
+        <div><a class="fig fig--scene"><img src="/docs/legacy-site/images/19-liter-palletizer-auxiliary-equipment01.jpg" alt=""></a><div class="cap"><b>фото</b> · цех</div></div>
+        <div><a class="fig fig--scene"><img src="/images/products/custom-equipment/hero-bg.jpg" alt=""></a><div class="cap"><b>фото</b> · щільний фон</div></div>
+      </div>
+    </div>
+
+    <!-- 4 -->
+    <div class="opt v4">
+      <div class="opt-head"><span class="opt-key">4</span><h2>Технічна плита з кутовими мітками</h2></div>
+      <p class="why">Та сама мист-плита, але з двома амбер-кутиками — як рамка кадру на кресленні. При наведенні кутики «розходяться» назовні. Це найбільш фірмовий, інженерний варіант: рамка сама щось означає, а не просто прикрашає.</p>
+      <span class="verdict">Найхарактерніший для машинобудівника — але це помітний акцент, не для кожної сітки</span>
+      <div class="row">
+        <div><a class="fig fig--product"><img src="/docs/legacy-site/images/format-parts-2.jpg" alt=""></a><div class="cap"><b>рендер</b> · форматні деталі</div></div>
+        <div><a class="fig fig--product"><img src="/docs/legacy-site/images/pillows-1.jpg" alt=""></a><div class="cap"><b>рендер</b> · подушки</div></div>
+        <div><a class="fig fig--scene"><img src="/docs/legacy-site/images/19-liter-palletizer-auxiliary-equipment01.jpg" alt=""></a><div class="cap"><b>фото</b> · цех</div></div>
+        <div><a class="fig fig--scene"><img src="/images/products/custom-equipment/palletizer-overview.jpg" alt=""></a><div class="cap"><b>фото</b> · щільний фон</div></div>
+      </div>
+    </div>
+
+    <!-- 5 -->
+    <div class="opt v5">
+      <div class="opt-head"><span class="opt-key">5</span><h2>Дуотон → колір при наведенні</h2></div>
+      <p class="why">Усе знебарвлюється до сірого, а колір повертається лише під курсором. Найсильніше «зшиває» різнорідні джерела: рендери, фото зі старого сайту й майбутні знімки виглядатимуть як одна серія незалежно від того, ким і коли зняті.</p>
+      <span class="verdict">Рятує різношерсту бібліотеку — але ховає колір продукту до наведення</span>
+      <div class="row">
+        <div><a class="fig fig--product"><img src="/docs/legacy-site/images/format-7.jpg" alt=""></a><div class="cap"><b>рендер</b> · зелена деталь</div></div>
+        <div><a class="fig fig--product"><img src="/docs/legacy-site/images/pe-labeling-plate-2.jpg" alt=""></a><div class="cap"><b>рендер</b> · плита етикетувальника</div></div>
+        <div><a class="fig fig--scene"><img src="/docs/legacy-site/images/19-liter-palletizer-auxiliary-equipment01.jpg" alt=""></a><div class="cap"><b>фото</b> · цех</div></div>
+        <div><a class="fig fig--scene"><img src="/images/products/custom-equipment/hero-bg.jpg" alt=""></a><div class="cap"><b>фото</b> · щільний фон</div></div>
+      </div>
+    </div>
+
+    <!-- hover demo -->
+    <div class="opt">
+      <div class="opt-head"><span class="opt-key">↗</span><h2>Стан при наведенні</h2></div>
+      <p class="why">Анімація однакова для всіх варіантів: картка трохи піднімається, рамка стає амбер, зображення повільно наближається на 4,5%. Нижче — той самий ряд, але з примусово увімкненим станом наведення, щоб побачити різницю без миші.</p>
+      <div class="row hoverdemo v1" style="margin-bottom:var(--s24)">
+        <div><a class="fig fig--product"><img src="/docs/legacy-site/images/format-3.jpg" alt=""></a><div class="cap"><b>наведення</b> · рендер</div></div>
+        <div><a class="fig fig--scene"><img src="/images/products/custom-equipment/palletizer-overview.jpg" alt=""></a><div class="cap"><b>наведення</b> · фото</div></div>
+        <div><a class="fig fig--product" style="background:var(--mist)"><img src="/docs/legacy-site/images/format-parts-2.jpg" alt="" style="mix-blend-mode:multiply"></a><div class="cap"><b>наведення</b> · мист-плита</div></div>
+        <div><a class="fig fig--scene"><img src="/images/products/custom-equipment/hero-bg.jpg" alt=""></a><div class="cap"><b>наведення</b> · фото</div></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="foot-bot" style="border-top:1px solid rgba(255,255,255,.1);padding-top:var(--s24)">
+      <span>© 2026 ТОВ «СОФОН». Внутрішня лабораторія.</span><span class="mono">image frames</span>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

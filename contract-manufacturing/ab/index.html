@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>A/B порівняння — Контрактне виробництво — Sofon</title>
+<meta name="description" content="Порівняння прототипів сторінки контрактного виробництва + банк згенерованого контенту.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/styles.css">
+<style>
+.hub-hero{background:var(--graphite);color:#fff;padding:var(--s64) 0}
+.hub-hero .eyebrow{color:var(--amber)}
+.hub-hero h1{max-width:22ch;margin:var(--s16) 0}
+.hub-hero .lead{color:rgba(255,255,255,.72);max-width:62ch}
+.hub-note{margin-top:var(--s24);font-family:var(--fm);font-size:13px;color:rgba(255,255,255,.6);
+  border-left:2px solid var(--amber);padding-left:var(--s16);max-width:66ch;line-height:1.6}
+.hub-note a{color:var(--amber)}
+.cmp{display:flex;flex-direction:column;gap:var(--s64)}
+.cmp-card{border:1px solid var(--border);border-radius:var(--radius-soft);overflow:hidden;background:#fff}
+.cmp-bar{display:flex;align-items:center;gap:var(--s16);flex-wrap:wrap;padding:var(--s24) var(--s32);
+  border-bottom:1px solid var(--border);background:var(--mist)}
+.cmp-key{font-family:var(--fm);font-size:13px;font-weight:600;letter-spacing:.08em;color:#fff;
+  background:var(--graphite);width:34px;height:34px;display:flex;align-items:center;justify-content:center;border-radius:var(--radius);flex:none}
+.cmp-ttl{font-size:20px;font-weight:600}
+.cmp-sub{font-family:var(--fm);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--steel)}
+.cmp-actions{margin-left:auto}
+.cmp-body{display:grid;grid-template-columns:.9fr 1.1fr;gap:0}
+.cmp-meta{padding:var(--s32);border-right:1px solid var(--border)}
+.cmp-meta .lbl{font-family:var(--fm);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--amber);margin-bottom:var(--s8);display:block}
+.cmp-meta p{font-size:15px;color:var(--steel);line-height:24px;margin-bottom:var(--s24)}
+.cmp-meta ul{list-style:none;display:flex;flex-direction:column;gap:8px;margin-bottom:var(--s24)}
+.cmp-meta li{position:relative;padding-left:22px;font-size:14.5px;color:var(--graphite)}
+.cmp-meta li::before{content:'';position:absolute;left:0;top:10px;width:10px;height:2px;background:var(--amber)}
+.cmp-frame{position:relative;background:var(--mist)}
+.cmp-frame iframe{width:100%;height:580px;border:0;display:block;background:#fff}
+.cmp-frame .hint{position:absolute;top:12px;right:12px;font-family:var(--fm);font-size:11px;letter-spacing:.06em;
+  text-transform:uppercase;color:var(--steel);background:rgba(255,255,255,.9);padding:5px 10px;border:1px solid var(--border);border-radius:100px;pointer-events:none}
+.orig{display:flex;align-items:center;gap:var(--s24);flex-wrap:wrap;border:1px dashed var(--border);
+  border-radius:var(--radius-soft);padding:var(--s24) var(--s32);background:var(--mist);margin-bottom:var(--s32)}
+.orig .t{font-weight:600}.orig .d{color:var(--steel);font-size:15px}.orig a{margin-left:auto}
+.bank{display:flex;align-items:center;gap:var(--s24);flex-wrap:wrap;border:1px solid var(--amber);
+  border-radius:var(--radius-soft);padding:var(--s24) var(--s32);background:rgba(240,124,26,.05);margin-bottom:var(--s48)}
+.bank .t{font-weight:600}.bank .d{color:var(--steel);font-size:15px}.bank a{margin-left:auto}
+.nav-lab{display:flex;gap:var(--s16);flex-wrap:wrap;margin-top:var(--s24)}
+.nav-lab a{font-family:var(--fm);font-size:12.5px;color:rgba(255,255,255,.6)}
+.nav-lab a:hover{color:var(--amber)}
+@media(max-width:900px){.cmp-body{grid-template-columns:1fr}.cmp-meta{border-right:0;border-bottom:1px solid var(--border)}}
+</style>
+</head>
+<body>
+<section class="hub-hero">
+  <div class="container">
+    <span class="eyebrow">Внутрішній прототип · A/B · Контрактне виробництво</span>
+    <h1>Контрактне виробництво — згенерований контент + два макети</h1>
+    <p class="lead">У legacy-сайті цього напряму не було — це нова лінія. Тому спершу я зібрав банк контенту (токарні, фрезерні, ЧПК-роутер, матеріали, процес, FAQ) з опорою на профільні цехи й на реальну перевагу Sofon — обробку інженерних пластиків. Далі — два макети, що подають цей контент по-різному.</p>
+    <p class="hub-note">Усе, що на сторінках позначено пунктирною амбер-плашкою <b>«Уточнити»</b>, — це реальні факти (парк верстатів, габарити, осі ЧПК, матеріали, терміни), яких я не вигадую: їх треба підтвердити перед публікацією. Повний банк текстів з варіантами заголовків — у файлі <a href="/contract-manufacturing/ab/CONTENT-BANK.md">CONTENT-BANK.md</a>.</p>
+    <div class="nav-lab">
+      <a href="/products/osnastka/ab/">← Оснастка (A/B)</a>
+      <a href="/products/custom-equipment/ab/">Нестандартне обладнання (A/B) →</a>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="orig">
+      <div><div class="t">Оригінал — як зараз</div>
+        <div class="d">Чернетка з курсивними плейсхолдерами й однією плашкою «уточнити». Точка відліку.</div></div>
+      <a class="btn btn--ghost" href="/contract-manufacturing/" target="_blank" rel="noopener">Відкрити поточну →</a>
+    </div>
+    <div class="bank">
+      <div><div class="t">Банк контенту</div>
+        <div class="d">Позиціонування (2 кути), 5 варіантів заголовків, описи послуг, матеріали, FAQ, CTA.</div></div>
+      <a class="btn btn--primary" href="/contract-manufacturing/ab/CONTENT-BANK.md" target="_blank" rel="noopener">Читати банк →</a>
+    </div>
+
+    <div class="cmp">
+      <div class="cmp-card">
+        <div class="cmp-bar"><span class="cmp-key">A</span>
+          <div><div class="cmp-ttl">Каталог можливостей</div><div class="cmp-sub">Спец-лист · усі напрями розгорнуто</div></div>
+          <div class="cmp-actions"><a class="btn btn--ghost" href="/contract-manufacturing/ab/a.html" target="_blank" rel="noopener">Відкрити →</a></div>
+        </div>
+        <div class="cmp-body">
+          <div class="cmp-meta">
+            <span class="lbl">Ідея</span>
+            <p>Розгорнутий каталог: кожен напрям (токарні / фрезерні / роутер) показано окремим блоком із типовими деталями. Далі — матриця матеріалів, хмара типів деталей, процес, «чому ми» і FAQ. Максимум інформації на одній сторінці.</p>
+            <span class="lbl">Що в композиції</span>
+            <ul>
+              <li>Три блоки послуг, що чергуються ліво/право</li>
+              <li>Матриця матеріалів: метали / пластики / лист</li>
+              <li>Плашки «Уточнити» прямо в контексті кожного блоку</li>
+            </ul>
+            <span class="lbl">Кому пасує</span>
+            <p style="margin-bottom:0">Технічному замовнику, який хоче одразу побачити весь обсяг можливостей.</p>
+          </div>
+          <div class="cmp-frame"><span class="hint">Превʼю · гортайте всередині</span>
+            <iframe loading="lazy" src="/contract-manufacturing/ab/a.html" title="Контракт A"></iframe>
+          </div>
+        </div>
+      </div>
+
+      <div class="cmp-card">
+        <div class="cmp-bar"><span class="cmp-key">B</span>
+          <div><div class="cmp-ttl">Від креслення до деталі</div><div class="cmp-sub">Конверсія · explorer можливостей</div></div>
+          <div class="cmp-actions"><a class="btn btn--ghost" href="/contract-manufacturing/ab/b.html" target="_blank" rel="noopener">Відкрити →</a></div>
+        </div>
+        <div class="cmp-body">
+          <div class="cmp-meta">
+            <span class="lbl">Ідея</span>
+            <p>Орієнтація на замовлення: у герої — чек-лист «що надіслати для прорахунку» й кнопка. Можливості зібрано у вкладки-explorer (перемикаєш тип обробки — панель оновлюється). Далі — горизонтальний процес, «чому ми» і FAQ-акордеон.</p>
+            <span class="lbl">Що в композиції</span>
+            <ul>
+              <li>Темний герой + інтейк-картка «що надіслати»</li>
+              <li>Вкладки токарні / фрезерні / роутер з клавіатурою</li>
+              <li>FAQ-акордеон із плашками «Уточнити» всередині</li>
+            </ul>
+            <span class="lbl">Кому пасує</span>
+            <p style="margin-bottom:0">Тому, хто вже має креслення й хоче швидко надіслати його на прорахунок.</p>
+          </div>
+          <div class="cmp-frame"><span class="hint">Превʼю · гортайте всередині</span>
+            <iframe loading="lazy" src="/contract-manufacturing/ab/b.html" title="Контракт B"></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="foot-bot" style="border-top:1px solid rgba(255,255,255,.1);padding-top:var(--s24)">
+      <span>© 2026 ТОВ «СОФОН». Внутрішній A/B прототип.</span><span class="mono">contract-manufacturing · content + layout</span>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,274 @@
+/* ============================================================
+   Sofon — GALLERY (кандидат на постійний елемент дизайну)
+   Один компонент для всіх сторінок сайту. Не прив'язаний до
+   оснастки: працює і з CAD-рендерами на білому, і зі звичайними
+   цеховими фото.
+
+   Розмітка:
+     <div class="gal gal--mosaic galh--dim">
+       <figure class="gal-i" data-fit="contain|cover"> … </figure>
+     </div>
+
+   data-fit="contain" — рендер на білому: вписуємо цілком, білу
+     підкладку розчиняємо у фоні секції (multiply), підпис — темний.
+   data-fit="cover"   — фото: кадруємо по плитці, підпис — світлий
+     на градієнтній вуалі.
+   Саме ця пара режимів і робить компонент універсальним: розкладка
+   й поведінка однакові, змінюється лише спосіб посадки зображення.
+
+   Змінні для тонкого налаштування зі сторінки:
+     --gal-bg   колір «аркуша» під плиткою (має збігатися з фоном секції)
+     --gal-line колір волосяних ліній між плитками
+     --gal-u    висота рядка-одиниці у мозаїці
+   ============================================================ */
+
+.gal{--gal-bg:var(--mist);--gal-line:var(--border);--gal-u:150px;position:relative}
+
+/* ---------- плитка ---------- */
+.gal-i{position:relative;overflow:hidden;margin:0;background:var(--gal-bg);
+  display:flex;align-items:center;justify-content:center;min-width:0;
+  /* --z / --zh — масштаб зображення у спокої й під курсором.
+     Рендери йдуть із широкими білими полями, тож у дрібній плитці деталь
+     виходить крихітною: підтягуємо її трохи вгору вже у спокої. */
+  --z:1;--zh:1.06;--bri:1.06}
+.gal-i img{width:100%;height:100%;display:block;transform:scale(var(--z));
+  transition:transform .5s cubic-bezier(.22,.61,.36,1),opacity .3s ease}
+.gal-i:is(:hover,.is-hot) img{transform:scale(var(--zh))}
+.gal-i[data-fit="cover"] img{object-fit:cover}
+.gal-i[data-fit="contain"]{--z:1.16;--zh:1.25}
+.gal-i[data-fit="contain"] img{object-fit:contain;padding:10px;
+  /* біла підкладка рендера множиться на фон секції і зникає; підйом яскравості
+     потрібен тим рендерам, де вона не чисто біла (--bri задається поштучно) */
+  mix-blend-mode:multiply;filter:brightness(var(--bri))}
+
+/* рамка-акцент: волосяна лінія кольору акценту по краю активної плитки */
+.gal-i::after{content:'';position:absolute;inset:0;z-index:4;pointer-events:none;
+  border:1px solid var(--amber);opacity:0;transition:opacity .2s ease}
+.gal-i:is(:hover,.is-hot)::after{opacity:1}
+
+/* Підстраховка читабельності. Підпис лягає просто на зображення, і на світлому
+   рендері темний текст може потрапити на темну деталь (і навпаки на фото).
+   Тому темний текст несе ледь помітне світле сяйво, світлий — темний кант:
+   на «своєму» фоні тінь не видно, на чужому вона рятує.
+     --gal-halo   ореол під темним текстом
+     --gal-rim    кант під світлим текстом */
+.gal{--gal-halo:0 1px 2px #fff,0 0 5px rgba(255,255,255,.98),0 0 13px rgba(255,255,255,.85),
+                0 0 22px rgba(255,255,255,.6);
+     --gal-rim:0 1px 2px rgba(10,13,16,.95),0 0 6px rgba(10,13,16,.85),
+               0 0 16px rgba(10,13,16,.6)}
+
+/* номер позиції — як у специфікації */
+.gal-n{position:absolute;left:12px;top:10px;z-index:3;font-family:var(--fm);
+  font-size:10px;letter-spacing:.1em;color:var(--steel);opacity:.5;transition:.2s ease;
+  text-shadow:var(--gal-halo)}
+.gal-i[data-fit="cover"] .gal-n{color:#fff;opacity:.75;text-shadow:var(--gal-rim)}
+.gal-i:is(:hover,.is-hot) .gal-n{color:var(--amber);opacity:1}
+
+/* вуаль під підпис — тільки для фото */
+.gal-veil{position:absolute;left:0;right:0;bottom:0;height:62%;z-index:2;pointer-events:none;
+  background:linear-gradient(180deg,transparent,rgba(14,17,20,.72) 62%,rgba(14,17,20,.92));
+  opacity:0;transition:opacity .28s ease}
+.gal-i[data-fit="contain"] .gal-veil{display:none}
+.gal-i:is(:hover,.is-hot) .gal-veil{opacity:1}
+
+/* підпис */
+.gal-cap{position:absolute;left:0;right:0;bottom:0;z-index:3;padding:12px 14px 13px;
+  display:flex;flex-direction:column;gap:2px;
+  opacity:0;transform:translateY(7px);
+  transition:opacity .26s ease,transform .26s cubic-bezier(.22,.61,.36,1)}
+.gal-i:is(:hover,.is-hot) .gal-cap{opacity:1;transform:none}
+.gal-cap b{font-family:var(--fm);font-size:10.5px;font-weight:600;letter-spacing:.08em;
+  text-transform:uppercase;line-height:1.3;color:var(--graphite);text-shadow:var(--gal-halo)}
+.gal-cap i{font-style:normal;font-size:12.5px;line-height:1.35;color:var(--steel);
+  text-shadow:var(--gal-halo)}
+.gal-i[data-fit="cover"] .gal-cap b{color:#fff;text-shadow:var(--gal-rim)}
+.gal-i[data-fit="cover"] .gal-cap i{color:rgba(255,255,255,.82);text-shadow:var(--gal-rim)}
+/* на темній секції аркуш темний, тож і темний текст там світлий — міняємо
+   ореол на кант, інакше сяйво світилося б навколо світлих літер */
+.section--dark .gal{--gal-halo:var(--gal-rim)}
+
+@media(prefers-reduced-motion:reduce){
+  .gal-i img,.gal-cap,.gal-veil,.gal-i::after{transition:none}
+}
+
+/* ============================================================
+   РОЗКЛАДКА 1 — mosaic: асиметрична сітка на волосяних лініях.
+   Смуга = 6 колонок × 3 рядки, у ній 5 плиток різного калібру;
+   смуги A і B чергуються, тож візерунок не повторюється щоразу,
+   а низ завжди рівний (за кратності 5).
+   ============================================================ */
+.gal--mosaic{display:grid;grid-template-columns:repeat(6,1fr);
+  grid-auto-rows:var(--gal-u);grid-auto-flow:row dense;gap:1px;background:var(--gal-line)}
+/* смуга A: великий квадрат ліворуч */
+.gal--tiles .gal-i:nth-child(10n+1){grid-column:span 3;grid-row:span 3}
+.gal--tiles .gal-i:nth-child(10n+2){grid-column:span 2;grid-row:span 2}
+.gal--tiles .gal-i:nth-child(10n+3){grid-column:span 1;grid-row:span 2}
+.gal--tiles .gal-i:nth-child(10n+4){grid-column:span 2;grid-row:span 1}
+.gal--tiles .gal-i:nth-child(10n+5){grid-column:span 1;grid-row:span 1}
+/* смуга B: дзеркально — великий квадрат праворуч */
+.gal--tiles .gal-i:nth-child(10n+6){grid-column:span 2;grid-row:span 2}
+.gal--tiles .gal-i:nth-child(10n+7){grid-column:span 1;grid-row:span 2}
+.gal--tiles .gal-i:nth-child(10n+8){grid-column:span 3;grid-row:span 3}
+.gal--tiles .gal-i:nth-child(10n+9){grid-column:span 2;grid-row:span 1}
+.gal--tiles .gal-i:nth-child(10n+10){grid-column:span 1;grid-row:span 1}
+
+/* Спани для чотирирядної смуги: смуга = 6 колонок × 4 ряди, у ній 7 плиток;
+   смуги A і B чергуються (цикл 14), тож візерунок не повторюється щоразу.
+   Ряд кожній плитці задано ЯВНО. Якщо лишити автоукладку, dense-пакування
+   доштовхує дрібні плитки в ранішні дірки замість своєї смуги, і правий
+   край стрічки розсипається порожніми комірками. */
+.gal--tiles4 .gal-i:nth-child(14n+1){grid-column:span 3;grid-row:1/span 3}
+.gal--tiles4 .gal-i:nth-child(14n+2){grid-column:span 2;grid-row:1/span 2}
+.gal--tiles4 .gal-i:nth-child(14n+3){grid-column:span 1;grid-row:1/span 2}
+.gal--tiles4 .gal-i:nth-child(14n+4){grid-column:span 3;grid-row:4/span 1}
+.gal--tiles4 .gal-i:nth-child(14n+5){grid-column:span 2;grid-row:3/span 2}
+.gal--tiles4 .gal-i:nth-child(14n+6){grid-column:span 1;grid-row:3/span 1}
+.gal--tiles4 .gal-i:nth-child(14n+7){grid-column:span 1;grid-row:4/span 1}
+.gal--tiles4 .gal-i:nth-child(14n+8){grid-column:span 3;grid-row:1/span 1}
+.gal--tiles4 .gal-i:nth-child(14n+9){grid-column:span 3;grid-row:2/span 3}
+.gal--tiles4 .gal-i:nth-child(14n+10){grid-column:span 2;grid-row:1/span 2}
+.gal--tiles4 .gal-i:nth-child(14n+11){grid-column:span 1;grid-row:1/span 2}
+.gal--tiles4 .gal-i:nth-child(14n+12){grid-column:span 2;grid-row:3/span 2}
+.gal--tiles4 .gal-i:nth-child(14n+13){grid-column:span 1;grid-row:3/span 1}
+.gal--tiles4 .gal-i:nth-child(14n+14){grid-column:span 1;grid-row:4/span 1}
+
+/* ============================================================
+   РОЗКЛАДКА 1b — strip: та сама мозаїка, але тече вправо.
+   Полотно ширше за екран; його горизонтальне положення задає курсор
+   (див. gallery.js), краї гасяться маскою, тож не видно, де воно
+   обривається. Рядків фіксовано три, смуги A/B ті самі, просто
+   пакуються по колонках.
+   ============================================================ */
+.gal-strip{position:relative;overflow:hidden;background:var(--gal-bg);
+  /* на всю ширину вікна, а не контейнера: смуга, обрізана рівно по колонці
+     тексту, читається як коробка, а не як стрічка, що йде далі */
+  width:100vw;margin-left:calc(50% - 50vw);
+  /* Гасіння — вузька смуга фіксованої ширини (--gal-fade), яка починається
+     там, де закінчується текстова колонка, і йде НАЗОВНІ. Далі за нею —
+     чистий фон секції, зображень там немає взагалі.
+       --gal-in   від краю екрана до колонки тексту (рахує скрипт)
+       --gal-out  зовнішня межа гасіння = --gal-in мінус --gal-fade */
+  --gal-fade:200px;
+  --gal-in-l:216px;--gal-out-l:216px;--gal-in-r:216px;--gal-out-r:216px;
+  -webkit-mask-image:linear-gradient(90deg,
+    transparent 0,transparent var(--gal-out-l),#000 var(--gal-in-l),
+    #000 calc(100% - var(--gal-in-r)),transparent calc(100% - var(--gal-out-r)),transparent 100%);
+  mask-image:linear-gradient(90deg,
+    transparent 0,transparent var(--gal-out-l),#000 var(--gal-in-l),
+    #000 calc(100% - var(--gal-in-r)),transparent calc(100% - var(--gal-out-r)),transparent 100%)}
+/* Рядів у смузі чотири, а не три: горизонтальна прокрутка від курсора тим
+   чутливіша, чим ширше полотно, тож більше зображень набираємо висотою,
+   а не довжиною. Ціль — полотно не ширше ~двох екранів. */
+.gal--strip{--gal-u:128px;display:grid;grid-template-rows:repeat(4,var(--gal-u));
+  grid-auto-flow:column dense;grid-auto-columns:var(--gal-cw,168px);
+  gap:1px;background:var(--gal-line);width:max-content;will-change:transform}
+
+/* У смузі наведення саме по собі нічого не робить: підпис і затемнення
+   вмикаються тільки коли курсор зупинився (клас .is-hot ставить скрипт).
+   Інакше підписи блимали б у кожної плитки, повз яку проїхав курсор. */
+.gal--strip .gal-i:not(.is-hot)::after{opacity:0}
+.gal--strip .gal-i:not(.is-hot) .gal-veil{opacity:0}
+.gal--strip .gal-i:not(.is-hot) .gal-cap{opacity:0;transform:translateY(7px)}
+.gal--strip .gal-i:not(.is-hot) .gal-n{color:var(--steel);opacity:.5;text-shadow:none}
+.gal--strip .gal-i[data-fit="cover"]:not(.is-hot) .gal-n{color:#fff;opacity:.75;
+  text-shadow:0 1px 6px rgba(0,0,0,.6)}
+/* під час руху всі картинки в повну силу; гасимо лише коли є зупинка */
+.gal--strip.has-hot .gal-i img{opacity:.34}
+.gal--strip.has-hot .gal-i.is-hot img{opacity:1}
+
+/* ============================================================
+   РОЗКЛАДКА 2 — bay: касета вертикальних слатів.
+   Ряд поділений на рівні смуги; та, що під курсором, розсувається,
+   решта стискається. Рух іде по всьому ряду, а не в одній плитці.
+   ============================================================ */
+.gal--bay{display:flex;flex-direction:column;gap:1px;background:var(--gal-line)}
+.gal-row{display:flex;gap:1px;height:var(--gal-bay-h,360px);background:var(--gal-line)}
+.gal--bay .gal-i{flex:1 1 0;transition:flex-grow .5s cubic-bezier(.22,.61,.36,1)}
+.gal--bay .gal-i:is(:hover,.is-hot){flex-grow:3.2}
+/* Підпис у касеті. Три стани:
+     нічого не вибрано  — у кожного слата основний рядок по центру низу;
+     слат розкрито      — у нього основний рядок у кутку + уточнення;
+     решта в цей момент — без тексту взагалі, щоб не сміттяти навколо вибраного.
+   Третій стан робить :has() — «ряд, у якому щось активне». */
+.gal--bay .gal-i .gal-cap{opacity:1;left:50%;right:auto;bottom:12px;
+  transform:translateX(-50%);width:max-content;max-width:calc(100% - 20px);
+  align-items:center;text-align:center;
+  transition:left .45s cubic-bezier(.22,.61,.36,1),
+             transform .45s cubic-bezier(.22,.61,.36,1)}
+.gal--bay .gal-i:is(:hover,.is-hot) .gal-cap{left:14px;transform:translateX(0);
+  align-items:flex-start;text-align:left}
+.gal--bay .gal-cap i{opacity:0;transition:opacity .3s ease}
+.gal--bay .gal-i:is(:hover,.is-hot) .gal-cap i{opacity:1}
+/* коли в ряду щось розкрито — у пасивних слатів текст прибираємо */
+.gal-row:has(.gal-i:is(:hover,.is-hot)) .gal-i:not(:hover):not(.is-hot) .gal-cap{
+  opacity:0;transition:opacity .2s ease}
+.gal-row:has(.gal-i:is(:hover,.is-hot)) .gal-i:not(:hover):not(.is-hot) .gal-veil{opacity:0}
+
+/* на фото підпис без підкладки не читається — лишаємо слабку вуаль постійно */
+.gal--bay .gal-i[data-fit="cover"] .gal-veil{opacity:.8;height:40%}
+.gal--bay .gal-i[data-fit="cover"]:is(:hover,.is-hot) .gal-veil{opacity:1;height:62%}
+
+/* ============================================================
+   ПОВЕДІНКА ПРИ НАВЕДЕННІ (модифікатори до розкладки)
+   ============================================================ */
+
+/* galh--dim: сусіди пригасають, активна плитка лишається на повній силі.
+   Дає ефект «фокуса» без жодного руху сітки.
+   Гасне САМЕ ЗОБРАЖЕННЯ, а не плитка: прозорість на плитці підмішує колір
+   ліній сітки, і замість «деталей на аркуші» проступає сірий прямокутник.
+   Прозорість зображення розчиняє його у кольорі аркуша — тож на світлій
+   секції пригашене блідне, на темній темніє, і нічого не треба переналаштовувати.
+   (Притемнення через brightness тут пробували — на цехових фото воно
+   зачорнює півсторінки.) */
+.gal-i img{transition:transform .5s cubic-bezier(.22,.61,.36,1),opacity .28s ease,filter .28s ease}
+.galh--dim:is(:hover,.has-hot) .gal-i img{opacity:.34}
+.galh--dim .gal-i:is(:hover,.is-hot) img{opacity:1}
+
+/* galh--pop: плитка під курсором піднімається над аркушем — як деталь,
+   яку взяли з піддона. Сусіди не рухаються, лише лишаються знизу. */
+.galh--pop .gal-i{transition:transform .3s cubic-bezier(.22,.61,.36,1),box-shadow .3s ease}
+.galh--pop .gal-i:is(:hover,.is-hot){z-index:8;transform:scale(1.14);
+  box-shadow:0 26px 60px rgba(16,20,26,.26);background:#fff}
+.galh--pop .gal-i[data-fit="contain"]:is(:hover,.is-hot) img{filter:brightness(1)}
+.galh--pop .gal-i{--zh:var(--z)} /* плитка їде цілком, зображення всередині не смикається */
+
+/* ============================================================
+   Для порівняння — те, що на сторінці зараз (щоб було від чого
+   відштовхуватись, а не по пам'яті).
+   ============================================================ */
+.gal--sheet{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--gal-line)}
+.gal--sheet .gal-i{aspect-ratio:1}
+.gal--drift{display:grid;grid-template-columns:repeat(6,1fr);grid-auto-rows:118px;
+  grid-auto-flow:dense;gap:var(--s24)}
+.gal--drift .gal-i:nth-child(6n+1),.gal--drift .gal-i:nth-child(6n+4){
+  grid-column:span 2;grid-row:span 2}
+
+/* ============================================================
+   Мобільне
+   ============================================================ */
+@media(max-width:900px){
+  .gal{--gal-u:132px}
+  .gal--mosaic{grid-template-columns:repeat(2,1fr)}
+  .gal--tiles .gal-i:nth-child(n),.gal--tiles4 .gal-i:nth-child(n){
+    grid-column:span 1;grid-row:auto/span 1}
+  .gal--tiles .gal-i:nth-child(10n+1),.gal--tiles .gal-i:nth-child(10n+8),
+  .gal--tiles4 .gal-i:nth-child(14n+1),.gal--tiles4 .gal-i:nth-child(14n+9){
+    grid-column:span 2;grid-row:span 2}
+  .gal--sheet{grid-template-columns:repeat(3,1fr)}
+  .gal--drift{grid-template-columns:repeat(4,1fr);grid-auto-rows:96px;gap:var(--s16)}
+  /* касета на вузькому екрані не працює як акордеон — розгортаємо у стрічку */
+  .gal-row{height:auto;display:grid;grid-template-columns:repeat(2,1fr)}
+  .gal--bay .gal-i{aspect-ratio:4/3}
+  .gal--bay .gal-i .gal-cap{left:14px;transform:none;align-items:flex-start;text-align:left}
+  .gal--bay .gal-cap i{opacity:1}
+  /* курсора на телефоні немає, тож смуга перетворюється на звичайну мозаїку */
+  .gal-strip{width:auto;margin-left:0;overflow:visible;
+    -webkit-mask-image:none;mask-image:none}
+  .gal--strip{--gal-u:132px;grid-template-rows:none;grid-template-columns:repeat(2,1fr);
+    grid-auto-rows:var(--gal-u);grid-auto-flow:row dense;grid-auto-columns:auto;
+    width:auto;transform:none!important}
+  /* на телефоні підпис знову за наведенням/тапом, як у решті розкладок */
+  .gal--strip .gal-i:not(.is-hot):hover::after{opacity:1}
+  .gal--strip .gal-i:not(.is-hot):hover .gal-cap{opacity:1;transform:none}
+  .gal--strip .gal-i:not(.is-hot):hover .gal-veil{opacity:1}
+}

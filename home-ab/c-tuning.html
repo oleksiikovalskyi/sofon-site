@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>C · налаштування мікровзаємодій — Sofon</title>
+<meta name="description" content="Порівняння: спосіб появи тексту в превʼю та підказка на скрол для варіанта C головної.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/styles.css">
+<style>
+.hub-hero{background:var(--graphite);color:#fff;padding:var(--s64) 0}
+.hub-hero .eyebrow{color:var(--amber)}
+.hub-hero h1{max-width:22ch;margin:var(--s16) 0}
+.hub-hero .lead{color:rgba(255,255,255,.72);max-width:64ch}
+.hub-note{margin-top:var(--s24);font-family:var(--fm);font-size:13px;color:rgba(255,255,255,.55);
+  border-left:2px solid var(--amber);padding-left:var(--s16);max-width:72ch;line-height:1.6}
+.nav-lab{display:flex;gap:var(--s16);flex-wrap:wrap;margin-top:var(--s24)}
+.nav-lab a{font-family:var(--fm);font-size:12.5px;color:rgba(255,255,255,.6)}
+.nav-lab a:hover{color:var(--amber)}
+
+.sec-lab{display:flex;align-items:baseline;gap:var(--s16);flex-wrap:wrap;margin-bottom:var(--s8)}
+.sec-lab h2{font-size:clamp(24px,2.6vw,32px)}
+.sec-lab .cnt{font-family:var(--fm);font-size:13px;color:var(--steel)}
+.sec-intro{color:var(--steel);max-width:72ch;margin-bottom:var(--s32);line-height:1.6}
+
+/* вертикальний стек широких карток: рамка на всю ширину → прототип у десктопному вигляді */
+.cmp{display:flex;flex-direction:column;gap:var(--s48)}
+.cmp-card{border:1px solid var(--border);border-radius:var(--radius-soft);overflow:hidden;background:#fff}
+.cmp-bar{display:flex;align-items:center;gap:var(--s16);flex-wrap:wrap;padding:var(--s16) var(--s24);
+  border-bottom:1px solid var(--border);background:var(--mist)}
+.cmp-key{font-family:var(--fm);font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;
+  color:#fff;background:var(--graphite);padding:5px 11px;border-radius:var(--radius);flex:none}
+.cmp-ttl{font-size:18px;font-weight:600}
+.cmp-desc{font-size:14px;color:var(--steel);line-height:1.5;margin:0;max-width:60ch}
+.cmp-desc b{color:var(--graphite);font-weight:600}
+.cmp-open{margin-left:auto;font-family:var(--fm);font-size:12px;color:var(--amber);white-space:nowrap;align-self:center}
+.cmp-frame{position:relative;background:var(--graphite)}
+.cmp-frame iframe{width:100%;border:0;display:block;background:var(--graphite)}
+.cmp-frame--dirs iframe{height:640px}
+.cmp-frame--hero iframe{height:600px}
+.cmp-frame .hint{position:absolute;top:12px;left:12px;z-index:2;font-family:var(--fm);font-size:10.5px;letter-spacing:.05em;
+  text-transform:uppercase;color:var(--steel);background:rgba(255,255,255,.92);padding:5px 10px;
+  border:1px solid var(--border);border-radius:100px;pointer-events:none}
+@media(max-width:640px){.cmp-frame--dirs iframe,.cmp-frame--hero iframe{height:520px}}
+</style>
+</head>
+<body>
+<div style="background:#12151A;color:#fff;font-family:var(--fm,monospace);font-size:12px;letter-spacing:.08em;text-align:center;padding:7px 12px">
+  ВНУТРІШНІЙ ПРОТОТИП · НАЛАШТУВАННЯ ВАРІАНТА C · <a href="/home-ab/" style="color:#F07C1A">← до порівняння A/B/C/D</a>
+</div>
+
+<section class="hub-hero">
+  <div class="container">
+    <span class="eyebrow">Варіант C · мікровзаємодії</span>
+    <h1>Дві дрібниці варіанта C — по кілька способів кожна</h1>
+    <p class="lead">Обраний макет C лишається без змін. Тут крутимо тільки два маленькі рішення: як зʼявляється текст поверх фото в превʼю напряму, і якою є підказка «гортай нижче» під героєм.</p>
+    <p class="hub-note">Рамки нижче — це живий прототип, не картинка. Поява тексту: наведіть курсор на пункт списку <b>ліворуч у рамці</b> — фото зміниться, а текст проступить приблизно за секунду. Підказки на скрол анімуються самі.</p>
+    <div class="nav-lab">
+      <a href="/home-ab/c.html" target="_blank" rel="noopener">Поточний C (як зараз) →</a>
+      <a href="/home-ab/" target="_blank" rel="noopener">Макро-порівняння A/B/C/D →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ РОЗДІЛ 1: ПОЯВА ТЕКСТУ ============ -->
+<section class="section">
+  <div class="container">
+    <div class="sec-lab"><h2>1 · Поява тексту в превʼю</h2><span class="cnt">3 способи</span></div>
+    <p class="sec-intro">Ідея спільна для всіх трьох: спершу видно чисте фото напряму, і лише за ~1 секунду поверх нього мʼяко проступає затемнення з текстом. Так встигаєш роздивитися і зображення, і прочитати підпис. Різниця — у характері появи. Наводьте на пункти списку в рамці.</p>
+
+    <div class="cmp">
+      <div class="cmp-card">
+        <div class="cmp-bar"><span class="cmp-key">fade</span><span class="cmp-ttl">Проявлення</span>
+          <p class="cmp-desc">Найспокійніший. Затемнення з текстом просто <b>плавно проступає</b> крізь фото, без жодного руху.</p>
+          <a class="cmp-open" href="/home-ab/c-proto.html?reveal=fade&cue=none" target="_blank" rel="noopener">відкрити на весь екран ↗</a></div>
+        <div class="cmp-frame cmp-frame--dirs"><span class="hint">наведіть на пункт списку ліворуч</span>
+          <iframe loading="lazy" src="/home-ab/c-proto.html?reveal=fade&cue=none#dirs" title="fade"></iframe></div>
+      </div>
+
+      <div class="cmp-card">
+        <div class="cmp-bar"><span class="cmp-key">slide</span><span class="cmp-ttl">Надвигання знизу</span>
+          <p class="cmp-desc">Затемнення з текстом <b>мʼяко наїжджає знизу вгору</b> й одночасно проступає. Трохи більше життя, але без ривка.</p>
+          <a class="cmp-open" href="/home-ab/c-proto.html?reveal=slide&cue=none" target="_blank" rel="noopener">відкрити на весь екран ↗</a></div>
+        <div class="cmp-frame cmp-frame--dirs"><span class="hint">наведіть на пункт списку ліворуч</span>
+          <iframe loading="lazy" src="/home-ab/c-proto.html?reveal=slide&cue=none#dirs" title="slide"></iframe></div>
+      </div>
+
+      <div class="cmp-card">
+        <div class="cmp-bar"><span class="cmp-key">wipe</span><span class="cmp-ttl">Розкриття знизу</span>
+          <p class="cmp-desc">Затемнення з текстом <b>розкривається знизу вгору</b>, наче штора піднімається по фото. Найпомітніший рух із трьох.</p>
+          <a class="cmp-open" href="/home-ab/c-proto.html?reveal=wipe&cue=none" target="_blank" rel="noopener">відкрити на весь екран ↗</a></div>
+        <div class="cmp-frame cmp-frame--dirs"><span class="hint">наведіть на пункт списку ліворуч</span>
+          <iframe loading="lazy" src="/home-ab/c-proto.html?reveal=wipe&cue=none#dirs" title="wipe"></iframe></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ РОЗДІЛ 2: ПІДКАЗКА НА СКРОЛ ============ -->
+<section class="section section--mist">
+  <div class="container">
+    <div class="sec-lab"><h2>2 · Підказка «гортай нижче»</h2><span class="cnt">3 способи</span></div>
+    <p class="sec-intro">Замість маленької лінії з крапкою, яка не сподобалася. У рамках — верхній екран героя; підказки анімуються самі.</p>
+
+    <div class="cmp">
+      <div class="cmp-card">
+        <div class="cmp-bar"><span class="cmp-key">none</span><span class="cmp-ttl">Без підказки</span>
+          <p class="cmp-desc">Чистий екран, жодного елемента. Найтихіше. Мінус — немає натяку, що нижче є ще контент.</p>
+          <a class="cmp-open" href="/home-ab/c-proto.html?reveal=fade&cue=none" target="_blank" rel="noopener">відкрити на весь екран ↗</a></div>
+        <div class="cmp-frame cmp-frame--hero"><span class="hint">верхній екран героя</span>
+          <iframe loading="lazy" src="/home-ab/c-proto.html?reveal=fade&cue=none" title="cue none"></iframe></div>
+      </div>
+
+      <div class="cmp-card">
+        <div class="cmp-bar"><span class="cmp-key">faint</span><span class="cmp-ttl">Великий, ледь помітний</span>
+          <p class="cmp-desc">Великий подвійний шеврон (64px) із <b>дуже низькою прозорістю</b> й повільним диханням. Помітний лише коли шукаєш очима.</p>
+          <a class="cmp-open" href="/home-ab/c-proto.html?reveal=fade&cue=faint" target="_blank" rel="noopener">відкрити на весь екран ↗</a></div>
+        <div class="cmp-frame cmp-frame--hero"><span class="hint">верхній екран героя</span>
+          <iframe loading="lazy" src="/home-ab/c-proto.html?reveal=fade&cue=faint" title="cue faint"></iframe></div>
+      </div>
+
+      <div class="cmp-card">
+        <div class="cmp-bar"><span class="cmp-key">glow</span><span class="cmp-ttl">Перелив фону</span>
+          <p class="cmp-desc">Не окремий обʼєкт, а <b>перелив самого фону</b>: біля нижнього краю героя мʼяке світло повільно стікає вниз, натякаючи на продовження.</p>
+          <a class="cmp-open" href="/home-ab/c-proto.html?reveal=fade&cue=glow" target="_blank" rel="noopener">відкрити на весь екран ↗</a></div>
+        <div class="cmp-frame cmp-frame--hero"><span class="hint">верхній екран героя</span>
+          <iframe loading="lazy" src="/home-ab/c-proto.html?reveal=fade&cue=glow" title="cue glow"></iframe></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="foot-bot" style="border:0"><span>© 2026 ТОВ «СОФОН».</span><span class="mono">внутрішній прототип · налаштування C</span></div>
+  </div>
+</footer>
+</body>
+</html>

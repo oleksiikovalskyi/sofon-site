@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>A · Флагман у герої — Sofon</title>
+<meta name="description" content="A/B-вариант A головної: флагман (оснастка) винесено в перший екран.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/styles.css">
+<style>
+/* ===== Home Variant A — «Флагман у герої» ===== */
+.ha-hero{position:relative;background:var(--graphite);color:#fff;overflow:hidden}
+.ha-hero::after{content:'';position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(1100px 460px at 82% -10%,rgba(240,124,26,.20),transparent 60%),
+  linear-gradient(180deg,rgba(27,30,35,0),rgba(27,30,35,.45))}
+.ha-hero .container{position:relative;z-index:2;display:grid;grid-template-columns:1.15fr .85fr;
+  gap:var(--s48);align-items:center;padding-top:var(--s64);padding-bottom:var(--s64)}
+.ha-hero h1{max-width:16ch;margin:var(--s16) 0}
+.ha-hero .lead{color:rgba(255,255,255,.78);max-width:46ch}
+.ha-hero-cta{display:flex;gap:var(--s16);margin-top:var(--s32);flex-wrap:wrap}
+/* flagship card in hero */
+.flag-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.18);
+  border-radius:var(--radius-soft);padding:var(--s32);position:relative}
+.flag-card::before{content:'Флагман';position:absolute;top:-11px;left:var(--s32);font-family:var(--fm);
+  font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;background:var(--amber);
+  color:#fff;padding:3px 10px;border-radius:2px}
+.flag-card .fi{width:44px;height:44px;color:var(--amber);margin-bottom:var(--s16)}
+.flag-card h3{color:#fff;font-size:24px;margin-bottom:var(--s8)}
+.flag-card p{color:rgba(255,255,255,.7);font-size:15px;line-height:23px}
+.flag-card ul{list-style:none;margin:var(--s24) 0;display:flex;flex-direction:column;gap:10px}
+.flag-card li{position:relative;padding-left:24px;color:rgba(255,255,255,.85);font-size:14.5px}
+.flag-card li::before{content:'';position:absolute;left:0;top:10px;width:12px;height:2px;background:var(--amber)}
+.flag-card .more{font-family:var(--fm);font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--amber);display:inline-flex;gap:7px}
+@media(max-width:900px){.ha-hero .container{grid-template-columns:1fr;gap:var(--s32)}}
+
+/* slim stats strip */
+.strip{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--s32);padding:var(--s32) 0}
+.strip .s{border-left:2px solid var(--amber);padding-left:var(--s16)}
+.strip .s b{display:block;font-size:26px;font-weight:700;letter-spacing:-.01em;line-height:1.1}
+.strip .s b span{color:var(--amber)}
+.strip .s i{font-style:normal;font-size:13.5px;color:rgba(255,255,255,.6);display:block;margin-top:6px;line-height:1.4}
+@media(max-width:760px){.strip{grid-template-columns:repeat(2,1fr);gap:var(--s24)}}
+</style>
+</head>
+<body data-page="home">
+<div style="background:#12151A;color:#fff;font-family:var(--fm,monospace);font-size:12px;letter-spacing:.08em;text-align:center;padding:7px 12px">
+  A/B ПРОТОТИП · ГОЛОВНА · ВАРІАНТ A — «ФЛАГМАН У ГЕРОЇ» · <a href="/home-ab/" style="color:#F07C1A">← до порівняння</a>
+</div>
+<header class="site-header">
+  <div class="container nav" id="nav">
+    <a class="brand" href="/">Sofon<span>.</span></a>
+    <nav class="nav-links">
+      <a href="/products/">Продукти</a>
+      <a href="/products/osnastka/">Оснастка</a>
+      <a href="/contract-manufacturing/">Контрактне виробництво</a>
+      
+      <a href="/contact/">Контакти</a>
+    </nav>
+    <div class="nav-right">
+      <span class="lang"><a class="on" href="/">UA</a><span>/</span><a href="/en/">EN</a></span>
+      <a class="btn btn--primary" href="/contact/">Отримати прорахунок</a>
+    </div>
+    <button class="nav-toggle" aria-label="Меню" onclick="document.getElementById('nav').parentElement.parentElement.classList.toggle('mobile-open')"><span></span></button>
+  </div>
+</header>
+<main>
+
+<section class="ha-hero">
+  <div class="container">
+    <div>
+      <span class="eyebrow">Обладнання для ліній розливу</span>
+      <h1>Переводимо лінію розливу на нову пляшку — швидко й точно</h1>
+      <p class="lead">Проєктуємо та виготовляємо оснастку, нестандартне обладнання, конвеєри та автоматику під конкретний цех. Інженерна кастомізація замість каталожних компромісів.</p>
+      <div class="ha-hero-cta">
+        <a class="btn btn--primary btn--lg" href="/contact/">Отримати прорахунок</a>
+        <a class="btn btn--onDark btn--lg" href="#dirs">Усі напрями ↓</a>
+      </div>
+    </div>
+    <a class="flag-card" href="/products/osnastka/">
+      <svg class="fi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M18.4 5.6l-2.1 2.1M7.7 16.3l-2.1 2.1"/><circle cx="12" cy="12" r="4"/></svg>
+      <h3>Оснастка для нової пляшки</h3>
+      <p>Змінили формат тари — і лінія стала. Виготовляємо комплекти форматних деталей, що переводять наявне обладнання на нову пляшку, без заміни машин.</p>
+      <ul>
+        <li>Турнікетні групи, зірки, ліри напрямні</li>
+        <li>Шнеки поділу потоку, системи роботи з пробкою</li>
+        <li>Переносники паперової етикетки на холодному клеї</li>
+      </ul>
+      <span class="more">Перейти до оснастки →</span>
+    </a>
+  </div>
+</section>
+
+<!-- slim stats -->
+<section class="section--dark" style="padding:var(--s16) 0">
+  <div class="container">
+    <div class="strip">
+      <div class="s"><b>під <span>ТЗ</span></b><i>Кожне рішення — під конкретний цех і задачу</i></div>
+      <div class="s"><b>Delta<span>·</span>Camozzi</b><i>Автоматика й пневматика преміум-класу</i></div>
+      <div class="s"><b>повний<span> цикл</span></b><i>Проєкт → виготовлення → монтаж → запуск</i></div>
+      <div class="s"><b>1400<span> б/год</span></b><i>Продуктивність палетизатора 19 л</i></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="dirs">
+  <div class="container">
+    <div class="sec-head">
+      <span class="eyebrow eyebrow--muted">Що ми робимо</span>
+      <h2>Шість напрямів обладнання ліній розливу</h2>
+      <p>Від форматної оснастки до підбору й запуску цілих ліній — усе під ваше технічне завдання.</p>
+    </div>
+    <div class="grid grid--3" id="dir-grid"></div>
+  </div>
+</section>
+
+<section class="section section--mist">
+  <div class="container">
+    <div class="band">
+      <div class="z">
+        <span class="eyebrow">Окремий напрям</span>
+        <h3>Контрактне виробництво</h3>
+        <p>Токарні, фрезерні та роутерні роботи на замовлення — для клієнтів поза розливом. Виготовимо деталі за вашим кресленням або зразком.</p>
+      </div>
+      <div class="z"><a class="btn btn--primary btn--lg" href="/contract-manufacturing/">Розмістити замовлення →</a></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="text-align:center">
+  <div class="container">
+    <span class="eyebrow eyebrow--muted">Готові обговорити задачу?</span>
+    <h2 style="margin:16px auto;max-width:18ch">Опишіть, що потрібно перевести чи виготовити</h2>
+    <p class="muted" style="margin:0 auto 32px">Навіть якщо вашого напряму немає на сайті — напишіть, ймовірно ми вже це робимо або підкажемо, до кого звернутися.</p>
+    <a class="btn btn--primary btn--lg" href="/contact/">Отримати прорахунок</a>
+  </div>
+</section>
+
+</main>
+<footer class="site-footer">
+  <div class="container">
+    <div class="foot-top">
+      <div class="foot-brand"><a class="brand" href="/">Sofon<span>.</span></a>
+        <p>Інженерно-виробничий завод обладнання для ліній розливу напоїв і води.</p></div>
+      <div class="foot-col"><h5>Продукти</h5>
+        <a href="/products/osnastka/">Оснастка</a><a href="/products/custom-equipment/">Нестандартне обладнання</a><a href="/contract-manufacturing/">Контрактне виробництво</a></div>
+      <div class="foot-col"><h5>Контакти</h5>
+        <a href="tel:+380672933066">+380 67 293 30 66</a><a href="mailto:les@immach.com">les@immach.com</a></div>
+    </div>
+    <div class="foot-bot"><span>© 2026 ТОВ «СОФОН».</span><span class="mono">A/B прототип</span></div>
+  </div>
+</footer>
+
+<script src="/home-ab/home-data.js"></script>
+<script>
+(function(){
+  var grid=document.getElementById('dir-grid');
+  HOME_DIRS.forEach(function(d){
+    var a=document.createElement('a');a.className='card'+(d.flag?' card--flag':'');a.href=d.href;
+    var fig=d.img
+      ? '<span class="fig card-fig fig--169 fig--'+(d.mode||'product')+'"><img src="'+d.img+'" alt="" loading="lazy"></span>'
+      : '';
+    a.innerHTML=fig+
+      '<h4>'+d.title+(d.sub?'<span style="display:block;font-family:var(--fm);font-size:11.5px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--steel);margin-top:7px">'+d.sub+'</span>':'')+'</h4>'+
+      '<p>'+d.blurb+'</p><span class="more">Докладніше →</span>';
+    grid.appendChild(a);
+  });
+})();
+</script>
+</body>
+</html>

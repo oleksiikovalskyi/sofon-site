@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>A/B порівняння — Головна — Sofon</title>
+<meta name="description" content="Порівняння прототипів головної сторінки Sofon.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/styles.css">
+<style>
+.hub-hero{background:var(--graphite);color:#fff;padding:var(--s64) 0}
+.hub-hero .eyebrow{color:var(--amber)}
+.hub-hero h1{max-width:20ch;margin:var(--s16) 0}
+.hub-hero .lead{color:rgba(255,255,255,.72);max-width:60ch}
+.hub-note{margin-top:var(--s24);font-family:var(--fm);font-size:13px;color:rgba(255,255,255,.55);
+  border-left:2px solid var(--amber);padding-left:var(--s16);max-width:64ch;line-height:1.6}
+.cmp{display:flex;flex-direction:column;gap:var(--s64)}
+.cmp-card{border:1px solid var(--border);border-radius:var(--radius-soft);overflow:hidden;background:#fff}
+.cmp-bar{display:flex;align-items:center;gap:var(--s16);flex-wrap:wrap;padding:var(--s24) var(--s32);
+  border-bottom:1px solid var(--border);background:var(--mist)}
+.cmp-key{font-family:var(--fm);font-size:13px;font-weight:600;letter-spacing:.08em;color:#fff;
+  background:var(--graphite);width:34px;height:34px;display:flex;align-items:center;justify-content:center;border-radius:var(--radius);flex:none}
+.cmp-ttl{font-size:20px;font-weight:600}
+.cmp-sub{font-family:var(--fm);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--steel)}
+.cmp-actions{margin-left:auto}
+.cmp-body{display:grid;grid-template-columns:.9fr 1.1fr;gap:0}
+.cmp-meta{padding:var(--s32);border-right:1px solid var(--border)}
+.cmp-meta .lbl{font-family:var(--fm);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--amber);margin-bottom:var(--s8);display:block}
+.cmp-meta p{font-size:15px;color:var(--steel);line-height:24px;margin-bottom:var(--s24)}
+.cmp-meta ul{list-style:none;display:flex;flex-direction:column;gap:8px;margin-bottom:var(--s24)}
+.cmp-meta li{position:relative;padding-left:22px;font-size:14.5px;color:var(--graphite)}
+.cmp-meta li::before{content:'';position:absolute;left:0;top:10px;width:10px;height:2px;background:var(--amber)}
+.cmp-frame{position:relative;background:var(--mist)}
+.cmp-frame iframe{width:100%;height:580px;border:0;display:block;background:#fff}
+.cmp-frame .hint{position:absolute;top:12px;right:12px;font-family:var(--fm);font-size:11px;letter-spacing:.06em;
+  text-transform:uppercase;color:var(--steel);background:rgba(255,255,255,.9);padding:5px 10px;border:1px solid var(--border);border-radius:100px;pointer-events:none}
+.orig{display:flex;align-items:center;gap:var(--s24);flex-wrap:wrap;border:1px dashed var(--border);
+  border-radius:var(--radius-soft);padding:var(--s24) var(--s32);background:var(--mist);margin-bottom:var(--s48)}
+.orig .t{font-weight:600}.orig .d{color:var(--steel);font-size:15px}.orig a{margin-left:auto}
+.nav-lab{display:flex;gap:var(--s16);flex-wrap:wrap;margin-top:var(--s24)}
+.nav-lab a{font-family:var(--fm);font-size:12.5px;color:rgba(255,255,255,.6)}
+.nav-lab a:hover{color:var(--amber)}
+@media(max-width:900px){.cmp-body{grid-template-columns:1fr}.cmp-meta{border-right:0;border-bottom:1px solid var(--border)}}
+</style>
+</head>
+<body>
+<section class="hub-hero">
+  <div class="container">
+    <span class="eyebrow">Внутрішній прототип · A/B · Головна</span>
+    <h1>Головна сторінка — чотири способи відкрити компанію</h1>
+    <p class="lead">Той самий зміст (шість напрямів, оснастка, контрактне виробництво, показники), але з різним першим екраном. A і B — перші дві спроби. C і D зібрані з їхніх сильних сторін: тёмний герой із фото, індекс напрямів зі списком і превʼю, без дублювальних кнопок і без ярликів на оснастці — вона виділяється порядком і вагою блоків.</p>
+    <p class="hub-note">Продакшн-сторінка не змінена. Живцем краще дивитися у своєму браузері — наведення й анімація не видно в статичних превʼю.</p>
+    <div class="nav-lab">
+      <a href="/contract-manufacturing/ab/">← Контрактне виробництво (A/B)</a>
+      <a href="/products/osnastka/ab/">Оснастка (A/B) →</a>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="orig">
+      <div><div class="t">Оригінал — як зараз</div>
+        <div class="d">Герой із плейсхолдер-фігурою, сітка 6 напрямів, показники, спотлайт флагмана.</div></div>
+      <a class="btn btn--ghost" href="/" target="_blank" rel="noopener">Відкрити поточну →</a>
+    </div>
+
+    <div class="cmp">
+      <div class="cmp-card">
+        <div class="cmp-bar"><span class="cmp-key">A</span>
+          <div><div class="cmp-ttl">Флагман у герої</div><div class="cmp-sub">Теза + оснастка в першому екрані</div></div>
+          <div class="cmp-actions"><a class="btn btn--ghost" href="/home-ab/a.html" target="_blank" rel="noopener">Відкрити →</a></div>
+        </div>
+        <div class="cmp-body">
+          <div class="cmp-meta">
+            <span class="lbl">Ідея</span>
+            <p>Замість абстрактної фігури в герої — одразу картка флагмана (оснастка) поруч із головною тезою. Показники стиснуто в тонку смугу. Відвідувач із першого екрана бачить головний продукт.</p>
+            <span class="lbl">Що в композиції</span>
+            <ul>
+              <li>Спліт-герой: теза ліворуч, флагман праворуч</li>
+              <li>Тонка смуга показників замість великого блоку</li>
+              <li>Далі — звична сітка 6 напрямів</li>
+            </ul>
+            <span class="lbl">Сильна сторона</span>
+            <p style="margin-bottom:0">Флагман продано за перші секунди; менша «каталожність».</p>
+          </div>
+          <div class="cmp-frame"><span class="hint">Превʼю · гортайте всередині</span>
+            <iframe loading="lazy" src="/home-ab/a.html" title="Головна A"></iframe>
+          </div>
+        </div>
+      </div>
+
+      <div class="cmp-card">
+        <div class="cmp-bar"><span class="cmp-key">B</span>
+          <div><div class="cmp-ttl">Індекс напрямів</div><div class="cmp-sub">Герой-покажчик із превʼю</div></div>
+          <div class="cmp-actions"><a class="btn btn--ghost" href="/home-ab/b.html" target="_blank" rel="noopener">Відкрити →</a></div>
+        </div>
+        <div class="cmp-body">
+          <div class="cmp-meta">
+            <span class="lbl">Ідея</span>
+            <p>Герой — це інтерактивний покажчик: список напрямів ліворуч, і при наведенні праворуч оновлюється темна панель-превʼю. Відвідувач сам «гортає» напрями й одразу бачить, що це для його лінії.</p>
+            <span class="lbl">Що в композиції</span>
+            <ul>
+              <li>Список ↔ превʼю з наведенням і клавіатурою</li>
+              <li>Флагман отримує окремий спотлайт нижче</li>
+              <li>Показники — повноцінним темним блоком</li>
+            </ul>
+            <span class="lbl">Сильна сторона</span>
+            <p style="margin-bottom:0">Залучає до взаємодії з першого екрана; інженерний «wayfinding».</p>
+          </div>
+          <div class="cmp-frame"><span class="hint">Превʼю · гортайте всередині</span>
+            <iframe loading="lazy" src="/home-ab/b.html" title="Головна B"></iframe>
+          </div>
+        </div>
+      </div>
+
+      <div class="cmp-card">
+        <div class="cmp-bar"><span class="cmp-key">C</span>
+          <div><div class="cmp-ttl">Заява + індекс</div><div class="cmp-sub">Тёмний герой окремо, індекс під ним</div></div>
+          <div class="cmp-actions"><a class="btn btn--ghost" href="/home-ab/c.html" target="_blank" rel="noopener">Відкрити →</a></div>
+        </div>
+        <div class="cmp-body">
+          <div class="cmp-meta">
+            <span class="lbl">Ідея</span>
+            <p>Перший екран — тільки теза на фото цеху, без жодної кнопки: CTA вже стоїть у шапці поруч. Нижче окремою світлою секцією — індекс напрямів зі списком і превʼю. Герой заявляє, індекс орієнтує.</p>
+            <span class="lbl">Що в композиції</span>
+            <ul>
+              <li>Фон-фото механізму оснастки замість плейсхолдера</li>
+              <li>Замість кнопки «Усі напрями ↓» — тонка лінія з крапкою, що стікає вниз</li>
+              <li>Список ↔ превʼю з фото напряму, наведення й клавіатура</li>
+              <li>Оснастка перша в списку й відкрита за замовчуванням</li>
+            </ul>
+            <span class="lbl">Сильна сторона</span>
+            <p style="margin-bottom:0">Чисто й легко: заява не змагається з навігацією за увагу.</p>
+          </div>
+          <div class="cmp-frame"><span class="hint">Превʼю · гортайте всередині</span>
+            <iframe loading="lazy" src="/home-ab/c.html" title="Головна C"></iframe>
+          </div>
+        </div>
+      </div>
+
+      <div class="cmp-card">
+        <div class="cmp-bar"><span class="cmp-key">D</span>
+          <div><div class="cmp-ttl">Індекс у герої</div><div class="cmp-sub">Теза й вибір напряму в одному екрані</div></div>
+          <div class="cmp-actions"><a class="btn btn--ghost" href="/home-ab/d.html" target="_blank" rel="noopener">Відкрити →</a></div>
+        </div>
+        <div class="cmp-body">
+          <div class="cmp-meta">
+            <span class="lbl">Ідея</span>
+            <p>Те саме наповнення, що в C, але теза й індекс злиті в один тёмний перший екран. Виходить щільніше й важче — той самий «потужний верх», але вже з навігацією всередині.</p>
+            <span class="lbl">Що в композиції</span>
+            <ul>
+              <li>Один тёмний блок: теза + список + превʼю на фото</li>
+              <li>Превʼю — підняте скло на тёмному, а не окрема панель</li>
+              <li>Підказка на скрол із підписом «Чому Sofon»</li>
+              <li>Оснастка перша в списку й відкрита за замовчуванням</li>
+            </ul>
+            <span class="lbl">Сильна сторона</span>
+            <p style="margin-bottom:0">Максимально щільний перший екран: і хто ми, і що обрати.</p>
+          </div>
+          <div class="cmp-frame"><span class="hint">Превʼю · гортайте всередині</span>
+            <iframe loading="lazy" src="/home-ab/d.html" title="Головна D"></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="foot-bot" style="border-top:1px solid rgba(255,255,255,.1);padding-top:var(--s24)">
+      <span>© 2026 ТОВ «СОФОН». Внутрішній A/B прототип.</span><span class="mono">home · layout A/B</span>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

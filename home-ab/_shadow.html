@@ -1,0 +1,24 @@
+<!doctype html><html lang="uk"><head><meta charset="utf-8">
+<title>перевірка тіней під підписами</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/styles.css">
+<link rel="stylesheet" href="/home-ab/gallery.css">
+<link rel="stylesheet" href="/home-ab/gal-page.css">
+<style>.t{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--gal-line)}
+.t .gal-i{aspect-ratio:1}</style>
+</head><body>
+<section class="section section--mist"><div class="container">
+<h4 style="margin-bottom:16px">Світла секція — темний підпис із ореолом</h4>
+<div class="gal t" id="a"></div></div></section>
+<section class="section section--dark"><div class="container">
+<h4 style="margin-bottom:16px;color:#fff">Темна секція — світлий підпис із кантом</h4>
+<div class="gal t" id="b"></div></div></section>
+<script src="/home-ab/gal-data.js"></script>
+<script src="/home-ab/gallery.js"></script>
+<script>
+var A=[GAL_OSN[6],GAL_OSN[12],GAL_MIX[0],GAL_MIX[7]];      // темний рендер, світлий рендер, темне фото, світле
+var B=[GAL_PHOTO[0],GAL_PHOTO[4],GAL_PHOTO[2],GAL_PHOTO[7]];
+SofonGal.render(document.getElementById('a'),A,'sheet');
+SofonGal.render(document.getElementById('b'),B,'sheet');
+document.querySelectorAll('.gal-i').forEach(function(t){t.classList.add('is-hot');});
+</script></body></html>

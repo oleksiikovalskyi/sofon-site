@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>B · Раскрывающиеся полосы — Нестандартное оборудование — Sofon</title>
+<meta name="description" content="A/B-вариант B: раздел «Примеры реализованных решений» как разворачивающиеся полосы-аккордеон.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/styles.css">
+<style>
+/* ===== Variant B — «Раскрывающиеся полосы» (accordion strips) ===== */
+
+/* editorial hero (light) */
+.b-hero{background:var(--mist);border-bottom:1px solid var(--border)}
+.b-hero .container{display:grid;grid-template-columns:1.4fr .6fr;gap:var(--s48);align-items:end;
+  padding-top:var(--s64);padding-bottom:var(--s64)}
+.b-hero h1{max-width:16ch}
+.b-hero .lead{color:var(--steel);max-width:46ch;margin-top:var(--s16)}
+.b-does{border-left:2px solid var(--amber);padding-left:var(--s24)}
+.b-does h4{font-family:var(--fm);font-size:12px;font-weight:600;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--steel);margin-bottom:var(--s16)}
+.b-does ol{list-style:none;counter-reset:d;display:flex;flex-direction:column;gap:12px}
+.b-does li{counter-increment:d;display:flex;gap:12px;align-items:baseline;font-size:15px;color:var(--graphite)}
+.b-does li::before{content:counter(d,decimal-leading-zero);font-family:var(--fm);font-size:12px;
+  color:var(--amber);font-weight:600}
+@media(max-width:900px){.b-hero .container{grid-template-columns:1fr;align-items:start;gap:var(--s32)}}
+
+/* strips */
+.st{border-top:1px solid var(--border)}
+.st-item{border-bottom:1px solid var(--border);position:relative}
+.st-item::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--amber);
+  transform:scaleX(0);transform-origin:left;transition:transform .2s ease}
+.st-item[aria-expanded="true"]::before{transform:scaleX(1)}
+.st-head{display:grid;grid-template-columns:auto auto 1fr auto;align-items:center;gap:var(--s24);
+  width:100%;background:none;border:0;text-align:left;cursor:pointer;padding:26px var(--s24);
+  transition:background .16s ease}
+.st-head:hover{background:var(--mist)}
+.st-idx{font-family:var(--fm);font-size:13px;font-weight:600;color:var(--steel);letter-spacing:.04em}
+.st-ic{width:34px;height:34px;color:var(--steel);transition:color .18s ease;flex:none}
+.st-item[aria-expanded="true"] .st-ic,.st-head:hover .st-ic{color:var(--amber)}
+.st-h{min-width:0}
+.st-h .tag{font-family:var(--fm);font-size:10.5px;font-weight:600;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--steel);display:block}
+.st-h .nm{font-size:20px;font-weight:600;color:var(--graphite);line-height:1.2;margin-top:2px;
+  transition:color .16s ease}
+.st-item[aria-expanded="true"] .st-h .nm{color:var(--amber)}
+.st-plus{width:34px;height:34px;border:1px solid var(--border);border-radius:var(--radius);position:relative;
+  flex:none;transition:.18s ease}
+.st-plus::before,.st-plus::after{content:'';position:absolute;left:50%;top:50%;width:12px;height:2px;
+  background:var(--graphite);transform:translate(-50%,-50%);transition:.22s ease}
+.st-plus::after{transform:translate(-50%,-50%) rotate(90deg)}
+.st-item[aria-expanded="true"] .st-plus{border-color:var(--amber);background:var(--amber)}
+.st-item[aria-expanded="true"] .st-plus::before,.st-item[aria-expanded="true"] .st-plus::after{background:#fff}
+.st-item[aria-expanded="true"] .st-plus::after{transform:translate(-50%,-50%) rotate(0)}
+
+.st-body{display:grid;grid-template-rows:0fr;transition:grid-template-rows .34s cubic-bezier(.4,0,.2,1)}
+.st-item[aria-expanded="true"] .st-body{grid-template-rows:1fr}
+.st-body>.st-inner{overflow:hidden;min-height:0}
+.st-cols{display:grid;grid-template-columns:1.1fr .9fr;gap:var(--s48);
+  padding:0 var(--s24) var(--s48) 82px}
+.st-cols .lead2{font-size:17px;line-height:27px;color:var(--steel)}
+.st-cols ul{list-style:none;margin:var(--s24) 0 0;display:flex;flex-direction:column;gap:var(--s8)}
+.st-cols li{position:relative;padding-left:26px;color:var(--graphite);font-size:15.5px}
+.st-cols li::before{content:'';position:absolute;left:0;top:11px;width:12px;height:2px;background:var(--amber)}
+.st-cols .st-cta{margin-top:var(--s32)}
+.st-fig{border:1px solid var(--border);border-radius:var(--radius-soft);min-height:190px;
+  background:linear-gradient(135deg,rgba(240,124,26,.08),transparent 60%),
+   repeating-linear-gradient(45deg,rgba(27,30,35,.04) 0 2px,transparent 2px 18px),var(--mist);
+  display:flex;align-items:flex-end;padding:var(--s24)}
+.st-fig .cap{font-family:var(--fm);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--steel)}
+@media(max-width:760px){
+  .st-cols{grid-template-columns:1fr;gap:var(--s24);padding:0 var(--s24) var(--s32) var(--s24)}
+  .st-head{grid-template-columns:auto 1fr auto;gap:var(--s16);padding:20px var(--s16)}
+  .st-ic{display:none}
+}
+@media(prefers-reduced-motion:reduce){.st-body{transition:none}}
+</style>
+</head>
+<body data-page="custom-equipment">
+<div style="background:#12151A;color:#fff;font-family:var(--fm,monospace);font-size:12px;letter-spacing:.08em;text-align:center;padding:7px 12px">
+  A/B ПРОТОТИП · ВАРИАНТ B — «РАСКРЫВАЮЩИЕСЯ ПОЛОСЫ» · <a href="/products/custom-equipment/ab/" style="color:#F07C1A">← к сравнению</a>
+</div>
+<header class="site-header">
+  <div class="container nav" id="nav">
+    <a class="brand" href="/">Sofon<span>.</span></a>
+    <nav class="nav-links">
+      <a href="/products/">Продукти</a>
+      <a href="/products/osnastka/">Оснастка</a>
+      <a href="/contract-manufacturing/">Контрактне виробництво</a>
+      
+      <a href="/contact/">Контакти</a>
+    </nav>
+    <div class="nav-right">
+      <span class="lang"><a class="on" href="/">UA</a><span>/</span><a href="/en/">EN</a></span>
+      <a class="btn btn--primary" href="/contact/">Отримати прорахунок</a>
+    </div>
+    <button class="nav-toggle" aria-label="Меню" onclick="document.getElementById('nav').parentElement.parentElement.classList.toggle('mobile-open')"><span></span></button>
+  </div>
+</header>
+<main>
+
+<section class="phero b-hero">
+  <div class="container">
+    <div>
+      <div class="crumb"><a href="/">Головна</a> / <a href="/products/">Продукти</a> / Нестандартне обладнання</div>
+      <span class="eyebrow">Под ТЗ заказчика</span>
+      <h1>Нестандартное оборудование линий розлива</h1>
+      <p class="lead">Нужна функция, которой нет у серийной машины, или узел под вашу тару? Разберёмся в задаче и спроектируем решение под неё.</p>
+      <div class="hero-cta" style="margin-top:24px"><a class="btn btn--primary btn--lg" href="/contact/">Обсудить задачу</a></div>
+    </div>
+    <div class="b-does">
+      <h4>Полный цикл</h4>
+      <ol>
+        <li>Помогаем составить ТЗ</li>
+        <li>Разрабатываем технологию и конструкцию</li>
+        <li>Изготавливаем и тестируем</li>
+        <li>Запускаем на вашем предприятии</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="sec-head">
+      <span class="eyebrow eyebrow--muted">Примеры реализованных решений</span>
+      <h2>Что мы уже делали под конкретные задачи</h2>
+      <p>Нажмите на полосу — она развернётся и покажет, как устроен узел.</p>
+    </div>
+    <div class="st" id="st"></div>
+  </div>
+</section>
+
+<section class="section section--mist">
+  <div class="container">
+    <div class="spot" style="align-items:stretch">
+      <div class="spot-media" style="aspect-ratio:auto"><img class="zoomable" src="/images/products/custom-equipment/palletizer-overview.jpg" alt="Паллетизатор 19 л — общий вид" style="width:100%;height:100%;object-fit:cover;display:block;border-radius:inherit"></div>
+      <div>
+        <span class="eyebrow">Кейс · нестандартное решение</span>
+        <h2>Паллетизатор для бутылей 19 л</h2>
+        <p class="muted" style="margin-top:16px">Автоматическая укладка 19-литровых бутылей на паллету. Производительность — 1400 бутылей в час.</p>
+        <ul>
+          <li><b>Компактная конструкция</b> — под ваши требования по размещению</li>
+          <li><b>Гибкая конфигурация</b> — одна/две паллеты, левый/правый заход</li>
+          <li><b>Delta Electronics и Camozzi</b> — надёжная автоматика и пневматика</li>
+        </ul>
+        <a class="btn btn--primary" style="margin-top:32px" href="/contact/">Получить расчёт</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--mist" style="padding-top:0">
+  <div class="container" style="text-align:center">
+    <h2 style="max-width:24ch;margin:0 auto 16px">Не нашли то, что искали? Опишите вашу задачу</h2>
+    <p class="muted" style="margin:0 auto 32px">Возможно, это уже наше направление работы — а если нет, подскажем, к кому обратиться.</p>
+    <a class="btn btn--primary btn--lg" href="/contact/">Обсудить задачу</a>
+  </div>
+</section>
+
+</main>
+<footer class="site-footer">
+  <div class="container">
+    <div class="foot-top">
+      <div class="foot-brand">
+        <a class="brand" href="/">Sofon<span>.</span></a>
+        <p>Інженерно-виробничий завод обладнання для ліній розливу напоїв і води.</p>
+      </div>
+      <div class="foot-col">
+        <h5>Продукти</h5>
+        <a href="/products/osnastka/">Оснастка</a>
+        <a href="/products/custom-equipment/">Нестандартне обладнання</a>
+        <a href="/contract-manufacturing/">Контрактне виробництво</a>
+      </div>
+      <div class="foot-col">
+        <h5>Контакти</h5>
+        <a href="tel:+380672933066">+380 67 293 30 66</a>
+        <a href="mailto:les@immach.com">les@immach.com</a>
+      </div>
+    </div>
+    <div class="foot-bot"><span>© 2026 ТОВ «СОФОН».</span><span class="mono">A/B прототип</span></div>
+  </div>
+</footer>
+
+<script src="/products/custom-equipment/ab/examples-data.js"></script>
+<script>
+(function(){
+  var wrap=document.getElementById('st');
+  ITEMS.forEach(function(d,i){
+    var item=document.createElement('div');
+    item.className='st-item';item.setAttribute('aria-expanded', i===0?'true':'false');
+    item.innerHTML=
+      '<button class="st-head" aria-expanded="'+(i===0)+'">'+
+        '<span class="st-idx">'+String(i+1).padStart(2,'0')+'</span>'+
+        '<svg class="st-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">'+d.icon+'</svg>'+
+        '<span class="st-h"><span class="tag">'+d.tag+'</span><span class="nm">'+d.title+'</span></span>'+
+        '<span class="st-plus" aria-hidden="true"></span>'+
+      '</button>'+
+      '<div class="st-body"><div class="st-inner"><div class="st-cols">'+
+        '<div><p class="lead2">'+d.lead+'</p>'+
+          '<ul>'+d.bullets.map(function(b){return '<li>'+b+'</li>';}).join('')+'</ul>'+
+          '<div class="st-cta"><a class="btn btn--primary" href="/contact/">Обсудить похожую задачу</a></div></div>'+
+        '<div class="st-fig"><span class="cap">'+d.tag+' · '+d.task+'</span></div>'+
+      '</div></div></div>';
+    wrap.appendChild(item);
+    var head=item.querySelector('.st-head');
+    head.addEventListener('click',function(){
+      var open=item.getAttribute('aria-expanded')==='true';
+      wrap.querySelectorAll('.st-item').forEach(function(it){
+        it.setAttribute('aria-expanded','false');
+        it.querySelector('.st-head').setAttribute('aria-expanded','false');
+      });
+      if(!open){item.setAttribute('aria-expanded','true');head.setAttribute('aria-expanded','true');}
+    });
+  });
+})();
+</script>
+</body>
+</html>

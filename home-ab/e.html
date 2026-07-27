@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>E · Повноекранний герой + Чому Sofon — Sofon</title>
+<meta name="description" content="Прототип E: герой на весь перший екран, у нього втягнуто перероблену секцію «Чому Sofon» горизонтальним рядом. Reveal=fade (коротка пауза), cue=glow без оранжевого.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/styles.css">
+<style>
+/* ===== Home E — повноекранний герой із втягнутою «Чому Sofon» ===== */
+:root{--reveal-delay:.45s;--reveal-dur:.5s}
+
+/* --- повноекранний герой --- */
+.hf{position:relative;background:var(--graphite);color:#fff;overflow:hidden;
+  min-height:calc(100vh - 72px)}
+.hf-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.30}
+.hf::after{content:'';position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:linear-gradient(180deg,rgba(27,30,35,.60),rgba(27,30,35,.82) 60%,rgba(27,30,35,.97)),
+  radial-gradient(1000px 460px at 80% -8%,rgba(240,124,26,.18),transparent 60%)}
+.hf .container{position:relative;z-index:3;min-height:calc(100vh - 72px);
+  display:flex;flex-direction:column;justify-content:center;
+  padding-top:var(--s48);padding-bottom:120px}
+.hf-say{max-width:64ch}
+.hf-say h1{max-width:17ch;margin:var(--s16) 0}
+.hf-say .lead{color:rgba(255,255,255,.82);max-width:52ch}
+
+/* «Чому Sofon» — тепер частина героя, горизонтальний ряд із повітрям */
+.hf-adv{margin-top:var(--s48);padding-top:var(--s32);border-top:1px solid rgba(255,255,255,.15)}
+.hf-adv .eyebrow{color:var(--amber);display:block;margin-bottom:var(--s24)}
+.hf-adv-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s48)}
+.hf-a b{display:block;font-size:21px;font-weight:600;color:#fff;letter-spacing:-.01em;line-height:1.15}
+.hf-a p{margin-top:10px;color:rgba(255,255,255,.66);font-size:14.5px;line-height:1.55;max-width:34ch}
+@media(max-width:820px){
+  .hf{min-height:auto}
+  .hf .container{min-height:auto}
+  .hf-adv-grid{grid-template-columns:1fr;gap:var(--s24)}
+}
+
+/* ===== ПІДКАЗКА НА СКРОЛ (?cue=) — none | glow | faint ===== */
+
+/* cue=faint v2 — компактний шеврон, притиснутий до низу героя.
+   Було: блок на всю ширину контейнера з 64px стрілкою, що «стирчала посеред сторінки».
+   Стало: абсолютно позиціонований 26px значок, який нічого не займає в потоці. */
+.cue--faint{display:none;position:absolute;left:50%;bottom:20px;transform:translateX(-50%);
+  z-index:4;color:#fff;line-height:0}
+body[data-cue="faint"] .cue--faint{display:block}
+.cue--faint svg{width:26px;height:auto;stroke:currentColor;stroke-width:1.5;fill:none;
+  opacity:.22;animation:faintPulse 3.2s ease-in-out infinite}
+@keyframes faintPulse{0%,100%{opacity:.10}50%{opacity:.30}}
+
+/* cue=glow v2 — нейтральне світло стікає вниз по центру, без оранжевої заливки краю */
+.flow{display:none;position:absolute;left:0;right:0;bottom:0;height:200px;z-index:2;pointer-events:none;overflow:hidden}
+body[data-cue="glow"] .flow{display:block}
+.flow::after{content:'';position:absolute;left:50%;top:0;width:130px;height:38px;border-radius:50%;
+  background:radial-gradient(60% 100% at 50% 50%,rgba(255,255,255,.24),transparent 72%);
+  filter:blur(7px);animation:flowDown 3s ease-in-out infinite}
+@keyframes flowDown{0%{transform:translate(-50%,0);opacity:0}25%{opacity:.7}100%{transform:translate(-50%,150px);opacity:0}}
+@media(prefers-reduced-motion:reduce){.flow::after,.cue--faint svg{animation:none;opacity:.4}
+  .flow::after{transform:translate(-50%,60px)}}
+
+/* --- index: список ліворуч, деталь праворуч (fade-reveal) --- */
+.idx{display:grid;grid-template-columns:1fr 1fr;gap:var(--s48);align-items:stretch;
+  border-top:1px solid var(--border);padding-top:var(--s32)}
+.idx-list{display:flex;flex-direction:column}
+.idx-row{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:var(--s16);
+  width:100%;text-align:left;background:none;border:0;border-bottom:1px solid var(--border);
+  padding:18px var(--s8);cursor:pointer;position:relative;transition:padding-left .18s ease;font-family:inherit}
+.idx-row:first-child{border-top:1px solid var(--border)}
+.idx-row::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--amber);
+  transform:scaleY(0);transition:transform .18s ease}
+.idx-row:hover,.idx-row[aria-current="true"]{padding-left:var(--s16)}
+.idx-row[aria-current="true"]::before{transform:scaleY(1)}
+.idx-ic{width:26px;height:26px;color:var(--steel);transition:color .16s ease;flex:none}
+.idx-row:hover .idx-ic,.idx-row[aria-current="true"] .idx-ic{color:var(--amber)}
+.idx-tt b{display:block;font-size:18px;font-weight:600;color:var(--graphite);line-height:1.2}
+.idx-tt span{display:block;font-family:var(--fm);font-size:11px;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--steel);margin-top:3px}
+.idx-arm{font-family:var(--fm);color:var(--border);transition:.16s ease;flex:none}
+.idx-row[aria-current="true"] .idx-arm{color:var(--amber);transform:translateX(3px)}
+
+.idx-prev{position:relative;overflow:hidden;border-radius:var(--radius-soft);
+  background:var(--graphite);color:#fff;min-height:420px;display:flex}
+.idx-prev-in{position:relative;display:flex;flex:1;color:inherit;text-decoration:none}
+.idx-prev-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+.idx-prev-veil{position:absolute;inset:0;z-index:1;display:flex;flex-direction:column;justify-content:flex-end;
+  background:linear-gradient(180deg,
+    rgba(14,17,20,.18) 0%,rgba(14,17,20,.04) 20%,rgba(14,17,20,.55) 42%,
+    rgba(14,17,20,.84) 68%,rgba(14,17,20,.96) 100%);
+  }
+
+/* ===== ПОЯВА ТЕКСТУ В ПРЕВ’Ю (?reveal=) — fade | slide | wipe ===== */
+/* fade v2 — та сама поява, але пауза скорочена з 1s до .45s */
+body[data-reveal="fade"] .idx-prev-veil{animation:vFade var(--reveal-dur) ease var(--reveal-delay) backwards}
+@keyframes vFade{from{opacity:0}to{opacity:1}}
+
+/* slide v2 — було: темний прямокутник їхав знизу через усе фото, і на світлому
+   знімку читався як «рамка, що повзе». Стало: дорога всього 28px + одночасне
+   проявлення, тож окремого темного краю не видно взагалі. */
+body[data-reveal="slide"] .idx-prev-veil{animation:vSlide var(--reveal-dur) cubic-bezier(.22,.61,.36,1) var(--reveal-delay) backwards}
+@keyframes vSlide{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
+
+/* wipe v2 — було: жорстка межа затемнення проїжджала по всьому зображенню.
+   Стало: сам блок не рухається, а проявляється м’якою маскою знизу вгору —
+   перехід розтягнутий майже на всю висоту, різкого краю немає. */
+body[data-reveal="wipe"] .idx-prev-veil{
+  -webkit-mask-image:linear-gradient(180deg,transparent 0 33.33%,#000 66.66%);
+  mask-image:linear-gradient(180deg,transparent 0 33.33%,#000 66.66%);
+  -webkit-mask-size:100% 300%;mask-size:100% 300%;
+  -webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;
+  animation:vWipe calc(var(--reveal-dur) + .15s) cubic-bezier(.22,.61,.36,1) var(--reveal-delay) backwards}
+@keyframes vWipe{
+  from{-webkit-mask-position:0 0;mask-position:0 0}
+  to{-webkit-mask-position:0 100%;mask-position:0 100%}}
+
+@media(prefers-reduced-motion:reduce){.idx-prev-veil{animation:none!important;opacity:1;
+  -webkit-mask-image:none;mask-image:none}}
+.idx-prev-body{padding:var(--s32);text-shadow:0 1px 16px rgba(0,0,0,.55)}
+.idx-prev h3{color:#fff;font-size:25px;margin-bottom:var(--s16);line-height:1.2}
+.idx-prev p{color:rgba(255,255,255,.82);font-size:15.5px;line-height:25px;max-width:44ch}
+.idx-prev .more{margin-top:var(--s24);font-family:var(--fm);font-size:13px;font-weight:600;
+  letter-spacing:.06em;text-transform:uppercase;color:var(--amber);display:inline-flex;gap:8px}
+@media(max-width:900px){.idx{grid-template-columns:1fr;gap:var(--s24)}.idx-prev{min-height:380px;order:2}}
+
+/* --- оснастка --- */
+.osn{display:grid;grid-template-columns:1.05fr .95fr;gap:var(--s48);align-items:center}
+.osn-media{border-radius:var(--radius-soft);overflow:hidden;aspect-ratio:4/3;background:var(--graphite)}
+.osn-media img{width:100%;height:100%;object-fit:cover}
+.osn h2{max-width:18ch}
+@media(max-width:900px){.osn{grid-template-columns:1fr;gap:var(--s24)}}
+
+.proto-bar{background:#12151A;color:#fff;font-family:var(--fm);font-size:12px;letter-spacing:.06em;text-align:center;padding:7px 12px}
+.proto-bar b{color:#F07C1A}.proto-bar a{color:#F07C1A;margin-left:6px}
+</style>
+</head>
+<body data-page="home" data-reveal="fade" data-cue="glow">
+<div class="proto-bar">ПРОТОТИП E · повноекранний герой + втягнута «Чому Sofon» · reveal <b id="pb-r">fade</b> · cue <b id="pb-c">glow</b></div>
+<header class="site-header">
+  <div class="container nav" id="nav">
+    <a class="brand" href="/">Sofon<span>.</span></a>
+    <nav class="nav-links">
+      <a href="/products/">Продукти</a>
+      <a href="/products/osnastka/">Оснастка</a>
+      <a href="/contract-manufacturing/">Контрактне виробництво</a>
+      <a href="/contact/">Контакти</a>
+    </nav>
+    <div class="nav-right">
+      <span class="lang"><a class="on" href="/">UA</a><span>/</span><a href="/en/">EN</a></span>
+      <a class="btn btn--primary" href="/contact/">Отримати прорахунок</a>
+    </div>
+    <button class="nav-toggle" aria-label="Меню" onclick="document.getElementById('nav').parentElement.parentElement.classList.toggle('mobile-open')"><span></span></button>
+  </div>
+</header>
+<main>
+
+<section class="hf">
+  <img class="hf-bg" src="/images/home/hero-bg.jpg" alt="">
+  <span class="flow" aria-hidden="true"></span>
+  <a class="cue cue--faint" href="#dirs" aria-label="Гортати вниз до напрямів">
+    <svg viewBox="0 0 24 16" aria-hidden="true"><path d="M2 2l10 6 10-6"/><path d="M2 8l10 6 10-6"/></svg>
+  </a>
+  <div class="container">
+    <div class="hf-say">
+      <span class="eyebrow">Обладнання для ліній розливу</span>
+      <h1>Переводимо лінію розливу на нову пляшку — швидко й точно</h1>
+      <p class="lead">Проєктуємо та виготовляємо оснастку, нестандартне обладнання, конвеєри та автоматику під конкретний цех. Інженерна кастомізація замість каталожних компромісів.</p>
+    </div>
+    <div class="hf-adv">
+      <span class="eyebrow">Чому Sofon</span>
+      <div class="hf-adv-grid">
+        <div class="hf-a"><b>Під технічне завдання</b><p>Проєктуємо рішення під конкретний цех і задачу, а не добираємо готове з каталогу.</p></div>
+        <div class="hf-a"><b>Повний цикл в одних руках</b><p>Проєкт, виготовлення, монтаж і запуск веде одна команда — від креслення до робочої лінії.</p></div>
+        <div class="hf-a"><b>Власний верстатний парк</b><p>Токарна, фрезерна та роутерна обробка на місці — від окремої деталі до готового вузла.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="dirs">
+  <div class="container">
+    <div class="sec-head" style="margin-bottom:28px">
+      <span class="eyebrow eyebrow--muted">Що ми робимо</span>
+      <h2>Шість напрямів обладнання ліній розливу</h2>
+    </div>
+    <div class="idx">
+      <div class="idx-list" id="idx-list"></div>
+      <div class="idx-prev" id="idx-prev"></div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--mist">
+  <div class="container">
+    <div class="osn">
+      <div class="osn-media"><img src="/docs/legacy-site/images/format-parts-2.jpg" alt="Комплект форматних деталей"></div>
+      <div>
+        <h2>Оснастка для переведення лінії на нову пляшку</h2>
+        <p class="muted" style="margin-top:16px">Змінили формат тари — і лінія стала. Ми виготовляємо комплекти форматних деталей, що переводять наявне обладнання на роботу з новою пляшкою, без заміни машин.</p>
+        <a class="btn btn--primary" style="margin-top:32px" href="/products/osnastka/">Перейти до оснастки →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="band">
+      <div class="z">
+        <span class="eyebrow">Окремий напрям</span>
+        <h3>Контрактне виробництво</h3>
+        <p>Токарні, фрезерні та роутерні роботи на замовлення — для клієнтів поза розливом. Виготовимо деталі за вашим кресленням або зразком.</p>
+      </div>
+      <div class="z"><a class="btn btn--primary btn--lg" href="/contract-manufacturing/">Розмістити замовлення →</a></div>
+    </div>
+  </div>
+</section>
+
+</main>
+<footer class="site-footer">
+  <div class="container">
+    <div class="foot-top">
+      <div class="foot-brand"><a class="brand" href="/">Sofon<span>.</span></a>
+        <p>Інженерно-виробничий завод обладнання для ліній розливу напоїв і води.</p></div>
+      <div class="foot-col"><h5>Продукти</h5>
+        <a href="/products/osnastka/">Оснастка</a><a href="/products/custom-equipment/">Нестандартне обладнання</a><a href="/contract-manufacturing/">Контрактне виробництво</a></div>
+      <div class="foot-col"><h5>Контакти</h5>
+        <a href="tel:+380672933066">+380 67 293 30 66</a><a href="mailto:les@immach.com">les@immach.com</a></div>
+    </div>
+    <div class="foot-bot"><span>© 2026 ТОВ «СОФОН».</span><span class="mono">A/B прототип</span></div>
+  </div>
+</footer>
+
+<script src="/home-ab/home-data.js"></script>
+<script>
+// ?reveal=fade|slide|wipe  ·  ?cue=glow|faint|none — щоб порівнювати варіанти без окремих файлів
+(function(){
+  var q=new URLSearchParams(location.search);
+  var R=(q.get('reveal')||'fade').toLowerCase(), C=(q.get('cue')||'glow').toLowerCase();
+  if(['fade','slide','wipe'].indexOf(R)<0) R='fade';
+  if(['none','glow','faint'].indexOf(C)<0) C='glow';
+  document.body.dataset.reveal=R;document.body.dataset.cue=C;
+  document.getElementById('pb-r').textContent=R;
+  document.getElementById('pb-c').textContent=C;
+})();
+(function(){
+  var list=document.getElementById('idx-list');
+  var prev=document.getElementById('idx-prev');
+  var rows=[];
+  function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;');}
+  function show(i){
+    var d=HOME_DIRS[i];
+    rows.forEach(function(r,j){r.setAttribute('aria-current', j===i?'true':'false');});
+    prev.innerHTML=
+      '<a class="idx-prev-in" href="'+d.href+'">'+
+        (d.img?'<img class="idx-prev-img" src="'+d.img+'" alt="" loading="lazy">':'')+
+        '<span class="idx-prev-veil"><span class="idx-prev-body">'+
+          '<h3>'+esc(d.title)+'</h3>'+
+          '<p>'+esc(d.blurb)+'</p>'+
+          '<span class="more">Докладніше →</span>'+
+        '</span></span>'+
+      '</a>';
+  }
+  HOME_DIRS.forEach(function(d,i){
+    var b=document.createElement('button');
+    b.type='button';b.className='idx-row';b.setAttribute('aria-current','false');
+    b.innerHTML='<svg class="idx-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">'+d.icon+'</svg>'+
+      '<span class="idx-tt"><b>'+esc(d.title)+'</b><span>'+esc(d.sub||'напрям')+'</span></span>'+
+      '<span class="idx-arm">→</span>';
+    b.addEventListener('mouseenter',function(){show(i);});
+    b.addEventListener('focus',function(){show(i);});
+    b.addEventListener('click',function(){location.href=d.href;});
+    list.appendChild(b);rows.push(b);
+  });
+  show(0);
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+/* Оформлення сторінок-прикладів галереї (самі приклади, не сайт). */
+.proto-bar{background:#12151A;color:#fff;font-family:var(--fm);font-size:12px;
+  letter-spacing:.06em;text-align:center;padding:8px 12px}
+.proto-bar b{color:#F07C1A}
+.proto-bar a{color:#F07C1A;margin-left:10px}
+.gh{display:grid;grid-template-columns:1.05fr .95fr;gap:var(--s48);align-items:end;
+  margin-bottom:var(--s32)}
+.gh h2{max-width:18ch}
+.on-dark{color:rgba(255,255,255,.72)}
+/* Колір «аркуша» задає секція, а не компонент: підкладка рендерів
+   множиться саме на нього, тож на білій секції аркуш має бути білим,
+   інакше під деталями проступає світло-сірий прямокутник. */
+.section .gal,.section .gal-strip{--gal-bg:#fff;--gal-line:var(--border)}
+.section--mist .gal,.section--mist .gal-strip{--gal-bg:var(--mist)}
+.section--dark .gal,.section--dark .gal-strip{--gal-bg:#181B20;--gal-line:#2A2E35}
+@media(max-width:900px){.gh{grid-template-columns:1fr;gap:var(--s16)}}
+/* смуга виходить за межі контейнера — секція не повинна давати
+   горизонтальну прокрутку через 100vw при видимому скролбарі */
+.section{overflow-x:clip}

@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>B · Індекс напрямів — Sofon</title>
+<meta name="description" content="A/B-вариант B головної: герой як інтерактивний покажчик напрямів.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/styles.css">
+<style>
+/* ===== Home Variant B — «Індекс напрямів» ===== */
+.hb-top{padding:var(--s64) 0 var(--s32)}
+.hb-top h1{max-width:18ch;margin:var(--s16) 0}
+.hb-top .lead{max-width:56ch}
+
+/* index: list + preview */
+.idx{display:grid;grid-template-columns:1fr 1fr;gap:var(--s48);align-items:stretch;
+  border-top:1px solid var(--border);padding-top:var(--s32)}
+.idx-list{display:flex;flex-direction:column}
+.idx-row{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:var(--s16);
+  width:100%;text-align:left;background:none;border:0;border-bottom:1px solid var(--border);
+  padding:18px var(--s8);cursor:pointer;position:relative;transition:padding-left .18s ease}
+.idx-row:first-child{border-top:1px solid var(--border)}
+.idx-row::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--amber);
+  transform:scaleY(0);transform-origin:center;transition:transform .18s ease}
+.idx-row:hover,.idx-row[aria-current="true"]{padding-left:var(--s16)}
+.idx-row[aria-current="true"]::before{transform:scaleY(1)}
+.idx-ic{width:26px;height:26px;color:var(--steel);transition:color .16s ease;flex:none}
+.idx-row:hover .idx-ic,.idx-row[aria-current="true"] .idx-ic{color:var(--amber)}
+.idx-tt b{display:block;font-size:18px;font-weight:600;color:var(--graphite);line-height:1.2}
+.idx-tt span{display:block;font-family:var(--fm);font-size:11px;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--steel);margin-top:3px}
+.idx-arm{font-family:var(--fm);color:var(--border);transition:.16s ease;flex:none}
+.idx-row[aria-current="true"] .idx-arm{color:var(--amber);transform:translateX(3px)}
+
+.idx-prev{background:var(--graphite);color:#fff;border-radius:var(--radius-soft);padding:var(--s48);
+  position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:center;min-height:340px}
+.idx-prev::after{content:'';position:absolute;right:-40px;bottom:-40px;width:280px;height:280px;
+  background:radial-gradient(circle,rgba(240,124,26,.18),transparent 68%)}
+.idx-prev .z{position:relative;z-index:2}
+.idx-prev-in{opacity:0;transform:translateY(10px);animation:idxIn .32s ease forwards}
+@keyframes idxIn{to{opacity:1;transform:none}}
+.idx-prev .pic{width:52px;height:52px;color:var(--amber);margin-bottom:var(--s24)}
+.idx-prev .flag{display:inline-block;font-family:var(--fm);font-size:10.5px;font-weight:600;letter-spacing:.1em;
+  text-transform:uppercase;background:var(--amber);color:#fff;padding:3px 10px;border-radius:2px;margin-bottom:var(--s16)}
+.idx-prev h3{color:#fff;font-size:26px;margin-bottom:var(--s16)}
+.idx-prev p{color:rgba(255,255,255,.78);font-size:16px;line-height:26px;max-width:44ch}
+.idx-prev .more{margin-top:var(--s32);font-family:var(--fm);font-size:13px;font-weight:600;letter-spacing:.06em;
+  text-transform:uppercase;color:var(--amber);display:inline-flex;gap:8px}
+@media(max-width:900px){.idx{grid-template-columns:1fr;gap:var(--s24)}.idx-prev{min-height:0;order:2;padding:var(--s32)}}
+
+/* stats reuse (nowrap для показників тепер у глобальному styles.css) */
+.section--dark .stats .stat .l{color:rgba(255,255,255,.6)}
+</style>
+</head>
+<body data-page="home">
+<div style="background:#12151A;color:#fff;font-family:var(--fm,monospace);font-size:12px;letter-spacing:.08em;text-align:center;padding:7px 12px">
+  A/B ПРОТОТИП · ГОЛОВНА · ВАРІАНТ B — «ІНДЕКС НАПРЯМІВ» · <a href="/home-ab/" style="color:#F07C1A">← до порівняння</a>
+</div>
+<header class="site-header">
+  <div class="container nav" id="nav">
+    <a class="brand" href="/">Sofon<span>.</span></a>
+    <nav class="nav-links">
+      <a href="/products/">Продукти</a>
+      <a href="/products/osnastka/">Оснастка</a>
+      <a href="/contract-manufacturing/">Контрактне виробництво</a>
+      
+      <a href="/contact/">Контакти</a>
+    </nav>
+    <div class="nav-right">
+      <span class="lang"><a class="on" href="/">UA</a><span>/</span><a href="/en/">EN</a></span>
+      <a class="btn btn--primary" href="/contact/">Отримати прорахунок</a>
+    </div>
+    <button class="nav-toggle" aria-label="Меню" onclick="document.getElementById('nav').parentElement.parentElement.classList.toggle('mobile-open')"><span></span></button>
+  </div>
+</header>
+<main>
+
+<section class="hb-top">
+  <div class="container">
+    <span class="eyebrow">Обладнання для ліній розливу</span>
+    <h1>Інженерна кастомізація ліній розливу — під ваш цех</h1>
+    <p class="lead">Оснастка, нестандартне обладнання, конвеєри та автоматика під конкретне технічне завдання. Оберіть напрям — подивіться, що це означає для вашої лінії.</p>
+  </div>
+</section>
+
+<section style="padding-bottom:var(--s64)">
+  <div class="container">
+    <div class="idx">
+      <div class="idx-list" id="idx-list"></div>
+      <div class="idx-prev" id="idx-prev"></div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--dark">
+  <div class="container">
+    <div class="sec-head" style="margin-bottom:32px"><span class="eyebrow">Чому Sofon</span><h2>Інженерія, а не каталог</h2></div>
+    <div class="stats">
+      <div class="stat"><div class="n">під <span>ТЗ</span></div><div class="l">Кожне рішення проєктуємо під конкретний цех і задачу</div></div>
+      <div class="stat"><div class="n">Delta<span>·</span>Camozzi</div><div class="l">Якісна компонентна база: автоматика й пневматика</div></div>
+      <div class="stat"><div class="n">повний<span>&nbsp;цикл</span></div><div class="l">Проєкт → виготовлення → монтаж → запуск</div></div>
+      <div class="stat"><div class="n">1400<span> б/год</span></div><div class="l">Продуктивність палетизатора 19 л</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--mist">
+  <div class="container">
+    <div class="spot">
+      <div class="spot-media"><span class="cap">// оснастка: зірки, ліри, шнеки — замінити реальним фото</span></div>
+      <div>
+        <span class="eyebrow">Флагман</span>
+        <h2>Оснастка для переведення лінії на нову пляшку</h2>
+        <p class="muted" style="margin-top:16px">Змінили формат тари — і лінія стала. Ми виготовляємо комплекти форматних деталей, що переводять наявне обладнання на роботу з новою пляшкою, без заміни машин.</p>
+        <ul>
+          <li><b>Турнікетні групи</b> та зірки для поділу й синхронізації потоку</li>
+          <li><b>Ліри напрямні</b> й шнеки поділу потоку пляшок</li>
+          <li><b>Системи роботи з пробкою</b> та переносники паперової етикетки</li>
+        </ul>
+        <a class="btn btn--primary" style="margin-top:32px" href="/products/osnastka/">Перейти до оснастки →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="band">
+      <div class="z">
+        <span class="eyebrow">Окремий напрям</span>
+        <h3>Контрактне виробництво</h3>
+        <p>Токарні, фрезерні та роутерні роботи на замовлення — для клієнтів поза розливом. Виготовимо деталі за вашим кресленням або зразком.</p>
+      </div>
+      <div class="z"><a class="btn btn--primary btn--lg" href="/contract-manufacturing/">Розмістити замовлення →</a></div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--mist" style="text-align:center">
+  <div class="container">
+    <span class="eyebrow eyebrow--muted">Готові обговорити задачу?</span>
+    <h2 style="margin:16px auto;max-width:18ch">Опишіть, що потрібно перевести чи виготовити</h2>
+    <p class="muted" style="margin:0 auto 32px">Навіть якщо вашого напряму немає на сайті — напишіть, ймовірно ми вже це робимо або підкажемо, до кого звернутися.</p>
+    <a class="btn btn--primary btn--lg" href="/contact/">Отримати прорахунок</a>
+  </div>
+</section>
+
+</main>
+<footer class="site-footer">
+  <div class="container">
+    <div class="foot-top">
+      <div class="foot-brand"><a class="brand" href="/">Sofon<span>.</span></a>
+        <p>Інженерно-виробничий завод обладнання для ліній розливу напоїв і води.</p></div>
+      <div class="foot-col"><h5>Продукти</h5>
+        <a href="/products/osnastka/">Оснастка</a><a href="/products/custom-equipment/">Нестандартне обладнання</a><a href="/contract-manufacturing/">Контрактне виробництво</a></div>
+      <div class="foot-col"><h5>Контакти</h5>
+        <a href="tel:+380672933066">+380 67 293 30 66</a><a href="mailto:les@immach.com">les@immach.com</a></div>
+    </div>
+    <div class="foot-bot"><span>© 2026 ТОВ «СОФОН».</span><span class="mono">A/B прототип</span></div>
+  </div>
+</footer>
+
+<script src="/home-ab/home-data.js"></script>
+<script>
+(function(){
+  var list=document.getElementById('idx-list');
+  var prev=document.getElementById('idx-prev');
+  var rows=[];
+  function show(i){
+    var d=HOME_DIRS[i];
+    rows.forEach(function(r,j){r.setAttribute('aria-current', j===i?'true':'false');});
+    prev.innerHTML='<div class="idx-prev-in z"><a href="'+d.href+'" style="display:block;color:inherit">'+
+      (d.flag?'<span class="flag">Флагман</span><br>':'')+
+      '<svg class="pic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">'+d.icon+'</svg>'+
+      '<h3>'+d.title+'</h3><p>'+d.blurb+'</p>'+
+      '<span class="more">Докладніше →</span></a></div>';
+  }
+  HOME_DIRS.forEach(function(d,i){
+    var b=document.createElement('button');b.className='idx-row';b.setAttribute('aria-current','false');
+    b.innerHTML='<svg class="idx-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">'+d.icon+'</svg>'+
+      '<span class="idx-tt"><b>'+d.title+'</b><span>'+(d.sub||'напрям')+'</span></span>'+
+      '<span class="idx-arm">→</span>';
+    b.addEventListener('mouseenter',function(){show(i);});
+    b.addEventListener('focus',function(){show(i);});
+    b.addEventListener('click',function(){location.href=d.href;});
+    list.appendChild(b);rows.push(b);
+  });
+  show(0);
+})();
+</script>
+</body>
+</html>

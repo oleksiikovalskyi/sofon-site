@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>A · Индекс узлов — Нестандартное оборудование — Sofon</title>
+<meta name="description" content="A/B-вариант A: раздел «Примеры реализованных решений» как индекс узлов с детальной панелью.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/styles.css">
+<style>
+/* ===== Variant A — «Индекс узлов» (master–detail) ===== */
+
+/* hero: photo + mono spec-ticket */
+.a-hero .container{display:grid;grid-template-columns:1.35fr .65fr;gap:var(--s48);align-items:end}
+.a-hero .lead{max-width:52ch}
+.a-ticket{border:1px solid rgba(255,255,255,.22);border-radius:var(--radius);
+  background:rgba(255,255,255,.04);padding:var(--s24);backdrop-filter:blur(2px)}
+.a-ticket h4{font-family:var(--fm);font-size:12px;font-weight:600;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--amber);margin-bottom:var(--s16)}
+.a-ticket dl{display:grid;grid-template-columns:auto 1fr;gap:10px 16px;margin:0}
+.a-ticket dt{font-family:var(--fm);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;
+  color:rgba(255,255,255,.5)}
+.a-ticket dd{font-size:14px;color:#fff;font-weight:500}
+@media(max-width:900px){.a-hero .container{grid-template-columns:1fr;align-items:start}
+  .a-ticket{margin-top:var(--s8)}}
+
+/* the index browser */
+.ix{display:grid;grid-template-columns:.9fr 1.1fr;gap:0;border:1px solid var(--border);
+  border-radius:var(--radius-soft);overflow:hidden;background:#fff}
+.ix-list{border-right:1px solid var(--border);display:flex;flex-direction:column}
+.ix-row{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:var(--s16);
+  width:100%;text-align:left;background:none;border:0;border-bottom:1px solid var(--border);
+  padding:18px var(--s24);cursor:pointer;position:relative;transition:background .16s ease}
+.ix-row:last-child{border-bottom:0}
+.ix-row::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--amber);
+  transform:scaleY(0);transform-origin:top;transition:transform .18s ease}
+.ix-row:hover{background:var(--mist)}
+.ix-row[aria-selected="true"]{background:var(--mist)}
+.ix-row[aria-selected="true"]::before{transform:scaleY(1)}
+.ix-ic{width:30px;height:30px;color:var(--steel);transition:color .16s ease;flex:none}
+.ix-row[aria-selected="true"] .ix-ic,.ix-row:hover .ix-ic{color:var(--amber)}
+.ix-tt{min-width:0}
+.ix-tt .tag{display:block;font-family:var(--fm);font-size:10.5px;font-weight:600;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--steel)}
+.ix-tt .nm{display:block;font-size:16px;font-weight:600;color:var(--graphite);line-height:1.25;margin-top:3px}
+.ix-arm{font-family:var(--fm);color:var(--border);font-size:18px;transition:.16s ease;flex:none}
+.ix-row[aria-selected="true"] .ix-arm{color:var(--amber);transform:translateX(3px)}
+
+.ix-detail{padding:var(--s48);display:flex;flex-direction:column;min-height:420px}
+.ix-panel{opacity:0;transform:translateY(8px);animation:ixIn .32s ease forwards}
+@keyframes ixIn{to{opacity:1;transform:none}}
+.ix-panel .eyebrow{margin-bottom:var(--s8)}
+.ix-panel h3{margin-bottom:var(--s16)}
+.ix-panel .ptxt{color:var(--steel);font-size:17px;line-height:27px}
+.ix-mini{list-style:none;margin:var(--s24) 0 0;display:flex;flex-direction:column;gap:var(--s8)}
+.ix-mini li{position:relative;padding-left:26px;color:var(--graphite);font-size:15.5px}
+.ix-mini li::before{content:'';position:absolute;left:0;top:11px;width:12px;height:2px;background:var(--amber)}
+.ix-task{margin-top:var(--s24);padding:14px var(--s16);background:var(--mist);border-radius:var(--radius);
+  font-family:var(--fm);font-size:13px;color:var(--graphite);letter-spacing:.01em}
+.ix-task b{color:var(--amber);font-weight:600}
+.ix-cta{margin-top:auto;padding-top:var(--s32)}
+.ix-count{font-family:var(--fm);font-size:12px;color:var(--steel);letter-spacing:.08em;margin-bottom:var(--s16)}
+
+@media(max-width:820px){
+  .ix{grid-template-columns:1fr}
+  .ix-list{border-right:0}
+  /* accordion behaviour on mobile: detail rendered after active row via JS-less fallback */
+  .ix-detail{border-top:1px solid var(--border)}
+}
+</style>
+</head>
+<body data-page="custom-equipment">
+<div style="background:#12151A;color:#fff;font-family:var(--fm,monospace);font-size:12px;letter-spacing:.08em;text-align:center;padding:7px 12px">
+  A/B ПРОТОТИП · ВАРИАНТ A — «ИНДЕКС УЗЛОВ» · <a href="/products/custom-equipment/ab/" style="color:#F07C1A">← к сравнению</a>
+</div>
+<header class="site-header">
+  <div class="container nav" id="nav">
+    <a class="brand" href="/">Sofon<span>.</span></a>
+    <nav class="nav-links">
+      <a href="/products/">Продукти</a>
+      <a href="/products/osnastka/">Оснастка</a>
+      <a href="/contract-manufacturing/">Контрактне виробництво</a>
+      
+      <a href="/contact/">Контакти</a>
+    </nav>
+    <div class="nav-right">
+      <span class="lang"><a class="on" href="/">UA</a><span>/</span><a href="/en/">EN</a></span>
+      <a class="btn btn--primary" href="/contact/">Отримати прорахунок</a>
+    </div>
+    <button class="nav-toggle" aria-label="Меню" onclick="document.getElementById('nav').parentElement.parentElement.classList.toggle('mobile-open')"><span></span></button>
+  </div>
+</header>
+<main>
+
+<section class="phero phero--photo a-hero">
+  <img class="phero-bg" src="/images/products/custom-equipment/hero-bg.jpg" alt="">
+  <div class="container">
+    <div>
+      <div class="crumb"><a href="/">Головна</a> / <a href="/products/">Продукти</a> / Нестандартне обладнання</div>
+      <span class="eyebrow">Под ТЗ заказчика</span>
+      <h1>Нестандартное оборудование линий розлива</h1>
+      <p class="lead" style="margin-top:16px">Нужна функция, которой нет у серийной машины, или узел под вашу тару? Разберёмся в задаче и спроектируем решение — с наименьшими затратами ресурсов и времени.</p>
+      <div class="hero-cta" style="margin-top:24px"><a class="btn btn--primary btn--lg" href="/contact/">Обсудить задачу</a></div>
+    </div>
+    <div class="a-ticket">
+      <h4>Полный цикл</h4>
+      <dl>
+        <dt>01</dt><dd>Помощь с ТЗ</dd>
+        <dt>02</dt><dd>Технология и конструкция</dd>
+        <dt>03</dt><dd>Изготовление и тесты</dd>
+        <dt>04</dt><dd>Запуск на предприятии</dd>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="sec-head">
+      <span class="eyebrow eyebrow--muted">Примеры реализованных решений</span>
+      <h2>Что мы уже делали под конкретные задачи</h2>
+      <p>Выберите узел слева — справа появится, как он устроен и какую задачу закрывает.</p>
+    </div>
+
+    <div class="ix" id="ix">
+      <div class="ix-list" id="ix-list" role="tablist" aria-label="Реализованные решения"></div>
+      <div class="ix-detail" id="ix-detail" role="tabpanel" aria-live="polite"></div>
+    </div>
+  </div>
+</section>
+
+<!-- palletizer case -->
+<section class="section section--mist">
+  <div class="container">
+    <div class="spot" style="align-items:stretch">
+      <div class="spot-media" style="aspect-ratio:auto"><img class="zoomable" src="/images/products/custom-equipment/palletizer-overview.jpg" alt="Паллетизатор 19 л — общий вид" style="width:100%;height:100%;object-fit:cover;display:block;border-radius:inherit"></div>
+      <div>
+        <span class="eyebrow">Кейс · нестандартное решение</span>
+        <h2>Паллетизатор для бутылей 19 л</h2>
+        <p class="muted" style="margin-top:16px">Автоматическая укладка 19-литровых бутылей на паллету. Производительность — 1400 бутылей в час.</p>
+        <p class="muted" style="margin-top:16px">Укладка на паллеты — самая трудоёмкая операция при розливе воды в 19 л. Автоматизация освобождает людей, а работа с паллетами прямо на полу цеха позволяет отказаться от конвейеров.</p>
+        <ul>
+          <li><b>Компактная конструкция</b> — под ваши требования по размещению</li>
+          <li><b>Гибкая конфигурация</b> — одна/две паллеты, левый/правый заход, прямая или L-образная</li>
+          <li><b>Delta Electronics и Camozzi</b> — надёжная автоматика и пневматика</li>
+        </ul>
+        <a class="btn btn--primary" style="margin-top:32px" href="/contact/">Получить расчёт</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="sec-head"><span class="eyebrow eyebrow--muted">Характеристики</span><h2>Паллетизатор 19 л — технические данные</h2></div>
+    <table class="spec">
+      <tr><td>Производительность</td><td>1400 бутылей в час при работе на две паллеты</td></tr>
+      <tr><td>Исполнение</td><td>Правостороннее или левостороннее</td></tr>
+      <tr><td>Габариты (одна паллета)</td><td>Высота 2690 мм, ширина 1880 мм, длина 2520 мм</td></tr>
+      <tr><td>Подача бутылей</td><td>С гравитационного рольганга или приводного конвейера</td></tr>
+      <tr><td>Слои</td><td>Конфигурируемое количество, от одного до трёх</td></tr>
+      <tr><td>Автоматика</td><td>Delta Electronics, графическая панель оператора</td></tr>
+      <tr><td>Пневматика</td><td>Camozzi</td></tr>
+    </table>
+  </div>
+</section>
+
+<section class="section section--mist">
+  <div class="container" style="text-align:center">
+    <h2 style="max-width:24ch;margin:0 auto 16px">Не нашли то, что искали? Опишите вашу задачу</h2>
+    <p class="muted" style="margin:0 auto 32px">Возможно, это уже наше направление работы — а если нет, подскажем, к кому обратиться.</p>
+    <a class="btn btn--primary btn--lg" href="/contact/">Обсудить задачу</a>
+  </div>
+</section>
+
+</main>
+<footer class="site-footer">
+  <div class="container">
+    <div class="foot-top">
+      <div class="foot-brand">
+        <a class="brand" href="/">Sofon<span>.</span></a>
+        <p>Інженерно-виробничий завод обладнання для ліній розливу напоїв і води.</p>
+      </div>
+      <div class="foot-col">
+        <h5>Продукти</h5>
+        <a href="/products/osnastka/">Оснастка</a>
+        <a href="/products/custom-equipment/">Нестандартне обладнання</a>
+        <a href="/contract-manufacturing/">Контрактне виробництво</a>
+      </div>
+      <div class="foot-col">
+        <h5>Контакти</h5>
+        <a href="tel:+380672933066">+380 67 293 30 66</a>
+        <a href="mailto:les@immach.com">les@immach.com</a>
+      </div>
+    </div>
+    <div class="foot-bot">
+      <span>© 2026 ТОВ «СОФОН».</span><span class="mono">A/B прототип</span>
+    </div>
+  </div>
+</footer>
+
+<script src="/products/custom-equipment/ab/examples-data.js"></script>
+<script>
+(function(){
+  var list=document.getElementById('ix-list');
+  var detail=document.getElementById('ix-detail');
+  var rows=[];
+  function renderDetail(i){
+    var d=ITEMS[i];
+    detail.innerHTML='';
+    var p=document.createElement('div');
+    p.className='ix-panel';
+    p.innerHTML=
+      '<div class="ix-count">'+String(i+1).padStart(2,'0')+' / '+String(ITEMS.length).padStart(2,'0')+'</div>'+
+      '<span class="eyebrow">'+d.tag+'</span>'+
+      '<h3>'+d.title+'</h3>'+
+      '<p class="ptxt">'+d.lead+'</p>'+
+      '<ul class="ix-mini">'+d.bullets.map(function(b){return '<li>'+b+'</li>';}).join('')+'</ul>'+
+      '<div class="ix-task"><b>Задача →</b> '+d.task+'</div>'+
+      '<div class="ix-cta"><a class="btn btn--primary" href="/contact/">Обсудить похожую задачу</a></div>';
+    detail.appendChild(p);
+  }
+  function select(i){
+    rows.forEach(function(r,j){r.setAttribute('aria-selected', j===i?'true':'false');r.tabIndex=j===i?0:-1;});
+    renderDetail(i);
+  }
+  ITEMS.forEach(function(d,i){
+    var b=document.createElement('button');
+    b.className='ix-row';b.setAttribute('role','tab');b.setAttribute('aria-selected','false');b.tabIndex=-1;
+    b.innerHTML='<svg class="ix-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">'+d.icon+'</svg>'+
+      '<span class="ix-tt"><span class="tag">'+d.tag+'</span><span class="nm">'+d.title+'</span></span>'+
+      '<span class="ix-arm">→</span>';
+    b.addEventListener('click',function(){select(i);});
+    b.addEventListener('keydown',function(e){
+      if(e.key==='ArrowDown'||e.key==='ArrowRight'){e.preventDefault();select((i+1)%ITEMS.length);rows[(i+1)%ITEMS.length].focus();}
+      if(e.key==='ArrowUp'||e.key==='ArrowLeft'){e.preventDefault();var p=(i-1+ITEMS.length)%ITEMS.length;select(p);rows[p].focus();}
+    });
+    list.appendChild(b);rows.push(b);
+  });
+  select(0);
+})();
+</script>
+</body>
+</html>

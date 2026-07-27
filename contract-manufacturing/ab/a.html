@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>A · Каталог можливостей — Контрактне виробництво — Sofon</title>
+<meta name="description" content="A/B-вариант A: контрактне виробництво як каталог можливостей механообробки.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/styles.css">
+<style>
+/* ===== Contract Variant A — «Каталог можливостей» ===== */
+.svc{display:grid;grid-template-columns:1fr 1fr;gap:var(--s48);align-items:center;padding:var(--s48) 0;
+  border-top:1px solid var(--border)}
+.svc:first-of-type{border-top:0}
+.svc.rev .svc-media{order:2}
+.svc-media{border:1px solid var(--border);border-radius:var(--radius-soft);aspect-ratio:4/3;
+  background:linear-gradient(135deg,rgba(240,124,26,.08),transparent 60%),
+   repeating-linear-gradient(45deg,rgba(27,30,35,.04) 0 2px,transparent 2px 18px),var(--mist);
+  display:flex;align-items:flex-end;padding:var(--s24);position:relative}
+.svc-media .svc-ic{position:absolute;top:var(--s24);left:var(--s24);width:56px;height:56px;color:var(--amber);opacity:.9}
+.svc-media .cap{font-family:var(--fm);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--steel)}
+.svc h2{margin:var(--s8) 0 var(--s16)}
+.svc .lead{color:var(--steel);font-size:17px;line-height:27px;max-width:52ch}
+.svc-parts{list-style:none;display:flex;flex-wrap:wrap;gap:var(--s8);margin-top:var(--s24)}
+.svc-parts li{font-family:var(--fm);font-size:13px;color:var(--graphite);border:1px solid var(--border);
+  border-radius:100px;padding:6px 13px;background:#fff}
+.profile{margin-top:var(--s24);padding:14px var(--s16);background:rgba(240,124,26,.06);
+  border-left:2px solid var(--amber);font-size:14.5px;line-height:22px;color:var(--graphite)}
+.todo{margin-top:var(--s16);font-family:var(--fm);font-size:12.5px;line-height:20px;color:var(--steel);
+  border:1px dashed var(--amber);border-radius:var(--radius);padding:10px 12px;background:rgba(240,124,26,.04)}
+.todo b{color:var(--amber-dk);font-weight:600;letter-spacing:.04em;text-transform:uppercase;font-size:11px}
+
+/* materials matrix */
+.mtx{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--gutter)}
+.mtx-col{border:1px solid var(--border);border-radius:var(--radius-soft);padding:var(--s24);background:#fff}
+.mtx-col h4{font-family:var(--fm);font-size:13px;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--amber);padding-bottom:var(--s16);border-bottom:1px solid var(--border);margin-bottom:var(--s16)}
+.mtx-col ul{list-style:none;display:flex;flex-direction:column;gap:10px}
+.mtx-col li{font-size:15px;color:var(--graphite);padding-left:20px;position:relative}
+.mtx-col li::before{content:'';position:absolute;left:0;top:10px;width:9px;height:2px;background:var(--amber)}
+
+/* part-type cloud */
+.cloud{display:flex;flex-wrap:wrap;gap:10px}
+.cloud span{font-size:15px;color:var(--graphite);border:1px solid var(--border);border-radius:var(--radius);
+  padding:9px 15px;background:#fff;transition:.15s ease}
+.cloud span:hover{border-color:var(--amber);color:var(--amber-dk)}
+
+/* why grid */
+.why{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--s32) var(--s48)}
+.why .w h4{display:flex;gap:var(--s8);align-items:baseline;font-size:18px}
+.why .w h4 .k{font-family:var(--fm);font-size:13px;color:var(--amber)}
+.why .w p{margin-top:var(--s8);color:var(--steel);font-size:15.5px;line-height:24px}
+
+/* faq */
+.faq{max-width:820px}
+.faq dt{font-weight:600;font-size:17px;margin-top:var(--s24);padding-top:var(--s24);border-top:1px solid var(--border)}
+.faq dt:first-child{border-top:0;margin-top:0;padding-top:0}
+.faq dd{color:var(--steel);font-size:15.5px;line-height:24px;margin-top:var(--s8)}
+.faq dd .todo{margin-top:var(--s8)}
+
+@media(max-width:900px){.svc{grid-template-columns:1fr;gap:var(--s24)}.svc.rev .svc-media{order:0}
+  .mtx,.why{grid-template-columns:1fr}}
+</style>
+</head>
+<body data-page="contract">
+<div style="background:#12151A;color:#fff;font-family:var(--fm,monospace);font-size:12px;letter-spacing:.08em;text-align:center;padding:7px 12px">
+  A/B ПРОТОТИП · КОНТРАКТНЕ ВИРОБНИЦТВО · ВАРІАНТ A — «КАТАЛОГ МОЖЛИВОСТЕЙ» · <a href="/contract-manufacturing/ab/" style="color:#F07C1A">← до порівняння</a>
+</div>
+<header class="site-header">
+  <div class="container nav" id="nav">
+    <a class="brand" href="/">Sofon<span>.</span></a>
+    <nav class="nav-links">
+      <a href="/products/">Продукти</a>
+      <a href="/products/osnastka/">Оснастка</a>
+      <a class="active" href="/contract-manufacturing/">Контрактне виробництво</a>
+      
+      <a href="/contact/">Контакти</a>
+    </nav>
+    <div class="nav-right">
+      <span class="lang"><a class="on" href="/">UA</a><span>/</span><a href="/en/">EN</a></span>
+      <a class="btn btn--primary" href="/contact/">Розмістити замовлення</a>
+    </div>
+    <button class="nav-toggle" aria-label="Меню" onclick="document.getElementById('nav').parentElement.parentElement.classList.toggle('mobile-open')"><span></span></button>
+  </div>
+</header>
+<main>
+
+<section class="phero">
+  <div class="container">
+    <div class="crumb"><a href="/">Головна</a> / Контрактне виробництво</div>
+    <span class="eyebrow">Механообробка на замовлення</span>
+    <h1>Токарні, фрезерні та роутерні роботи під ваше креслення</h1>
+    <p class="lead" style="margin-top:16px;max-width:60ch">Власний верстатний парк, що щодня працює на наше обладнання ліній розливу, — тепер і під ваші замовлення. Метал і інженерні пластики, від однієї деталі до дрібної серії.</p>
+    <div class="hero-cta" style="margin-top:24px">
+      <a class="btn btn--primary btn--lg" href="/contact/">Розмістити замовлення</a>
+      <a class="btn btn--ghost btn--lg" href="#services">Що ми обробляємо ↓</a>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="services">
+  <div class="container">
+    <div class="sec-head">
+      <span class="eyebrow eyebrow--muted">Напрями обробки</span>
+      <h2>Три види робіт на одному майданчику</h2>
+      <p>Тіла обертання, корпусні деталі й розкрій листа. Що з цього потрібно — залежить від вашої деталі; часто в одному замовленні поєднуються кілька операцій.</p>
+    </div>
+    <div id="svc-wrap"></div>
+  </div>
+</section>
+
+<section class="section section--mist">
+  <div class="container">
+    <div class="sec-head"><span class="eyebrow eyebrow--muted">Матеріали</span><h2>З чим працюємо</h2>
+      <p>Метал і інженерні пластики. Останні — профільний для нас матеріал ще з форматної оснастки.</p></div>
+    <div class="mtx" id="mtx"></div>
+    <p class="todo" style="max-width:820px"><b>Уточнити</b> — фактичний перелік матеріалів (особливо марки сталей і пластиків), перш ніж публікувати.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="sec-head"><span class="eyebrow eyebrow--muted">Типові деталі</span><h2>Що ми виготовляємо</h2></div>
+    <div class="cloud" id="cloud"></div>
+  </div>
+</section>
+
+<section class="section section--mist">
+  <div class="container">
+    <div class="sec-head"><span class="eyebrow eyebrow--muted">Як замовити</span><h2>Від креслення до готової деталі</h2></div>
+    <div class="grid grid--3" id="proc"></div>
+    <p class="muted" style="margin-top:var(--s24);font-size:15px">Немає креслення? За фізичним зразком знімемо розміри й оцифруємо геометрію.
+      <span class="todo" style="display:inline-block;margin-left:8px"><b>Уточнити</b> метод обміру</span></p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="sec-head"><span class="eyebrow eyebrow--muted">Чому Sofon</span><h2>Не посередник, а завод</h2></div>
+    <div class="why" id="why"></div>
+  </div>
+</section>
+
+<section class="section section--mist">
+  <div class="container">
+    <div class="sec-head"><span class="eyebrow eyebrow--muted">Питання й відповіді</span><h2>Коротко про замовлення</h2></div>
+    <dl class="faq" id="faq"></dl>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container" style="text-align:center">
+    <h2 style="max-width:22ch;margin:0 auto 16px">Є креслення? Порахуємо вартість і терміни</h2>
+    <p class="muted" style="margin:0 auto 32px">Надішліть файл або опишіть деталь — повернемося з прорахунком.</p>
+    <a class="btn btn--primary btn--lg" href="/contact/">Розмістити замовлення</a>
+  </div>
+</section>
+
+</main>
+<footer class="site-footer">
+  <div class="container">
+    <div class="foot-top">
+      <div class="foot-brand"><a class="brand" href="/">Sofon<span>.</span></a>
+        <p>Інженерно-виробничий завод обладнання для ліній розливу напоїв і води.</p></div>
+      <div class="foot-col"><h5>Напрями</h5>
+        <a href="/products/osnastka/">Оснастка</a><a href="/contract-manufacturing/">Контрактне виробництво</a><a href="/products/custom-equipment/">Нестандартне обладнання</a></div>
+      <div class="foot-col"><h5>Контакти</h5>
+        <a href="tel:+380672933066">+380 67 293 30 66</a><a href="mailto:les@immach.com">les@immach.com</a></div>
+    </div>
+    <div class="foot-bot"><span>© 2026 ТОВ «СОФОН».</span><span class="mono">A/B прототип · чернетка контенту</span></div>
+  </div>
+</footer>
+
+<script src="/contract-manufacturing/ab/contract-data.js"></script>
+<script>
+(function(){
+  // services alternating
+  var wrap=document.getElementById('svc-wrap');
+  CM_SERVICES.forEach(function(s,i){
+    var row=document.createElement('div');row.className='svc'+(i%2?' rev':'');
+    var profile=s.profile?'<div class="profile">'+s.profile+'</div>':'';
+    row.innerHTML=
+      '<div class="svc-media"><svg class="svc-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">'+s.icon+'</svg>'+
+        '<span class="cap">// фото — замінити реальним</span></div>'+
+      '<div><span class="eyebrow">'+s.tag+'</span><h2>'+s.name+'</h2>'+
+        '<p class="lead">'+s.lead+'</p>'+
+        '<ul class="svc-parts">'+s.parts.map(function(p){return '<li>'+p+'</li>';}).join('')+'</ul>'+
+        profile+
+        '<p class="todo"><b>Уточнити</b> '+s.todo+'</p></div>';
+    wrap.appendChild(row);
+  });
+  // materials
+  var mtx=document.getElementById('mtx');
+  CM_MATERIALS.forEach(function(g){
+    var c=document.createElement('div');c.className='mtx-col';
+    c.innerHTML='<h4>'+g.group+'</h4><ul>'+g.items.map(function(x){return '<li>'+x+'</li>';}).join('')+'</ul>';
+    mtx.appendChild(c);
+  });
+  // cloud
+  var cloud=document.getElementById('cloud');
+  var types=['Вали','Втулки','Фланці','Штуцери','Перехідники','Корпуси','Плити','Кронштейни','Притискачі','Шаблони й кондуктори','Зношувані деталі з пластику','Захисні панелі','Таблички та трафарети','Запчастини за зразком'];
+  types.forEach(function(t){var s=document.createElement('span');s.textContent=t;cloud.appendChild(s);});
+  // process
+  var proc=document.getElementById('proc');
+  CM_PROCESS.forEach(function(p,i){
+    var c=document.createElement('div');c.className='card';
+    c.innerHTML='<h4>'+(i+1)+' · '+p.t+'</h4><p>'+p.d+'</p>';proc.appendChild(c);
+  });
+  // why
+  var why=document.getElementById('why');
+  CM_WHY.forEach(function(w,i){
+    var d=document.createElement('div');d.className='w';
+    d.innerHTML='<h4><span class="k">0'+(i+1)+'</span> '+w.t+'</h4><p>'+w.d+'</p>';why.appendChild(d);
+  });
+  // faq
+  var faq=document.getElementById('faq');
+  CM_FAQ.forEach(function(f){
+    var todo=f.todo?'<div class="todo"><b>Уточнити</b> '+f.todo+'</div>':'';
+    var ans=f.a?'<dd>'+f.a+todo+'</dd>':'<dd>'+todo+'</dd>';
+    faq.insertAdjacentHTML('beforeend','<dt>'+f.q+'</dt>'+ans);
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>C · прототип налаштувань — Sofon</title>
+<meta name="description" content="Параметризований прототип варіанта C: спосіб появи тексту в превʼю (?reveal=) і підказка на скрол (?cue=).">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/styles.css">
+<style>
+/* ===== Home C — прототип мікровзаємодій =====
+   reveal (поява тексту в превʼю): fade | slide | wipe — задається ?reveal=
+   cue (підказка на скрол):        none | faint | glow — задається ?cue=
+   Спільна затримка появи тексту — щоб встигнути роздивитися фото. */
+:root{--reveal-delay:1s;--reveal-dur:.8s}
+
+/* --- hero --- */
+.hc-hero{position:relative;background:var(--graphite);color:#fff;overflow:hidden}
+.hc-hero-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.34}
+.hc-hero::after{content:'';position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:linear-gradient(180deg,rgba(27,30,35,.55),rgba(27,30,35,.82) 62%,rgba(27,30,35,.97)),
+  radial-gradient(900px 420px at 78% -8%,rgba(240,124,26,.20),transparent 62%)}
+.hc-hero .container{position:relative;z-index:3;padding-top:var(--s64);padding-bottom:var(--s48)}
+.hc-hero h1{max-width:17ch;margin:var(--s16) 0}
+.hc-hero .lead{color:rgba(255,255,255,.80);max-width:52ch}
+
+/* --- підказка на скрол: базово прихована, вмикається за data-cue --- */
+.cue{display:none}
+
+/* cue=faint — великий, майже непомітний подвійний шеврон */
+.cue--faint{margin-top:var(--s48);flex-direction:column;align-items:center;color:#fff}
+body[data-cue="faint"] .cue--faint{display:flex}
+.cue--faint svg{width:64px;height:auto;stroke:currentColor;stroke-width:1.3;fill:none;
+  opacity:.12;animation:faintPulse 3.2s ease-in-out infinite}
+@keyframes faintPulse{0%,100%{opacity:.05}50%{opacity:.16}}
+
+/* cue=glow — не окремий обʼєкт, а перелив фону біля низу героя */
+.flow{display:none;position:absolute;left:0;right:0;bottom:0;height:230px;z-index:2;pointer-events:none;overflow:hidden}
+body[data-cue="glow"] .flow{display:block}
+.flow::before{content:'';position:absolute;inset:0;
+  background:linear-gradient(180deg,transparent,rgba(240,124,26,.05) 55%,rgba(240,124,26,.12))}
+.flow::after{content:'';position:absolute;left:22%;right:22%;top:-8px;height:44px;border-radius:50%;
+  background:radial-gradient(60% 100% at 50% 50%,rgba(255,255,255,.22),transparent 72%);
+  filter:blur(7px);animation:flowDown 3.2s ease-in-out infinite}
+@keyframes flowDown{0%{transform:translateY(0);opacity:0}25%{opacity:.75}100%{transform:translateY(155px);opacity:0}}
+
+/* --- index: список ліворуч, деталь праворуч --- */
+.idx{display:grid;grid-template-columns:1fr 1fr;gap:var(--s48);align-items:stretch;
+  border-top:1px solid var(--border);padding-top:var(--s32)}
+.idx-list{display:flex;flex-direction:column}
+.idx-row{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:var(--s16);
+  width:100%;text-align:left;background:none;border:0;border-bottom:1px solid var(--border);
+  padding:18px var(--s8);cursor:pointer;position:relative;transition:padding-left .18s ease;font-family:inherit}
+.idx-row:first-child{border-top:1px solid var(--border)}
+.idx-row::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--amber);
+  transform:scaleY(0);transition:transform .18s ease}
+.idx-row:hover,.idx-row[aria-current="true"]{padding-left:var(--s16)}
+.idx-row[aria-current="true"]::before{transform:scaleY(1)}
+.idx-ic{width:26px;height:26px;color:var(--steel);transition:color .16s ease;flex:none}
+.idx-row:hover .idx-ic,.idx-row[aria-current="true"] .idx-ic{color:var(--amber)}
+.idx-tt b{display:block;font-size:18px;font-weight:600;color:var(--graphite);line-height:1.2}
+.idx-tt span{display:block;font-family:var(--fm);font-size:11px;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--steel);margin-top:3px}
+.idx-arm{font-family:var(--fm);color:var(--border);transition:.16s ease;flex:none}
+.idx-row[aria-current="true"] .idx-arm{color:var(--amber);transform:translateX(3px)}
+
+/* превʼю: фото на весь обʼєкт, вуаль із текстом — окремий шар, що зʼявляється із затримкою */
+.idx-prev{position:relative;overflow:hidden;border-radius:var(--radius-soft);
+  background:var(--graphite);color:#fff;min-height:420px;display:flex}
+.idx-prev-in{position:relative;display:flex;flex:1;color:inherit;text-decoration:none}
+.idx-prev-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+.idx-prev-veil{position:absolute;inset:0;z-index:1;display:flex;flex-direction:column;justify-content:flex-end;
+  background:linear-gradient(180deg,
+    rgba(14,17,20,.18) 0%,
+    rgba(14,17,20,.04) 20%,
+    rgba(14,17,20,.55) 42%,
+    rgba(14,17,20,.84) 68%,
+    rgba(14,17,20,.96) 100%)}
+.idx-prev-body{padding:var(--s32);text-shadow:0 1px 16px rgba(0,0,0,.55)}
+.idx-prev h3{color:#fff;font-size:25px;margin-bottom:var(--s16);line-height:1.2}
+.idx-prev p{color:rgba(255,255,255,.82);font-size:15.5px;line-height:25px;max-width:44ch}
+.idx-prev .more{margin-top:var(--s24);font-family:var(--fm);font-size:13px;font-weight:600;
+  letter-spacing:.06em;text-transform:uppercase;color:var(--amber);display:inline-flex;gap:8px}
+
+/* три способи появи вуалі (фото весь час чисте протягом затримки завдяки backwards) */
+body[data-reveal="fade"]  .idx-prev-veil{animation:vFade  var(--reveal-dur) ease var(--reveal-delay) backwards}
+body[data-reveal="slide"] .idx-prev-veil{animation:vSlide var(--reveal-dur) cubic-bezier(.22,.61,.36,1) var(--reveal-delay) backwards}
+body[data-reveal="wipe"]  .idx-prev-veil{animation:vWipe  calc(var(--reveal-dur) + .1s) cubic-bezier(.22,.61,.36,1) var(--reveal-delay) backwards}
+@keyframes vFade{from{opacity:0}to{opacity:1}}
+@keyframes vSlide{from{opacity:0;transform:translateY(42px)}to{opacity:1;transform:none}}
+@keyframes vWipe{from{clip-path:inset(100% 0 0 0)}to{clip-path:inset(0 0 0 0)}}
+
+@media(prefers-reduced-motion:reduce){
+  .idx-prev-veil{animation:none!important;opacity:1!important;transform:none!important;clip-path:none!important}
+  .cue--faint svg,.flow::after{animation:none}
+}
+@media(max-width:900px){
+  .idx{grid-template-columns:1fr;gap:var(--s24)}
+  .idx-prev{min-height:380px;order:2}
+}
+
+/* прото-плашка */
+.proto-bar{background:#12151A;color:#fff;font-family:var(--fm);font-size:12px;letter-spacing:.06em;
+  text-align:center;padding:7px 12px}
+.proto-bar b{color:#F07C1A;font-weight:600}
+.proto-bar a{color:#F07C1A;margin-left:6px}
+</style>
+</head>
+<body data-page="home" data-reveal="fade" data-cue="none">
+<div class="proto-bar" id="pbar">ПРОТОТИП C · <a href="/home-ab/c-tuning.html">← до порівняння</a></div>
+<header class="site-header">
+  <div class="container nav" id="nav">
+    <a class="brand" href="/">Sofon<span>.</span></a>
+    <nav class="nav-links">
+      <a href="/products/">Продукти</a>
+      <a href="/products/osnastka/">Оснастка</a>
+      <a href="/contract-manufacturing/">Контрактне виробництво</a>
+      <a href="/contact/">Контакти</a>
+    </nav>
+    <div class="nav-right">
+      <span class="lang"><a class="on" href="/">UA</a><span>/</span><a href="/en/">EN</a></span>
+      <a class="btn btn--primary" href="/contact/">Отримати прорахунок</a>
+    </div>
+    <button class="nav-toggle" aria-label="Меню" onclick="document.getElementById('nav').parentElement.parentElement.classList.toggle('mobile-open')"><span></span></button>
+  </div>
+</header>
+<main>
+
+<section class="hc-hero">
+  <img class="hc-hero-bg" src="/images/home/hero-bg.jpg" alt="">
+  <span class="flow" aria-hidden="true"></span>
+  <div class="container">
+    <span class="eyebrow">Обладнання для ліній розливу</span>
+    <h1>Переводимо лінію розливу на нову пляшку — швидко й точно</h1>
+    <p class="lead">Проєктуємо та виготовляємо оснастку, нестандартне обладнання, конвеєри та автоматику під конкретний цех. Інженерна кастомізація замість каталожних компромісів.</p>
+    <a class="cue cue--faint" href="#dirs" aria-label="Гортати вниз до напрямів">
+      <svg viewBox="0 0 44 40" aria-hidden="true"><path d="M7 8 L22 22 L37 8"/><path d="M7 20 L22 34 L37 20"/></svg>
+    </a>
+  </div>
+</section>
+
+<section class="section" id="dirs">
+  <div class="container">
+    <div class="sec-head" style="margin-bottom:28px">
+      <span class="eyebrow eyebrow--muted">Що ми робимо</span>
+      <h2>Шість напрямів обладнання ліній розливу</h2>
+    </div>
+    <div class="idx">
+      <div class="idx-list" id="idx-list"></div>
+      <div class="idx-prev" id="idx-prev"></div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--dark">
+  <div class="container">
+    <div class="sec-head" style="margin-bottom:32px"><span class="eyebrow">Чому Sofon</span><h2>Інженерія, а не каталог</h2></div>
+    <div class="stats">
+      <div class="stat"><div class="n">під <span>ТЗ</span></div><div class="l">Кожне рішення проєктуємо під конкретний цех і задачу</div></div>
+      <div class="stat"><div class="n">Delta<span>·</span>Camozzi</div><div class="l">Якісна компонентна база: автоматика й пневматика</div></div>
+      <div class="stat"><div class="n">повний<span>&nbsp;цикл</span></div><div class="l">Проєкт → виготовлення → монтаж → запуск</div></div>
+      <div class="stat"><div class="n">1400<span> б/год</span></div><div class="l">Продуктивність палетизатора 19 л</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--mist">
+  <div class="container">
+    <div class="osn">
+      <div class="osn-media"><img src="/docs/legacy-site/images/format-parts-2.jpg" alt="Комплект форматних деталей"></div>
+      <div>
+        <h2>Оснастка для переведення лінії на нову пляшку</h2>
+        <p class="muted" style="margin-top:16px">Змінили формат тари — і лінія стала. Ми виготовляємо комплекти форматних деталей, що переводять наявне обладнання на роботу з новою пляшкою, без заміни машин.</p>
+        <a class="btn btn--primary" style="margin-top:32px" href="/products/osnastka/">Перейти до оснастки →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+<footer class="site-footer">
+  <div class="container">
+    <div class="foot-top">
+      <div class="foot-brand"><a class="brand" href="/">Sofon<span>.</span></a>
+        <p>Інженерно-виробничий завод обладнання для ліній розливу напоїв і води.</p></div>
+      <div class="foot-col"><h5>Продукти</h5>
+        <a href="/products/osnastka/">Оснастка</a><a href="/products/custom-equipment/">Нестандартне обладнання</a><a href="/contract-manufacturing/">Контрактне виробництво</a></div>
+      <div class="foot-col"><h5>Контакти</h5>
+        <a href="tel:+380672933066">+380 67 293 30 66</a><a href="mailto:les@immach.com">les@immach.com</a></div>
+    </div>
+    <div class="foot-bot"><span>© 2026 ТОВ «СОФОН».</span><span class="mono">A/B прототип</span></div>
+  </div>
+</footer>
+
+<style>
+/* локальний блок оснастки (спрощений) */
+.osn{display:grid;grid-template-columns:1.05fr .95fr;gap:var(--s48);align-items:center}
+.osn-media{border-radius:var(--radius-soft);overflow:hidden;aspect-ratio:4/3;background:var(--graphite)}
+.osn-media img{width:100%;height:100%;object-fit:cover}
+.osn h2{max-width:18ch}
+@media(max-width:900px){.osn{grid-template-columns:1fr;gap:var(--s24)}}
+.section--dark .stat .l{color:rgba(255,255,255,.6)}
+</style>
+
+<script src="/home-ab/home-data.js"></script>
+<script>
+(function(){
+  // читаємо режими з адреси
+  var q=new URLSearchParams(location.search);
+  var REVEAL=(q.get('reveal')||'fade').toLowerCase();
+  var CUE=(q.get('cue')||'none').toLowerCase();
+  if(['fade','slide','wipe'].indexOf(REVEAL)<0) REVEAL='fade';
+  if(['none','faint','glow'].indexOf(CUE)<0) CUE='none';
+  document.body.dataset.reveal=REVEAL;
+  document.body.dataset.cue=CUE;
+  document.getElementById('pbar').innerHTML=
+    'ПРОТОТИП C · поява тексту: <b>'+REVEAL+'</b> · підказка: <b>'+CUE+'</b>'+
+    ' · <a href="/home-ab/c-tuning.html">← до порівняння</a>';
+
+  var list=document.getElementById('idx-list');
+  var prev=document.getElementById('idx-prev');
+  var rows=[];
+  function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;');}
+  function show(i){
+    var d=HOME_DIRS[i];
+    rows.forEach(function(r,j){r.setAttribute('aria-current', j===i?'true':'false');});
+    // пересоздание innerHTML перезапускає CSS-анімацію вуалі із затримкою
+    prev.innerHTML=
+      '<a class="idx-prev-in" href="'+d.href+'">'+
+        (d.img?'<img class="idx-prev-img" src="'+d.img+'" alt="" loading="lazy">':'')+
+        '<span class="idx-prev-veil"><span class="idx-prev-body">'+
+          '<h3>'+esc(d.title)+'</h3>'+
+          '<p>'+esc(d.blurb)+'</p>'+
+          '<span class="more">Докладніше →</span>'+
+        '</span></span>'+
+      '</a>';
+  }
+  HOME_DIRS.forEach(function(d,i){
+    var b=document.createElement('button');
+    b.type='button';b.className='idx-row';b.setAttribute('aria-current','false');
+    b.innerHTML='<svg class="idx-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">'+d.icon+'</svg>'+
+      '<span class="idx-tt"><b>'+esc(d.title)+'</b><span>'+esc(d.sub||'напрям')+'</span></span>'+
+      '<span class="idx-arm">→</span>';
+    b.addEventListener('mouseenter',function(){show(i);});
+    b.addEventListener('focus',function(){show(i);});
+    b.addEventListener('click',function(){location.href=d.href;});
+    list.appendChild(b);rows.push(b);
+  });
+  show(0);
+})();
+</script>
+</body>
+</html>

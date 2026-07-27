@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>C · Мозаика с инспектором — Нестандартное оборудование — Sofon</title>
+<meta name="description" content="A/B-вариант C: сетка карточек с выдвижным инспектором под строкой.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/styles.css">
+<style>
+/* ===== Variant C — «Мозаика + инспектор» (accordion grid) ===== */
+
+/* filter chips */
+.mo-filter{display:flex;flex-wrap:wrap;gap:var(--s8);margin-bottom:var(--s32)}
+.mo-chip{font-family:var(--fm);font-size:12px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;
+  padding:8px 14px;border:1px solid var(--border);border-radius:100px;background:#fff;color:var(--steel);
+  cursor:pointer;transition:.15s ease}
+.mo-chip:hover{border-color:var(--graphite);color:var(--graphite)}
+.mo-chip[aria-pressed="true"]{background:var(--graphite);border-color:var(--graphite);color:#fff}
+
+.mo{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--gutter);align-items:start}
+.mo-tile{grid-column:span 1;display:flex;flex-direction:column;gap:var(--s16);text-align:left;
+  padding:var(--s32);background:#fff;border:1px solid var(--border);border-radius:var(--radius-soft);
+  cursor:pointer;transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease;position:relative}
+.mo-tile:hover{transform:translateY(-3px);border-color:var(--amber);
+  box-shadow:0 20px 40px -24px rgba(27,30,35,.45)}
+.mo-tile[aria-expanded="true"]{border-color:var(--amber);
+  box-shadow:0 0 0 1px var(--amber) inset}
+.mo-tile.is-dim{opacity:.4;filter:saturate(.4)}
+.mo-ic{width:44px;height:44px;color:var(--amber)}
+.mo-tag{font-family:var(--fm);font-size:10.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--steel)}
+.mo-tile h4{margin:0}
+.mo-teaser{font-size:14.5px;line-height:22px;color:var(--steel);margin:0}
+.mo-more{margin-top:auto;font-family:var(--fm);font-size:12px;font-weight:600;letter-spacing:.06em;
+  text-transform:uppercase;color:var(--graphite);display:inline-flex;gap:6px;align-items:center}
+.mo-tile:hover .mo-more,.mo-tile[aria-expanded="true"] .mo-more{color:var(--amber)}
+.mo-more .pm{transition:transform .18s ease}
+.mo-tile[aria-expanded="true"] .mo-more .pm{transform:rotate(45deg)}
+
+/* inspector docked full-width under the clicked row */
+.mo-insp{grid-column:1/-1;position:relative;background:var(--graphite);color:#fff;
+  border-radius:var(--radius-soft);padding:var(--s48);margin-top:var(--s8);
+  display:grid;grid-template-columns:1.15fr .85fr;gap:var(--s48);
+  opacity:0;transform:translateY(-8px);animation:moIn .3s ease forwards;overflow:hidden}
+@keyframes moIn{to{opacity:1;transform:none}}
+.mo-insp::after{content:'';position:absolute;right:-30px;top:-30px;width:220px;height:220px;
+  background:radial-gradient(circle,rgba(240,124,26,.20),transparent 68%)}
+.mo-notch{position:absolute;top:-9px;left:var(--notch,50%);transform:translateX(-50%);
+  width:18px;height:18px;background:var(--graphite);rotate:45deg;transition:left .25s ease}
+.mo-insp .z{position:relative;z-index:2}
+.mo-insp .eyebrow{color:var(--amber);margin-bottom:var(--s8)}
+.mo-insp h3{color:#fff;margin-bottom:var(--s16)}
+.mo-insp .ilead{color:rgba(255,255,255,.8);font-size:17px;line-height:27px}
+.mo-chips{display:flex;flex-wrap:wrap;gap:var(--s8);margin-top:var(--s24)}
+.mo-chips span{font-family:var(--fm);font-size:12px;color:#fff;border:1px solid rgba(255,255,255,.25);
+  border-radius:100px;padding:6px 13px}
+.mo-side{position:relative;z-index:2;border-left:1px solid rgba(255,255,255,.15);padding-left:var(--s32);
+  display:flex;flex-direction:column}
+.mo-side .lab{font-family:var(--fm);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.5)}
+.mo-side .val{font-size:16px;color:#fff;margin-top:var(--s8);line-height:1.4}
+.mo-side .btn{margin-top:var(--s32)}
+.mo-close{position:absolute;top:var(--s24);right:var(--s24);z-index:3;width:36px;height:36px;
+  border:1px solid rgba(255,255,255,.25);border-radius:var(--radius);background:none;color:#fff;
+  cursor:pointer;font-size:20px;line-height:1;transition:.15s ease}
+.mo-close:hover{border-color:#fff;background:rgba(255,255,255,.08)}
+
+@media(max-width:900px){
+  .mo{grid-template-columns:repeat(2,1fr)}
+  .mo-insp{grid-template-columns:1fr;gap:var(--s24);padding:var(--s32)}
+  .mo-side{border-left:0;border-top:1px solid rgba(255,255,255,.15);padding-left:0;padding-top:var(--s24)}
+}
+@media(max-width:560px){.mo{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){.mo-insp{animation:none;opacity:1;transform:none}.mo-notch{transition:none}}
+</style>
+</head>
+<body data-page="custom-equipment">
+<div style="background:#12151A;color:#fff;font-family:var(--fm,monospace);font-size:12px;letter-spacing:.08em;text-align:center;padding:7px 12px">
+  A/B ПРОТОТИП · ВАРИАНТ C — «МОЗАИКА + ИНСПЕКТОР» · <a href="/products/custom-equipment/ab/" style="color:#F07C1A">← к сравнению</a>
+</div>
+<header class="site-header">
+  <div class="container nav" id="nav">
+    <a class="brand" href="/">Sofon<span>.</span></a>
+    <nav class="nav-links">
+      <a href="/products/">Продукти</a>
+      <a href="/products/osnastka/">Оснастка</a>
+      <a href="/contract-manufacturing/">Контрактне виробництво</a>
+      
+      <a href="/contact/">Контакти</a>
+    </nav>
+    <div class="nav-right">
+      <span class="lang"><a class="on" href="/">UA</a><span>/</span><a href="/en/">EN</a></span>
+      <a class="btn btn--primary" href="/contact/">Отримати прорахунок</a>
+    </div>
+    <button class="nav-toggle" aria-label="Меню" onclick="document.getElementById('nav').parentElement.parentElement.classList.toggle('mobile-open')"><span></span></button>
+  </div>
+</header>
+<main>
+
+<section class="phero phero--photo">
+  <img class="phero-bg" src="/images/products/custom-equipment/hero-bg.jpg" alt="">
+  <div class="container">
+    <div class="crumb"><a href="/">Головна</a> / <a href="/products/">Продукти</a> / Нестандартне обладнання</div>
+    <span class="eyebrow">Под ТЗ заказчика</span>
+    <h1>Нестандартное оборудование линий розлива</h1>
+    <p class="lead" style="margin-top:16px;max-width:60ch">Нужна функция, которой нет у серийной машины, или узел под вашу тару? Разберёмся в задаче и спроектируем решение — от помощи с ТЗ до запуска на вашем предприятии.</p>
+    <div class="hero-cta" style="margin-top:24px"><a class="btn btn--primary btn--lg" href="/contact/">Обсудить задачу</a></div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="sec-head">
+      <span class="eyebrow eyebrow--muted">Примеры реализованных решений</span>
+      <h2>Что мы уже делали под конкретные задачи</h2>
+      <p>Отфильтруйте по участку линии и раскройте карточку — детали появятся прямо под ней.</p>
+    </div>
+    <div class="mo-filter" id="mo-filter"></div>
+    <div class="mo" id="mo"></div>
+  </div>
+</section>
+
+<section class="section section--mist">
+  <div class="container">
+    <div class="spot" style="align-items:stretch">
+      <div class="spot-media" style="aspect-ratio:auto"><img class="zoomable" src="/images/products/custom-equipment/palletizer-overview.jpg" alt="Паллетизатор 19 л — общий вид" style="width:100%;height:100%;object-fit:cover;display:block;border-radius:inherit"></div>
+      <div>
+        <span class="eyebrow">Кейс · нестандартное решение</span>
+        <h2>Паллетизатор для бутылей 19 л</h2>
+        <p class="muted" style="margin-top:16px">Автоматическая укладка 19-литровых бутылей на паллету. Производительность — 1400 бутылей в час.</p>
+        <ul>
+          <li><b>Компактная конструкция</b> — под ваши требования по размещению</li>
+          <li><b>Гибкая конфигурация</b> — одна/две паллеты, левый/правый заход</li>
+          <li><b>Delta Electronics и Camozzi</b> — надёжная автоматика и пневматика</li>
+        </ul>
+        <a class="btn btn--primary" style="margin-top:32px" href="/contact/">Получить расчёт</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container" style="text-align:center">
+    <h2 style="max-width:24ch;margin:0 auto 16px">Не нашли то, что искали? Опишите вашу задачу</h2>
+    <p class="muted" style="margin:0 auto 32px">Возможно, это уже наше направление работы — а если нет, подскажем, к кому обратиться.</p>
+    <a class="btn btn--primary btn--lg" href="/contact/">Обсудить задачу</a>
+  </div>
+</section>
+
+</main>
+<footer class="site-footer">
+  <div class="container">
+    <div class="foot-top">
+      <div class="foot-brand">
+        <a class="brand" href="/">Sofon<span>.</span></a>
+        <p>Інженерно-виробничий завод обладнання для ліній розливу напоїв і води.</p>
+      </div>
+      <div class="foot-col">
+        <h5>Продукти</h5>
+        <a href="/products/osnastka/">Оснастка</a>
+        <a href="/products/custom-equipment/">Нестандартне обладнання</a>
+        <a href="/contract-manufacturing/">Контрактне виробництво</a>
+      </div>
+      <div class="foot-col">
+        <h5>Контакти</h5>
+        <a href="tel:+380672933066">+380 67 293 30 66</a>
+        <a href="mailto:les@immach.com">les@immach.com</a>
+      </div>
+    </div>
+    <div class="foot-bot"><span>© 2026 ТОВ «СОФОН».</span><span class="mono">A/B прототип</span></div>
+  </div>
+</footer>
+
+<script src="/products/custom-equipment/ab/examples-data.js"></script>
+<script>
+(function(){
+  var grid=document.getElementById('mo');
+  var filterWrap=document.getElementById('mo-filter');
+  var tiles=[], openIdx=-1, insp=null, activeFilter='Все';
+
+  function teaser(t){var w=t.split(' ');return w.slice(0,7).join(' ')+(w.length>7?'…':'');}
+
+  // filters
+  var tags=['Все'].concat(ITEMS.map(function(d){return d.tag;}).filter(function(v,i,a){return a.indexOf(v)===i;}));
+  tags.forEach(function(tg){
+    var c=document.createElement('button');c.className='mo-chip';c.textContent=tg;
+    c.setAttribute('aria-pressed', tg==='Все'?'true':'false');
+    c.addEventListener('click',function(){
+      activeFilter=tg;
+      filterWrap.querySelectorAll('.mo-chip').forEach(function(x){x.setAttribute('aria-pressed', x===c?'true':'false');});
+      closeInsp();
+      tiles.forEach(function(t,i){t.classList.toggle('is-dim', tg!=='Все' && ITEMS[i].tag!==tg);});
+    });
+    filterWrap.appendChild(c);
+  });
+
+  function buildInsp(i){
+    var d=ITEMS[i];
+    var el=document.createElement('div');
+    el.className='mo-insp';
+    el.innerHTML=
+      '<span class="mo-notch"></span>'+
+      '<button class="mo-close" aria-label="Закрыть">×</button>'+
+      '<div class="z"><span class="eyebrow">'+d.tag+'</span><h3>'+d.title+'</h3>'+
+        '<p class="ilead">'+d.lead+'</p>'+
+        '<div class="mo-chips">'+d.bullets.map(function(b){return '<span>'+b+'</span>';}).join('')+'</div></div>'+
+      '<div class="mo-side"><span class="lab">Какую задачу закрывает</span>'+
+        '<span class="val">'+d.task+'</span>'+
+        '<a class="btn btn--primary" href="/contact/">Обсудить похожую задачу</a></div>';
+    el.querySelector('.mo-close').addEventListener('click',function(e){e.stopPropagation();closeInsp();});
+    return el;
+  }
+  function colCount(){return getComputedStyle(grid).gridTemplateColumns.split(' ').length;}
+  function closeInsp(){
+    if(insp){insp.remove();insp=null;}
+    if(openIdx>=0){tiles[openIdx].setAttribute('aria-expanded','false');openIdx=-1;}
+  }
+  function openTile(i){
+    var cc=colCount();
+    var rowLast=Math.min((Math.floor(i/cc)+1)*cc-1, tiles.length-1);
+    closeInsp();
+    openIdx=i;tiles[i].setAttribute('aria-expanded','true');
+    insp=buildInsp(i);
+    tiles[rowLast].after(insp);
+    // notch aligned to clicked tile centre
+    var left=tiles[i].offsetLeft - insp.offsetLeft + tiles[i].offsetWidth/2;
+    insp.style.setProperty('--notch', left+'px');
+  }
+
+  ITEMS.forEach(function(d,i){
+    var t=document.createElement('button');
+    t.className='mo-tile';t.setAttribute('aria-expanded','false');
+    t.innerHTML=
+      '<svg class="mo-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">'+d.icon+'</svg>'+
+      '<span class="mo-tag">'+d.tag+'</span>'+
+      '<h4>'+d.title+'</h4>'+
+      '<p class="mo-teaser">'+teaser(d.lead)+'</p>'+
+      '<span class="mo-more">Подробнее <span class="pm">+</span></span>';
+    t.addEventListener('click',function(){ openIdx===i ? closeInsp() : openTile(i); });
+    grid.appendChild(t);tiles.push(t);
+  });
+
+  var rt;
+  window.addEventListener('resize',function(){clearTimeout(rt);rt=setTimeout(function(){
+    if(openIdx>=0){var i=openIdx;openTile(i);}
+  },150);});
+})();
+</script>
+</body>
+</html>
