@@ -16,7 +16,7 @@
 Запуск:  py .claude/bottle-ruler.py [шлях_до_bottles_cache.jsonl]
 Пише:    lab/bottles.html
 """
-import io, json, os, sys
+import io, json, math, os, random, sys
 
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8", errors="replace")
 
@@ -86,13 +86,73 @@ def litres(ml):
     return s + " л"
 
 
+def widths(r):
+    """Ширина й глибина формату. Де є заміри — беремо їх.
+
+    Де є тільки висота й об'єм (таких записів удвічі більше), рахуємо
+    еквівалентний діаметр: об'єм = площа × висота корпусу, корпус — приблизно
+    0.58 повної висоти. Це не вигадка, а фізика; на форматах, де є обидва
+    джерела, розрахунок дає 83.8 проти заміряних 81.0 і 110.3 проти 113.9.
+    Для плоских флаконів розрахунок занижує (там A — широка грань, а не
+    діаметр), тож такі позначаємо як похідні й на них нічого не стверджуємо.
+    """
+    if r.get("a") and r.get("b"):
+        return r["a"], r["b"], False
+    v_mm3 = r["volume_ml"] * 1000.0
+    d = (4 * v_mm3 / (math.pi * 0.58 * r["h"])) ** 0.5
+    return d, d, True
+
+
+def band(kit):
+    """Смуга «врозбіг» — під фон, а не під читання.
+
+    Строгий стрій за висотою потрібен лінійці: там висоти порівнюють очима.
+    Фону він шкодить — рівний ряд однакових інтервалів читається як частокіл.
+    Тому тут навпаки: пляшки стоять не на одній базі, а гуляють по вертикалі,
+    інтервали нерівні, масштаб трохи різний, а порядок перемішаний, щоб поруч
+    не опинялись дві схожі. Розкид детермінований (`random.seed`), інакше кожна
+    перезбірка давала б інший фон і діф було б не прочитати.
+    """
+    rng = random.Random(20260727)
+    order = kit[:]
+    rng.shuffle(order)
+    # трохи більше за набір, щоб смуга була довшою за екран
+    seq = order + [r for r in reversed(order[: max(1, len(order) // 2)])]
+
+    maxh = max(r["h"] for r in seq) * PX_PER_MM
+    H = round(maxh * 1.34)
+    parts, x = [], 20.0
+    for r in seq:
+        s = rng.uniform(0.72, 1.0)                 # різний масштаб
+        h = r["h"] * PX_PER_MM * s
+        w = r["_a"] * PX_PER_MM * s
+        y = rng.uniform(0.04, 0.30) * (H - h)      # гуляє по вертикалі
+        parts.append(
+            f'  <g transform="translate({x + w / 2:.1f} {y:.1f}) scale({s:.3f})"'
+            f' opacity="{rng.uniform(.5, 1):.2f}">'
+            f'<path d="{path(r["h"], r["_a"], r["_b"])}"/></g>'
+        )
+        x += w + rng.uniform(8, 40)                # нерівні інтервали
+    # Оформлення — АТРИБУТАМИ, а не класом. Смуга задумана як ассет, який
+    # можна покласти і фоном, і окремим файлом; CSS сторінки туди не поїде,
+    # а без `fill` контур заливається чорним за замовчуванням — саме так я
+    # вперше й отримав чорний прямокутник замість силуетів.
+    return (f'<svg class="btl-band" viewBox="0 0 {x + 20:.0f} {H}" '
+            f'xmlns="http://www.w3.org/2000/svg" aria-hidden="true"'
+            f' preserveAspectRatio="xMidYMid slice">\n'
+            f'  <g fill="none" stroke="#1B1E23" stroke-width="1.6" stroke-linejoin="round">\n'
+            + "\n".join(parts) + "\n  </g>\n</svg>")
+
+
 def main():
     rows = [json.loads(l) for l in open(CACHE, encoding="utf-8") if l.strip()]
-    kit = [r for r in rows if r.get("h") and r.get("a") and r.get("b") and r.get("volume_ml")]
+    kit = [r for r in rows if r.get("h") and r.get("volume_ml")]
+    for r in kit:
+        r["_a"], r["_b"], r["_est"] = widths(r)
     # шикуємо ЗА ВИСОТОЮ, а не за об'ємом: рядок має читатись як сходинка.
     # За об'ємом виходить пилка — 0,375 л буває вищою за 0,5 л, і замість
     # лінійки видно безлад.
-    kit.sort(key=lambda r: (r["h"], r["a"]))
+    kit.sort(key=lambda r: (r["h"], r["_a"]))
     if not kit:
         sys.exit("У кеші немає жодного запису з повними H/A/B — малювати нічого.")
 
@@ -100,34 +160,38 @@ def main():
     height = round(maxh * PX_PER_MM) + PAD_TOP + PAD_BOT
     base = PAD_TOP + round(maxh * PX_PER_MM)
 
+    # ---- 1. Лінійка: строгий стрій за висотою, підписи об'ємом ----
     parts, cursor = [], 0
     for r in kit:
-        w = round(r["a"] * PX_PER_MM) + GAP
+        w = round(r["_a"] * PX_PER_MM) + GAP
         cx = cursor + w / 2
         top = base - round(r["h"] * PX_PER_MM)
         parts.append(
             f'  <g class="bt" transform="translate({cx:.1f} {top:.1f})">\n'
-            f'    <path d="{path(r["h"], r["a"], r["b"])}"/>\n'
+            f'    <path d="{path(r["h"], r["_a"], r["_b"])}"/>\n'
             f'    <text class="v" y="{round(r["h"]*PX_PER_MM)+22:.0f}">{litres(r["volume_ml"])}</text>\n'
             f'  </g>'
         )
         cursor += w
-    svg_w = cursor
 
-    svg = (f'<svg class="ruler" viewBox="0 0 {svg_w:.0f} {height}" '
+    svg = (f'<svg class="ruler" viewBox="0 0 {cursor:.0f} {height}" '
            f'xmlns="http://www.w3.org/2000/svg" role="img" '
            f'aria-label="Лінійка форматів тари: силуети пляшок за висотою, підписані об\'ємом">\n'
            + "\n".join(parts)
-           + f'\n  <line class="base" x1="0" y1="{base+.5}" x2="{svg_w:.0f}" y2="{base+.5}"/>\n</svg>')
+           + f'\n  <line class="base" x1="0" y1="{base+.5}" x2="{cursor:.0f}" y2="{base+.5}"/>\n</svg>')
 
-    html = TEMPLATE.replace("__SVG__", svg).replace("__N__", str(len(kit))) \
+    html = TEMPLATE.replace("__SVG__", svg).replace("__BAND__", band(kit)) \
+                   .replace("__N__", str(len(kit))) \
+                   .replace("__EST__", str(sum(1 for r in kit if r["_est"]))) \
                    .replace("__TOTAL__", str(len(rows)))
     with open(OUT, "w", encoding="utf-8", newline="\n") as f:
         f.write(html)
 
     print(f"lab/bottles.html — {len(kit)} форматів із {len(rows)} записів кеша")
     for r in kit:
-        print(f"  {litres(r['volume_ml']):>8}  H={r['h']:.0f}  A={r['a']:.0f}  B={r['b']:.0f}  {r['kod']}")
+        mark = "розрах." if r["_est"] else "заміри"
+        print(f"  {litres(r['volume_ml']):>8}  H={r['h']:.0f}  A={r['_a']:.0f}  B={r['_b']:.0f}"
+              f"  {mark}  {r.get('kod') or '(без коду)'}")
 
 
 TEMPLATE = """<!doctype html>
@@ -150,6 +214,19 @@ TEMPLATE = """<!doctype html>
   .ruler .bt:hover path{stroke:var(--amber)}
   .ruler .bt:hover .v{fill:var(--amber)}
   .ruler .base{stroke:var(--border);stroke-width:1;vector-effect:non-scaling-stroke}
+  .btl-band{width:100%;height:auto;display:block}
+  .btl-band path{fill:none;stroke:var(--graphite);stroke-width:1;vector-effect:non-scaling-stroke}
+  .bandwrap{width:100vw;margin-left:calc(50% - 50vw);overflow:hidden;margin-bottom:var(--s48)}
+  /* демонстрація «під текстом»: та сама смуга, пригашена й розмита */
+  .demo{position:relative;overflow:hidden;padding:var(--s64) var(--s32);
+    border:1px solid var(--border)}
+  .demo-bg{position:absolute;inset:0;opacity:.3;filter:blur(.4px)}
+  .demo-bg .btl-band{height:100%}
+  .demo-fg{position:relative;max-width:52ch;
+    background:radial-gradient(80% 90% at 40% 50%,rgba(255,255,255,.94) 45%,rgba(255,255,255,0));
+    padding:var(--s24)}
+  .demo-fg h3{font-size:26px;margin:var(--s8) 0}
+  .demo-fg p{color:var(--steel);font-size:15px;line-height:24px}
   .why{max-width:70ch;margin-top:var(--s48)}
   .why h3{font-size:17px;margin-bottom:var(--s8)}
   .why p{color:var(--steel);font-size:15px;line-height:24px;margin-bottom:var(--s16)}
@@ -166,6 +243,36 @@ TEMPLATE = """<!doctype html>
          порівнюються напряму. Підпис — тільки об'єм.</p>
     </div>
     __SVG__
+  </div>
+</section>
+
+<!-- Смуга «врозбіг» — кандидат у фон секції, а не в самостійний блок.
+     Показана двічі: як є, і в тій силі, у якій вона реально лягла б під текст. -->
+<section class="section section--mist">
+  <div class="container">
+    <div class="sec-head">
+      <span class="eyebrow eyebrow--muted">Той самий набір · врозбіг</span>
+      <h2>Смуга під фон</h2>
+      <p>Не стрій, а розсип: різна висота посадки, різний масштаб, нерівні
+         інтервали. Так вона працює текстурою, а не переліком.</p>
+    </div>
+  </div>
+  <div class="bandwrap">__BAND__</div>
+  <div class="container">
+    <div class="demo">
+      <div class="demo-bg">__BAND__</div>
+      <div class="demo-fg">
+        <span class="eyebrow eyebrow--muted">Як це виглядає під текстом</span>
+        <h3>Комплект форматних деталей під вашу пляшку</h3>
+        <p>Смуга тут пригашена до тієї сили, у якій вона не сперечається
+           з текстом. Це той самий ассет, що вище.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
     <div class="why">
       <h3>Звідки це намальовано</h3>
       <p>Не з креслень пляшок. Ті креслення — документи чужих заводів, зі
@@ -176,8 +283,9 @@ TEMPLATE = """<!doctype html>
          глибина. Це схема формату: висота й ширина справжні, профіль плечей
          узагальнений. Плоскі формати й круглі малюються по-різному, бо саме
          через цю різницю оснастка під однаковий об'єм буває не та сама.</p>
-      <p><b>Показано __N__ форматів із __TOTAL__ записів бази.</b> Решта записів
-         поки без розмірів — не тому, що таких форматів немає, а тому, що
+      <p><b>Показано __N__ форматів із __TOTAL__ записів бази</b>
+         (з них __EST__ — з розрахованою шириною: у базі є висота й об'єм,
+         але немає замірів A/B). Решта записів поки без висоти — не тому, що таких форматів немає, а тому, що
          H/A/B у них не заповнені. Скільки форматів заявляємо цифрою — окреме
          питання до власника, без підтвердження цифру на сайт не ставимо.</p>
     </div>
