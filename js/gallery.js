@@ -18,7 +18,10 @@
   var REST_MS = 260;   // скільки курсор має простояти, щоб це рахувалось зупинкою
   var REST_PX = 3;     // менші зсуви — тремтіння руки, а не рух
   var EASE = 0.12;     // частка шляху за кадр: це і є ті ~0.3 с
-  var POP_SCALE = 1.14; // масштаб підйому — той самий, що в css/styles.css
+  // Запас непрозорої зони під підйом плитки (див. paint). Найширша плитка —
+  // 506px, при масштабі 1.14 вона виходить убік на 35px. 56 лишає ще ~20px
+  // просвіту, щоб картка не виглядала притиснутою до смуги гасіння.
+  var POP_PAD = 56;
 
   function initStrip(win) {
     var inner = win.querySelector('.gal--strip');
@@ -49,30 +52,19 @@
       inner.style.transform = 'translate3d(' + (start - cur).toFixed(2) + 'px,0,0)';
       // гасіння живе тільки з того боку, де за межею справді щось є
       var f = G ? G.fade : 200, inn = G ? G.inn : 0;
-      win.style.setProperty('--gal-in-l', inn + 'px');
-      win.style.setProperty('--gal-out-l', (inn - Math.min(f, cur)) + 'px');
-      win.style.setProperty('--gal-in-r', inn + 'px');
-      win.style.setProperty('--gal-out-r', (inn - Math.min(f, max - cur)) + 'px');
-    }
-
-    // Підсув піднятої плитки, щоб вона не вилазила у смугу гасіння.
-    // Полотно видно тільки в межах чистої зони, тож плитка біля її краю при
-    // підйомі виходить убік на half*(POP_SCALE-1) і там її зрізає. Пробував
-    // натомість розсувати саму зону гасіння — але тоді запас є лише поки
-    // полотно стоїть рівно в краю, а щойно воно рушить, зріз повертається.
-    // Тому рухаємо не зону, а плитку: рівно настільки, щоб вона вмістилась.
-    function nudge(el) {
-      var r = el.getBoundingClientRect(), wr = win.getBoundingClientRect();
-      var gx = r.width * (POP_SCALE - 1) / 2, inn = G ? G.inn : 0;
-      var lim = { l: wr.left + inn, r: wr.right - inn }, dx = 0;
-      if (r.left - gx < lim.l) dx = lim.l - (r.left - gx);
-      else if (r.right + gx > lim.r) dx = lim.r - (r.right + gx);
-      // Більше ніж на приріст рухати не можна, і це не перестраховка.
-      // Плитка, що лежить за чистою зоною, дала б зсув у сотні пікселів —
-      // тобто стрибок через пів екрана. Компенсуємо рівно приріст масштабу:
-      // рівно стільки бракує плитці, яка стоїть упритул до межі.
-      dx = Math.max(-gx, Math.min(gx, dx));
-      if (dx) el.style.setProperty('--pop-dx', dx.toFixed(1) + 'px');
+      // Непрозора зона ширша за текстову колонку на POP_PAD з кожного боку.
+      // Це запас під підйом: крайня плитка при підйомі виходить убік на
+      // половину приросту (найширша 506px × 0.07 ≈ 35px), і без запасу вона
+      // стоїть упритул до гасіння — картка виглядає так, ніби залазить у
+      // розмиту смугу. Запас постійний, а не тільки в крайніх положеннях:
+      // робив спершу так, і виходило, що просвіт є лише поки полотно стоїть
+      // рівно в краю, а щойно воно рушить — картка знову впритул.
+      // Полотно від цього не з'їжджає: `start` і `max` рахуються від чистої
+      // зони, зсунуто тільки саму маску.
+      win.style.setProperty('--gal-in-l', (inn - POP_PAD) + 'px');
+      win.style.setProperty('--gal-out-l', (inn - POP_PAD - Math.min(f, cur)) + 'px');
+      win.style.setProperty('--gal-in-r', (inn - POP_PAD) + 'px');
+      win.style.setProperty('--gal-out-r', (inn - POP_PAD - Math.min(f, max - cur)) + 'px');
     }
     function tick() {
       cur += (target - cur) * EASE;
@@ -86,11 +78,7 @@
     }
 
     function clearHot() {
-      if (hotEl) {
-        hotEl.classList.remove('is-hot');
-        hotEl.style.removeProperty('--pop-dx');
-        hotEl = null;
-      }
+      if (hotEl) { hotEl.classList.remove('is-hot'); hotEl = null; }
       inner.classList.remove('has-hot');
     }
     function armRest(x, y) {
@@ -102,9 +90,7 @@
         var el = document.elementFromPoint(x, y);
         el = el && el.closest ? el.closest('.gal-i') : null;
         if (!el) return;
-        // міряємо ДО класу: після нього плитка вже масштабована
-        hotEl = el; nudge(el);
-        el.classList.add('is-hot'); inner.classList.add('has-hot');
+        hotEl = el; el.classList.add('is-hot'); inner.classList.add('has-hot');
       }, REST_MS);
     }
 
