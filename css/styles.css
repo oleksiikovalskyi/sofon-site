@@ -229,6 +229,9 @@ a.card:hover .fig img{transform:scale(1.05)}
 @media(prefers-reduced-motion:reduce){.fig img{transition:none}a.card:hover .fig img{transform:none}}
 /* ---------- numbers strip ---------- */
 .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--gutter)}
+/* Модифікатор, а не inline-стиль: inline переміг би медіазапит нижче, і на
+   телефоні три колонки лишились би трьома. */
+.stats--3{grid-template-columns:repeat(3,1fr)}
 .stat .n{font-size:clamp(26px,2.6vw,44px);font-weight:700;letter-spacing:-.02em;line-height:1.05}
 /* нерозривною робимо ЛИШЕ одиницю виміру («б/год»), а не все значення:
    інакше довгі текстові значення розпирають колонку й ламають сусідні. */
@@ -251,6 +254,8 @@ a.card:hover .fig img{transform:scale(1.05)}
 .caps h2{color:#fff}
 .caps .sec-head p{color:rgba(255,255,255,.7)}
 .caps-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--s32)}
+/* шість груп краще лягають у 3×2, ніж у 4+2 — той самий випадок, що зі .stats--3 */
+.caps-grid--3{grid-template-columns:repeat(3,1fr)}
 .caps-item{border-top:2px solid rgba(255,255,255,.2);padding-top:var(--s16);transition:border-color .2s ease}
 .caps-item:hover{border-top-color:var(--amber)}
 .caps-item .k{display:block;font-family:var(--fm);font-size:11px;font-weight:600;letter-spacing:.12em;
@@ -285,6 +290,10 @@ a.card:hover .fig img{transform:scale(1.05)}
 .feat .item h4{display:flex;gap:var(--s8);align-items:baseline}
 .feat .item h4 .k{font-family:var(--fm);font-size:13px;color:var(--amber)}
 .feat .item p{margin-top:var(--s8);color:var(--steel);font-size:16px}
+/* посилання на власну сторінку вузла — там, де рядок у покажчику розкрито окремо */
+.feat-more{display:inline-flex;gap:6px;margin-top:var(--s8);font-family:var(--fm);font-size:13px;
+  font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--graphite)}
+.feat-more:hover{color:var(--amber)}
 /* spec table */
 .spec{width:100%;border-collapse:collapse;margin-top:var(--s24)}
 .spec td{padding:14px 0;border-bottom:1px solid var(--border);vertical-align:top}
@@ -563,6 +572,9 @@ a.card:hover .fig img{transform:scale(1.05)}
   border-top:1px solid var(--border);padding-top:var(--s32);margin-top:var(--s32)}
 .ctype:first-of-type{margin-top:0}
 .ctype h3{max-width:15ch}
+/* блок «питання — відповідь»: у заголовку тут ціле речення, і 15ch ламали
+   його на чотири рядки */
+.ctype--qa h3{max-width:26ch}
 .ctype-body p+p{margin-top:var(--s16)}
 .ctype-list{list-style:none;margin-top:var(--s24);display:flex;flex-direction:column;gap:var(--s8)}
 .ctype-list li{position:relative;padding-left:26px;color:var(--steel);font-size:16px;max-width:66ch}
@@ -570,6 +582,11 @@ a.card:hover .fig img{transform:scale(1.05)}
   background:var(--amber)}
 .ctype-list li b{color:var(--graphite);font-weight:600}
 @media(max-width:900px){.ctype{grid-template-columns:1fr;gap:var(--s16)}}
+/* рядок функцій вузла: що він робить, одним рядком через крапку-роздільник.
+   Стоїть під абзацом про роль і відділений волосяною лінією — читається як
+   підпис до заголовка, а не як ще один абзац. */
+.ctype-facts{margin-top:var(--s24);padding-top:var(--s16);border-top:1px solid var(--border);
+  font-size:13.5px;line-height:1.9;letter-spacing:.02em;color:var(--steel);max-width:80ch}
 
 /* креслення компоновки на всю ширину колонки */
 .cplan{border:1px solid var(--border);border-radius:var(--radius-soft);background:#fff;
@@ -754,6 +771,8 @@ body[data-page="contract"] [data-nav="contract"]{color:var(--amber)}
    верхнього рівня вони не мають */
 body[data-page="conveyor"] [data-nav="products"],
 body[data-page="custom-equipment"] [data-nav="products"]{color:var(--amber)}
+/* сторінка вузла всередині розділу підсвічує сам розділ */
+body[data-page="screws"] [data-nav="osnastka"]{color:var(--amber)}
 
 /* ============================================================
    ГОЛОВНА — повноекранний герой і покажчик напрямів.
