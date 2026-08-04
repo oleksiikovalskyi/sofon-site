@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>D · Питання — каркас сторінки шнеків</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/styles.css">
+<link rel="stylesheet" href="/lab/screws-ab/ab.css">
+<style>
+/* ══ ВАРІАНТ D · «ПИТАННЯ» ═══════════════════════════════════════════
+   Принцип інший не за розкладкою, а за віссю розповіді. A, B і C описують
+   ВУЗОЛ — від ролі до сумісності. D описує СИТУАЦІЮ читача: заголовки
+   розділів тут не «Матеріали» й «Виконання», а те, з чим людина прийшла.
+   Той самий матеріал розкладений по трьох станах: щось не так → що ми з
+   цим робимо → з чого почати.
+   Ризик: доказова частина (цифри, машини) може загубитись усередині
+   розмови. Сила: сторінка починає працювати на того, у кого лінія
+   «начебто працює» — а це єдиний спосіб зачепити його взагалі. */
+
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+
+/* ── шапка-питання ── */
+.qhead{padding:var(--s64) 0 var(--s48);border-bottom:1px solid var(--border)}
+.qhead h1{font-size:clamp(30px,4vw,52px);line-height:1.06;max-width:17ch;letter-spacing:-.02em;
+  margin-top:var(--s16)}
+.qhead .lead{margin-top:var(--s24);font-size:19px;line-height:30px;color:var(--steel);max-width:54ch}
+.qhead-in{display:grid;grid-template-columns:1.1fr .9fr;gap:var(--s64);align-items:center}
+@media(max-width:900px){.qhead-in{grid-template-columns:1fr;gap:var(--s32)}}
+
+/* ── стан: три великі розділи-стани ── */
+.state{padding:var(--s64) 0;border-bottom:1px solid var(--border)}
+.state--mist{background:var(--mist)}
+.state-h{display:flex;align-items:baseline;gap:var(--s24);margin-bottom:var(--s48)}
+.state-h .no{font-family:var(--fm);font-size:52px;font-weight:600;line-height:.8;color:var(--border)}
+.state-h h2{font-size:clamp(24px,2.8vw,34px);line-height:1.12;max-width:22ch}
+.state-h .sub{display:block;margin-top:10px;font-size:16.5px;line-height:26px;color:var(--steel);
+  max-width:56ch;font-weight:400}
+
+/* ── картка-питання ── */
+.qgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--s24)}
+@media(max-width:860px){.qgrid{grid-template-columns:1fr}}
+.q{background:#fff;border:1px solid var(--border);border-radius:var(--radius-soft);
+  padding:var(--s32);display:flex;flex-direction:column;gap:var(--s16)}
+.state--mist .q{background:#fff}
+.q .ask{font-size:19.5px;line-height:1.3;font-weight:600;position:relative;padding-left:22px}
+.q .ask::before{content:'«';position:absolute;left:0;top:-2px;color:var(--amber);font-size:26px;
+  line-height:1}
+.q .ans{font-size:15.5px;line-height:24px;color:var(--steel)}
+.q .fact{margin-top:auto;padding-top:var(--s16);border-top:1px solid var(--border);
+  font-family:var(--fm);font-size:11.5px;letter-spacing:.05em;color:var(--steel);
+  text-transform:uppercase}
+.q--wide{grid-column:span 2}
+@media(max-width:860px){.q--wide{grid-column:span 1}}
+
+/* картка з кадром замість тексту — щоб сітка не була суцільною стіною карток */
+.q--fig{padding:0;overflow:hidden;border:0}
+.q--fig .ph{height:100%;min-height:220px;aspect-ratio:auto}
+
+/* ── смуга-перелік ознак усередині стану ── */
+.signs{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--s24);margin-top:var(--s32)}
+.signs div{border-top:2px solid var(--graphite);padding-top:14px}
+.signs .k{font-family:var(--fm);font-size:11px;font-weight:600;letter-spacing:.12em;color:var(--amber)}
+.signs h4{font-size:17px;line-height:1.25;margin:8px 0 4px}
+.signs p{font-size:14.5px;line-height:22px;color:var(--steel)}
+@media(max-width:900px){.signs{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:540px){.signs{grid-template-columns:1fr}}
+
+/* ── довідкова частина внизу: те, що не є розмовою ── */
+.ref{padding:var(--s64) 0}
+.ref-h{display:flex;align-items:baseline;justify-content:space-between;gap:var(--s24);
+  padding-bottom:var(--s16);border-bottom:2px solid var(--graphite);margin-bottom:var(--s32)}
+.ref-h h3{font-size:21px}
+.ref-h span{font-family:var(--fm);font-size:11px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--steel)}
+.ref+.ref{padding-top:0}
+
+.dark{background:var(--graphite);color:#fff}
+.dark h2,.dark h3{color:#fff}
+.dark .cols{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s32)}
+.dark .cols div{border-top:1px solid rgba(255,255,255,.2);padding-top:var(--s16)}
+.dark .cols .k{font-family:var(--fm);font-size:11px;font-weight:600;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--amber)}
+.dark .cols p{margin-top:10px;font-size:15px;line-height:23px;color:rgba(255,255,255,.62)}
+@media(max-width:820px){.dark .cols{grid-template-columns:1fr}}
+
+.endband{background:var(--graphite);color:#fff;text-align:center;padding:var(--s64) 0}
+.endband h2{color:#fff;font-size:clamp(26px,3.2vw,40px);max-width:20ch;margin:var(--s16) auto}
+.endband p{color:rgba(255,255,255,.68);max-width:52ch;margin:0 auto var(--s32)}
+</style>
+</head>
+<body>
+
+<div class="labbar"><div class="labbar-in">
+  <b>Шнеки · каркас</b>
+  <span class="hint">текст-затички, реальні тільки назви розділів</span>
+  <nav><a href="/lab/screws-ab/a.html">A Тракт</a><a href="/lab/screws-ab/b.html">B Аркуш</a><a href="/lab/screws-ab/c.html">C Кадри</a><a class="on" href="/lab/screws-ab/d.html">D Питання</a></nav>
+</div></div>
+
+<!-- ── ШАПКА ─────────────────────────────────────────────────────── -->
+<header class="wrap qhead">
+  <div class="crumb"><a href="/">Головна</a> / <a href="/products/">Продукти</a> / <a href="/products/osnastka/">Оснастка</a> / Шнеки</div>
+  <div class="qhead-in">
+    <div>
+      <span class="eyebrow">Оснастка · вузол комплекту</span>
+      <h1>Заголовок-теза, з якою приходить читач</h1>
+      <p class="lead fill">Два рядки про те, що ця сторінка відповідає на конкретні ситуації, а не описує деталь узагалі.</p>
+    </div>
+    <div class="ph ph--43"><div class="ph-cap"><b>Кадр · головний</b><span>Шнек у лінії</span></div></div>
+  </div>
+</header>
+
+<!-- ── СТАН 1 · ЩОСЬ НЕ ТАК ──────────────────────────────────────── -->
+<section class="state">
+  <div class="wrap">
+    <div class="state-h">
+      <span class="no">01</span>
+      <div>
+        <h2>Назва стану: з чим людина приходить</h2>
+        <span class="sub fill">Два рядки підводки до групи питань цього стану.</span>
+      </div>
+    </div>
+
+    <div class="qgrid">
+      <div class="q">
+        <div class="ask">Питання клієнта одним рядком»</div>
+        <p class="ans fill">Відповідь у три-чотири рядки, приблизно такої довжини, як буде у фіналі. Тут же живе факт, який ми хочемо сказати.</p>
+        <div class="fact">коротка бирка з фактом</div>
+      </div>
+      <div class="q">
+        <div class="ask">Питання клієнта одним рядком»</div>
+        <p class="ans fill">Відповідь у три-чотири рядки, приблизно такої довжини, як буде у фіналі. Тут же живе факт, який ми хочемо сказати.</p>
+        <div class="fact">коротка бирка з фактом</div>
+      </div>
+    </div>
+
+    <div class="signs">
+      <div><span class="k">01</span><h4>Перша ознака</h4><p class="fill">Один короткий рядок.</p></div>
+      <div><span class="k">02</span><h4>Друга ознака</h4><p class="fill">Один короткий рядок.</p></div>
+      <div><span class="k">03</span><h4>Третя ознака</h4><p class="fill">Один короткий рядок.</p></div>
+      <div><span class="k">04</span><h4>Четверта ознака</h4><p class="fill">Один короткий рядок.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── СТАН 2 · ЩО МИ З ЦИМ РОБИМО ───────────────────────────────── -->
+<section class="state state--mist">
+  <div class="wrap">
+    <div class="state-h">
+      <span class="no">02</span>
+      <div>
+        <h2>Назва стану: що ми з цим робимо</h2>
+        <span class="sub fill">Два рядки підводки. Сюди лягають виконання, матеріали, посадка й привід — але подані як відповідь, а не як довідка.</span>
+      </div>
+    </div>
+
+    <div class="qgrid">
+      <div class="q q--wide">
+        <div class="ask">Питання клієнта одним рядком»</div>
+        <p class="ans fill">Відповідь у два рядки, а далі — перелік того, що ми вміємо в цій ситуації:</p>
+        <ul class="ctype-list" style="margin-top:0">
+          <li><b>Перший тип.</b> Один рядок пояснення.</li>
+          <li><b>Другий тип.</b> Один рядок пояснення.</li>
+          <li><b>Третій тип.</b> Один рядок пояснення.</li>
+          <li><b>Четвертий тип.</b> Один рядок пояснення.</li>
+          <li><b>П'ятий тип.</b> Один рядок пояснення.</li>
+        </ul>
+      </div>
+
+      <div class="q q--fig"><div class="ph"><div class="ph-cap"><b>Кадр</b><span>Рендер деталі</span></div></div></div>
+
+      <div class="q">
+        <div class="ask">Питання клієнта одним рядком»</div>
+        <p class="ans fill">Відповідь у два рядки, далі коротка таблиця:</p>
+        <table class="spec" style="margin-top:0">
+          <tr><td>Матеріал перший</td><td>Пояснення</td></tr>
+          <tr><td>Матеріал другий</td><td>Пояснення</td></tr>
+          <tr><td>Матеріал третій</td><td>Пояснення</td></tr>
+        </table>
+      </div>
+
+      <div class="q">
+        <div class="ask">Питання клієнта одним рядком»</div>
+        <p class="ans fill">Відповідь у три-чотири рядки. Сюди йде те, що належить нам у темі привода.</p>
+        <div class="fact">коротка бирка з фактом</div>
+      </div>
+      <div class="q">
+        <div class="ask">Питання клієнта одним рядком»</div>
+        <p class="ans fill">Відповідь у три-чотири рядки. Сюди йдуть умови роботи вузла.</p>
+        <div class="fact">коротка бирка з фактом</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── СТАН 3 · З ЧОГО ПОЧАТИ ────────────────────────────────────── -->
+<section class="state">
+  <div class="wrap">
+    <div class="state-h">
+      <span class="no">03</span>
+      <div>
+        <h2>Назва стану: з чого почати</h2>
+        <span class="sub fill">Два рядки підводки. Тут знімається ступор «а що від мене треба».</span>
+      </div>
+    </div>
+
+    <div class="qgrid">
+      <div class="q q--wide">
+        <div class="ask">Питання клієнта одним рядком»</div>
+        <p class="ans fill">Відповідь у два рядки про основний шлях, далі решта способів:</p>
+        <ul class="ctype-list" style="margin-top:0">
+          <li><b>Спосіб другий.</b> Один рядок.</li>
+          <li><b>Спосіб третій.</b> Один рядок.</li>
+          <li><b>Спосіб четвертий.</b> Один рядок.</li>
+        </ul>
+      </div>
+      <div class="q">
+        <div class="ask">Питання клієнта одним рядком»</div>
+        <p class="ans fill">Відповідь у два-три рядки — сюди йде строк виготовлення.</p>
+        <div class="fact">строк · 00 днів</div>
+      </div>
+      <div class="q">
+        <div class="ask">Питання клієнта одним рядком»</div>
+        <p class="ans fill">Відповідь у два-три рядки.</p>
+        <div class="fact">коротка бирка з фактом</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── ДОВІДКОВА ЧАСТИНА ─────────────────────────────────────────── -->
+<div class="wrap ref">
+  <div class="ref-h"><h3>Досвід у цифрах</h3><span>довідка</span></div>
+  <div class="stats" style="grid-template-columns:repeat(3,1fr)">
+    <div class="stat"><div class="n">000</div><div class="l fill">підпис до цифри</div></div>
+    <div class="stat"><div class="n">000</div><div class="l fill">підпис до цифри</div></div>
+    <div class="stat"><div class="n">000</div><div class="l fill">підпис до цифри</div></div>
+  </div>
+  <p class="mono fill" style="margin-top:var(--s32);font-size:13.5px;line-height:1.9">перелік · через · крапку · що · саме · охоплюємо · за · тарою</p>
+</div>
+
+<section class="dark">
+  <div class="wrap ref">
+    <div class="ref-h" style="border-bottom-color:rgba(255,255,255,.25)"><h3>Під які машини</h3><span style="color:rgba(255,255,255,.5)">довідка</span></div>
+    <div class="cols">
+      <div><span class="k">Група перша</span><p>Назва · назва · назва · назва · назва · назва · назва</p></div>
+      <div><span class="k">Група друга</span><p>Назва · назва · назва</p></div>
+      <div><span class="k">Група третя</span><p>Назва · назва · назва · назва</p></div>
+      <div><span class="k">Група четверта</span><p>Назва · назва · назва</p></div>
+      <div><span class="k">Група п'ята</span><p>Назва · назва · назва · назва</p></div>
+      <div><span class="k">Група шоста</span><p>Назва</p></div>
+    </div>
+    <p class="mono" style="margin-top:var(--s32);font-size:15px;color:#fff">— обов'язковий рядок-хвіст про машини поза переліком</p>
+  </div>
+</section>
+
+<div class="wrap ref">
+  <div class="ref-h"><h3>Слот під відео</h3><span>ассет</span></div>
+  <div class="ph ph--21"><div class="ph-cap"><b>Слот · відео</b><span>Шнек у роботі, п'ять секунд</span></div></div>
+</div>
+
+<section class="endband">
+  <div class="wrap">
+    <span class="eyebrow" style="color:var(--amber)">Наступний крок</span>
+    <h2>Заклик у кінці, один рядок</h2>
+    <p class="fill--dark">Два рядки про те, що надіслати, щоб отримати відповідь.</p>
+    <span class="btn btn--primary btn--lg">Дія одним рядком</span>
+  </div>
+</section>
+
+<div class="wrap" style="padding-top:var(--s48);padding-bottom:var(--s64)">
+  <p class="mono" style="font-size:12px;color:var(--steel)">Каркас D. Текст — затички, реальні тільки назви розділів. Не входить у збірку сайту.</p>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>B · Технічний аркуш — каркас сторінки шнеків</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/styles.css">
+<link rel="stylesheet" href="/lab/screws-ab/ab.css">
+<style>
+/* ══ ВАРІАНТ B · «ТЕХНІЧНИЙ АРКУШ» ═══════════════════════════════════
+   Принцип протилежний до A: не розповідь, а документ. Сторінка влаштована
+   як лист специфікації — регістр «позиція → значення», щільні рядки,
+   волосяні лінії, моношрифт у лейблах. Читач не «проходить маршрут», він
+   ШУКАЄ рядок і знаходить його очима. Повітря мінімум, картинки дрібні й
+   пронумеровані як позиції на кресленні.
+   Ризик варіанта: сухо. Сила: виглядає як інженерний документ, а не як
+   рекламна сторінка — а саме цим ми й відрізняємось. */
+
+.sheet{max-width:1120px;margin:0 auto;padding:0 24px}
+
+/* ── шапка-штамп документа ── */
+.doc-head{border-bottom:2px solid var(--graphite);padding:var(--s48) 0 var(--s24);
+  display:grid;grid-template-columns:1.35fr .65fr;gap:var(--s48);align-items:end}
+.doc-head h1{font-size:clamp(26px,3vw,38px);line-height:1.1;max-width:18ch;margin-top:10px}
+.doc-head .lead{margin-top:var(--s16);font-size:17px;line-height:26px;color:var(--steel);max-width:52ch}
+.doc-meta{border:1px solid var(--border)}
+.doc-meta div{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--border)}
+.doc-meta div:first-child{border-top:0}
+.doc-meta dt,.doc-meta dd{padding:8px 12px;margin:0;font-family:var(--fm);font-size:11.5px;
+  letter-spacing:.04em}
+.doc-meta dt{color:var(--steel);text-transform:uppercase;font-size:10.5px;letter-spacing:.1em}
+.doc-meta dd{border-left:1px solid var(--border);font-weight:600}
+
+/* ── позиція документа ── */
+.pos{border-bottom:1px solid var(--border);padding:var(--s32) 0}
+.pos-h{display:grid;grid-template-columns:64px 1fr;gap:var(--s24);align-items:baseline;
+  margin-bottom:var(--s24)}
+.pos-no{font-family:var(--fm);font-size:12px;font-weight:600;letter-spacing:.1em;color:var(--amber)}
+.pos-h h2{font-size:20px;letter-spacing:-.01em}
+.pos-h .sub{font-family:var(--fm);font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--steel);margin-top:4px;display:block}
+
+/* регістр: лейбл ліворуч, значення праворуч, усе на одній вертикалі */
+.reg{display:grid;grid-template-columns:64px 200px 1fr;gap:var(--s24)}
+.reg-row{display:contents}
+.reg-k{grid-column:2;font-family:var(--fm);font-size:12px;letter-spacing:.03em;color:var(--steel);
+  padding:9px 0;border-top:1px solid var(--border)}
+.reg-v{grid-column:3;font-size:15.5px;line-height:23px;padding:9px 0;border-top:1px solid var(--border)}
+.reg-row:first-child .reg-k,.reg-row:first-child .reg-v{border-top:0;padding-top:0}
+.reg-v b{font-weight:600}
+@media(max-width:820px){
+  .reg{grid-template-columns:1fr}
+  .reg-k,.reg-v{grid-column:1}
+  .reg-k{padding-bottom:0;border-top:1px solid var(--border)}
+  .reg-v{border-top:0;padding-top:2px}
+  .pos-h{grid-template-columns:1fr;gap:6px}
+}
+
+/* смуга дрібних кадрів із номерами позицій */
+.strip{display:grid;grid-template-columns:repeat(5,1fr);gap:var(--s16);margin-top:var(--s24)}
+.strip .ph{aspect-ratio:1/1}
+.strip .ph .ph-cap{padding:10px 12px}
+.strip .ph b{font-size:9.5px}
+.strip .ph span{font-size:11.5px;line-height:15px}
+@media(max-width:820px){.strip{grid-template-columns:repeat(2,1fr)}}
+
+/* підсумковий рядок унизу позиції */
+.pos-foot{margin-top:var(--s24);padding-left:88px;font-family:var(--fm);font-size:12px;
+  color:var(--steel);letter-spacing:.03em}
+@media(max-width:820px){.pos-foot{padding-left:0}}
+
+/* блок цифр — теж рядками регістру, не плитками */
+.nums{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--border)}
+.nums div{padding:var(--s24);border-left:1px solid var(--border)}
+.nums div:first-child{border-left:0}
+.nums .n{font-size:30px;font-weight:700;letter-spacing:-.02em}
+.nums .l{font-family:var(--fm);font-size:11px;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--steel);margin-top:6px}
+@media(max-width:700px){.nums{grid-template-columns:1fr}.nums div{border-left:0;border-top:1px solid var(--border)}}
+
+.doc-end{border-top:2px solid var(--graphite);margin-top:var(--s48);padding:var(--s48) 0 var(--s64);
+  display:grid;grid-template-columns:1fr auto;gap:var(--s32);align-items:center}
+.doc-end h2{font-size:24px;max-width:24ch}
+@media(max-width:760px){.doc-end{grid-template-columns:1fr}.doc-head{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<div class="labbar"><div class="labbar-in">
+  <b>Шнеки · каркас</b>
+  <span class="hint">текст-затички, реальні тільки назви розділів</span>
+  <nav><a href="/lab/screws-ab/a.html">A Тракт</a><a class="on" href="/lab/screws-ab/b.html">B Аркуш</a><a href="/lab/screws-ab/c.html">C Кадри</a><a href="/lab/screws-ab/d.html">D Питання</a></nav>
+</div></div>
+
+<div class="sheet">
+
+  <!-- ── ШАПКА-ШТАМП ─────────────────────────────────────────────── -->
+  <header class="doc-head">
+    <div>
+      <div class="crumb"><a href="/">Головна</a> / <a href="/products/">Продукти</a> / <a href="/products/osnastka/">Оснастка</a> / Шнеки</div>
+      <span class="eyebrow">Оснастка · вузол комплекту</span>
+      <h1>Шнеки поділу потоку</h1>
+      <p class="lead fill">Один-два рядки про те, що робить цей вузол і чому він робиться під конкретну пляшку.</p>
+    </div>
+    <dl class="doc-meta">
+      <div><dt>Геометрія</dt><dd>під тару</dd></div>
+      <div><dt>Вихідні дані</dt><dd>заміри</dd></div>
+      <div><dt>Матеріал</dt><dd>під ділянку</dd></div>
+      <div><dt>Строк</dt><dd>00 днів</dd></div>
+    </dl>
+  </header>
+
+  <!-- ── ПОЗИЦІЯ 01 ── -->
+  <section class="pos">
+    <div class="pos-h">
+      <span class="pos-no">01</span>
+      <div><h2>Роль у лінії</h2><span class="sub">призначення вузла</span></div>
+    </div>
+    <div class="reg">
+      <div class="reg-row"><div class="reg-k">Що робить</div><div class="reg-v fill">Перелік функцій через крапку-роздільник, один-два рядки завдовжки</div></div>
+      <div class="reg-row"><div class="reg-k">Від чого залежить</div><div class="reg-v fill">Один рядок пояснення</div></div>
+      <div class="reg-row"><div class="reg-k">Наслідок</div><div class="reg-v fill">Один рядок пояснення</div></div>
+    </div>
+    <div class="strip">
+      <div class="ph"><div class="ph-cap"><b>01</b><span>кадр</span></div></div>
+      <div class="ph"><div class="ph-cap"><b>02</b><span>кадр</span></div></div>
+      <div class="ph"><div class="ph-cap"><b>03</b><span>кадр</span></div></div>
+      <div class="ph"><div class="ph-cap"><b>04</b><span>кадр</span></div></div>
+      <div class="ph"><div class="ph-cap"><b>05</b><span>кадр</span></div></div>
+    </div>
+    <p class="pos-foot">підпис до смуги кадрів, один рядок дрібним</p>
+  </section>
+
+  <!-- ── ПОЗИЦІЯ 02 ── -->
+  <section class="pos">
+    <div class="pos-h">
+      <span class="pos-no">02</span>
+      <div><h2>Виконання</h2><span class="sub">типи під задачу</span></div>
+    </div>
+    <div class="reg">
+      <div class="reg-row"><div class="reg-k">Тип 1</div><div class="reg-v"><b>Назва виконання.</b> <span class="fill">Пояснення в один-два рядки, приблизно такої довжини, як буде у фіналі.</span></div></div>
+      <div class="reg-row"><div class="reg-k">Тип 2</div><div class="reg-v"><b>Назва виконання.</b> <span class="fill">Пояснення в один-два рядки, приблизно такої довжини, як буде у фіналі.</span></div></div>
+      <div class="reg-row"><div class="reg-k">Тип 3</div><div class="reg-v"><b>Назва виконання.</b> <span class="fill">Пояснення в один-два рядки, приблизно такої довжини, як буде у фіналі.</span></div></div>
+      <div class="reg-row"><div class="reg-k">Тип 4</div><div class="reg-v"><b>Назва виконання.</b> <span class="fill">Пояснення в один-два рядки, приблизно такої довжини, як буде у фіналі.</span></div></div>
+      <div class="reg-row"><div class="reg-k">Тип 5</div><div class="reg-v"><b>Назва виконання.</b> <span class="fill">Пояснення в один-два рядки, приблизно такої довжини, як буде у фіналі.</span></div></div>
+    </div>
+  </section>
+
+  <!-- ── ПОЗИЦІЯ 03 ── -->
+  <section class="pos">
+    <div class="pos-h">
+      <span class="pos-no">03</span>
+      <div><h2>Матеріали</h2><span class="sub">вибір під умови ділянки</span></div>
+    </div>
+    <div class="reg">
+      <div class="reg-row"><div class="reg-k">Принцип</div><div class="reg-v fill">Один-два рядки про те, за яким принципом обирається матеріал.</div></div>
+      <div class="reg-row"><div class="reg-k">Матеріал 1</div><div class="reg-v"><b>Назва (позначення).</b> <span class="fill">Де застосовується, один рядок.</span></div></div>
+      <div class="reg-row"><div class="reg-k">Матеріал 2</div><div class="reg-v"><b>Назва (позначення).</b> <span class="fill">Де застосовується, один рядок.</span></div></div>
+      <div class="reg-row"><div class="reg-k">Матеріал 3</div><div class="reg-v"><b>Назва (позначення).</b> <span class="fill">Де застосовується, один рядок.</span></div></div>
+      <div class="reg-row"><div class="reg-k">Робоче тіло</div><div class="reg-v fill">Один рядок обмеження.</div></div>
+    </div>
+  </section>
+
+  <!-- ── ПОЗИЦІЯ 04 ── -->
+  <section class="pos">
+    <div class="pos-h">
+      <span class="pos-no">04</span>
+      <div><h2>Посадка й привід</h2><span class="sub">що закладаємо ми</span></div>
+    </div>
+    <div class="reg">
+      <div class="reg-row"><div class="reg-k">Регулювання</div><div class="reg-v fill">Один-два рядки пояснення.</div></div>
+      <div class="reg-row"><div class="reg-k">Інтерфейс</div><div class="reg-v fill">Один-два рядки пояснення.</div></div>
+      <div class="reg-row"><div class="reg-k">Привід</div><div class="reg-v fill">Один-два рядки пояснення.</div></div>
+    </div>
+  </section>
+
+  <!-- ── ПОЗИЦІЯ 05 ── -->
+  <section class="pos">
+    <div class="pos-h">
+      <span class="pos-no">05</span>
+      <div><h2>Умови роботи</h2><span class="sub">що потрібно, щоб вузол працював</span></div>
+    </div>
+    <div class="reg">
+      <div class="reg-row"><div class="reg-k">Умова 1</div><div class="reg-v fill">Один-два рядки пояснення.</div></div>
+      <div class="reg-row"><div class="reg-k">Умова 2</div><div class="reg-v fill">Один-два рядки пояснення.</div></div>
+    </div>
+  </section>
+
+  <!-- ── ПОЗИЦІЯ 06 ── -->
+  <section class="pos">
+    <div class="pos-h">
+      <span class="pos-no">06</span>
+      <div><h2>Ознаки зносу</h2><span class="sub">коли міняти</span></div>
+    </div>
+    <div class="reg">
+      <div class="reg-row"><div class="reg-k">Підводка</div><div class="reg-v fill">Два рядки про те, що вузол зношується поступово.</div></div>
+      <div class="reg-row"><div class="reg-k">Ознака 1</div><div class="reg-v fill">Один рядок.</div></div>
+      <div class="reg-row"><div class="reg-k">Ознака 2</div><div class="reg-v fill">Один рядок.</div></div>
+      <div class="reg-row"><div class="reg-k">Ознака 3</div><div class="reg-v fill">Один рядок.</div></div>
+      <div class="reg-row"><div class="reg-k">Ознака 4</div><div class="reg-v fill">Один рядок.</div></div>
+    </div>
+  </section>
+
+  <!-- ── ПОЗИЦІЯ 07 ── -->
+  <section class="pos">
+    <div class="pos-h">
+      <span class="pos-no">07</span>
+      <div><h2>З чого починаємо</h2><span class="sub">вихідні дані для замовлення</span></div>
+    </div>
+    <div class="reg">
+      <div class="reg-row"><div class="reg-k">Основне</div><div class="reg-v"><b>Спосіб перший.</b> <span class="fill">Два рядки пояснення, приблизно такої довжини, як буде у фіналі.</span></div></div>
+      <div class="reg-row"><div class="reg-k">Також</div><div class="reg-v"><b>Спосіб другий.</b> <span class="fill">Один рядок.</span></div></div>
+      <div class="reg-row"><div class="reg-k">Також</div><div class="reg-v"><b>Спосіб третій.</b> <span class="fill">Один рядок.</span></div></div>
+      <div class="reg-row"><div class="reg-k">Також</div><div class="reg-v"><b>Спосіб четвертий.</b> <span class="fill">Один рядок.</span></div></div>
+    </div>
+  </section>
+
+  <!-- ── ПОЗИЦІЯ 08 ── -->
+  <section class="pos">
+    <div class="pos-h">
+      <span class="pos-no">08</span>
+      <div><h2>Досвід</h2><span class="sub">цифри й охоплення</span></div>
+    </div>
+    <div class="nums">
+      <div><div class="n">000</div><div class="l">підпис до цифри</div></div>
+      <div><div class="n">000</div><div class="l">підпис до цифри</div></div>
+      <div><div class="n">000</div><div class="l">підпис до цифри</div></div>
+    </div>
+    <div class="reg" style="margin-top:var(--s24)">
+      <div class="reg-row"><div class="reg-k">Тара</div><div class="reg-v fill">перелік · через · крапку · що · саме · охоплюємо</div></div>
+    </div>
+  </section>
+
+  <!-- ── ПОЗИЦІЯ 09 ── -->
+  <section class="pos">
+    <div class="pos-h">
+      <span class="pos-no">09</span>
+      <div><h2>Сумісність</h2><span class="sub">під які машини</span></div>
+    </div>
+    <div class="reg">
+      <div class="reg-row"><div class="reg-k">Група 1</div><div class="reg-v fill">Назва · назва · назва · назва · назва · назва · назва</div></div>
+      <div class="reg-row"><div class="reg-k">Група 2</div><div class="reg-v fill">Назва · назва · назва</div></div>
+      <div class="reg-row"><div class="reg-k">Група 3</div><div class="reg-v fill">Назва · назва · назва · назва</div></div>
+      <div class="reg-row"><div class="reg-k">Група 4</div><div class="reg-v fill">Назва · назва · назва</div></div>
+      <div class="reg-row"><div class="reg-k">Група 5</div><div class="reg-v fill">Назва · назва · назва · назва</div></div>
+      <div class="reg-row"><div class="reg-k">Решта</div><div class="reg-v"><b>Обов'язковий рядок-хвіст про машини поза переліком</b></div></div>
+    </div>
+  </section>
+
+  <!-- ── ПОЗИЦІЯ 10 ── -->
+  <section class="pos">
+    <div class="pos-h">
+      <span class="pos-no">10</span>
+      <div><h2>Питання</h2><span class="sub">що питають найчастіше</span></div>
+    </div>
+    <div class="reg">
+      <div class="reg-row"><div class="reg-k">Питання</div><div class="reg-v"><b>«Питання клієнта одним рядком»</b><br><span class="fill">Відповідь у два рядки, приблизно такої довжини, як буде у фіналі.</span></div></div>
+      <div class="reg-row"><div class="reg-k">Питання</div><div class="reg-v"><b>«Питання клієнта одним рядком»</b><br><span class="fill">Відповідь у два рядки, приблизно такої довжини, як буде у фіналі.</span></div></div>
+      <div class="reg-row"><div class="reg-k">Питання</div><div class="reg-v"><b>«Питання клієнта одним рядком»</b><br><span class="fill">Відповідь у два рядки, приблизно такої довжини, як буде у фіналі.</span></div></div>
+      <div class="reg-row"><div class="reg-k">Питання</div><div class="reg-v"><b>«Питання клієнта одним рядком»</b><br><span class="fill">Відповідь у два рядки, приблизно такої довжини, як буде у фіналі.</span></div></div>
+    </div>
+  </section>
+
+  <!-- ── ЗАКЛИК ── -->
+  <div class="doc-end">
+    <div>
+      <span class="eyebrow eyebrow--muted">Наступний крок</span>
+      <h2>Заклик у кінці, один рядок</h2>
+      <p class="fill" style="margin-top:var(--s8);font-size:15.5px">Два рядки про те, що надіслати, щоб отримати відповідь.</p>
+    </div>
+    <span class="btn btn--primary btn--lg">Дія одним рядком</span>
+  </div>
+
+  <p class="mono" style="font-size:12px;color:var(--steel);padding-bottom:var(--s64)">Каркас B. Текст — затички, реальні тільки назви розділів. Не входить у збірку сайту.</p>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,50 @@
+/* Спільна оболонка чотирьох каркасів сторінки шнеків.
+   Тут лежить тільки службове: перемикач варіантів і заглушки під текст
+   та зображення. Сам макет у кожного варіанта свій, у його ж файлі. */
+
+/* ---------- смуга-перемикач ---------- */
+.labbar{position:sticky;top:0;z-index:60;background:#12151A;color:#fff;
+  font-family:var(--fm);font-size:12px;letter-spacing:.06em}
+.labbar-in{max-width:1120px;margin:0 auto;padding:9px 24px;display:flex;
+  align-items:center;gap:20px;flex-wrap:wrap}
+.labbar b{color:var(--amber);font-weight:600;text-transform:uppercase}
+.labbar nav{display:flex;gap:2px;margin-left:auto}
+.labbar nav a{color:rgba(255,255,255,.6);padding:5px 12px;border-radius:2px;transition:.14s ease}
+.labbar nav a:hover{color:#fff;background:rgba(255,255,255,.08)}
+.labbar nav a.on{color:#12151A;background:var(--amber);font-weight:600}
+.labbar .hint{color:rgba(255,255,255,.4);text-transform:none;letter-spacing:.02em}
+@media(max-width:760px){.labbar .hint{display:none}.labbar nav{margin-left:0;width:100%}}
+
+/* ---------- заглушка під зображення ----------
+   Помічена навмисно: порожнє місце має читатись як «сюди стане кадр»,
+   а не як зламана верстка. Пропорцію задає модифікатор або inline. */
+.ph{position:relative;display:flex;align-items:flex-end;overflow:hidden;
+  background:
+    repeating-linear-gradient(45deg,rgba(27,30,35,.05) 0 1px,transparent 1px 11px),
+    var(--mist);
+  border:1px solid var(--border)}
+.ph--dark{background:
+    repeating-linear-gradient(45deg,rgba(255,255,255,.07) 0 1px,transparent 1px 11px),
+    #23272e;border-color:rgba(255,255,255,.14)}
+.ph--43{aspect-ratio:4/3}
+.ph--169{aspect-ratio:16/9}
+.ph--11{aspect-ratio:1/1}
+.ph--21{aspect-ratio:2/1}
+.ph--tall{aspect-ratio:3/4}
+.ph b{display:block;font-family:var(--fm);font-size:10.5px;font-weight:600;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--amber)}
+.ph span{display:block;margin-top:4px;font-size:13.5px;line-height:19px;color:var(--steel)}
+.ph--dark span{color:rgba(255,255,255,.6)}
+.ph-cap{padding:16px 18px;position:relative;z-index:2}
+/* хрестик по центру — щоб кадр читався як кадр, а не як сіра пляма */
+.ph::before{content:'';position:absolute;left:50%;top:50%;width:26px;height:1px;
+  background:var(--border);transform:translate(-50%,-50%)}
+.ph::after{content:'';position:absolute;left:50%;top:50%;width:1px;height:26px;
+  background:var(--border);transform:translate(-50%,-50%)}
+.ph--dark::before,.ph--dark::after{background:rgba(255,255,255,.2)}
+
+/* ---------- затички під текст ----------
+   Довжина рядків приблизно така, як буде у фіналі: каркас має показувати
+   ритм смуги, а не «десь тут буде текст». */
+.fill{color:var(--steel)}
+.fill--dark{color:rgba(255,255,255,.55)}

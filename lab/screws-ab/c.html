@@ -1,0 +1,297 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>C · Кадри — каркас сторінки шнеків</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/styles.css">
+<link rel="stylesheet" href="/lab/screws-ab/ab.css">
+<style>
+/* ══ ВАРІАНТ C · «КАДРИ» ═════════════════════════════════════════════
+   Принцип: веде зображення, текст короткий. Кожен розділ — смуга на всю
+   ширину екрана, де кадр виходить за поле сторінки до самого краю, а текст
+   стоїть вузькою колонкою навпроти. Смуги чергуються бік у бік, і від цього
+   виникає ритм «кадр — теза — кадр». Кегль великий, повітря багато.
+   Ризик: сторінка виходить довгою і вимагає справжніх фото — на поганих
+   знімках така розкладка розсипається. Сила: так виглядають сайти тих, з
+   ким нас порівнюють (arol, khs), і саме тут працює наша галерея. */
+
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+
+/* ── герой на весь екран ── */
+.cfr-hero{position:relative;min-height:min(84vh,760px);display:flex;align-items:flex-end;
+  background:#12151A;overflow:hidden}
+.cfr-hero .ph{position:absolute;inset:0;border:0;aspect-ratio:auto}
+.cfr-hero-in{position:relative;z-index:2;width:100%;max-width:1120px;margin:0 auto;
+  padding:var(--s64) 24px}
+.cfr-veil{position:absolute;inset:0;z-index:1;
+  background:linear-gradient(180deg,rgba(14,17,20,.15) 0%,rgba(14,17,20,.55) 55%,rgba(14,17,20,.92) 100%)}
+.cfr-hero h1{color:#fff;font-size:clamp(34px,5vw,64px);line-height:1.02;max-width:14ch;
+  letter-spacing:-.02em;margin-top:var(--s16)}
+.cfr-hero .lead{color:rgba(255,255,255,.8);max-width:48ch;margin-top:var(--s24);font-size:19px;line-height:30px}
+.cfr-hero .eyebrow{color:var(--amber)}
+.cfr-hero .crumb,.cfr-hero .crumb a{color:rgba(255,255,255,.6)}
+
+/* ── смуга: кадр на виліт + колонка тексту ── */
+.cfr{display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:var(--s64);
+  padding:var(--s64) 0}
+.cfr-fig{position:relative}
+/* кадр іде за поле сторінки до краю екрана */
+.cfr-fig .ph{aspect-ratio:4/3;width:calc(100% + 50vw - 560px + 24px);margin-left:calc(-50vw + 560px - 24px)}
+.cfr--flip .cfr-fig{order:2}
+.cfr--flip .cfr-fig .ph{margin-left:0;margin-right:calc(-50vw + 560px - 24px)}
+.cfr--flip .cfr-say{order:1}
+.cfr-say{max-width:46ch}
+.cfr-say .no{font-family:var(--fm);font-size:12px;font-weight:600;letter-spacing:.14em;color:var(--amber)}
+.cfr-say h2{font-size:clamp(26px,3vw,40px);line-height:1.1;margin-top:12px;letter-spacing:-.015em}
+.cfr-say p{margin-top:var(--s24);font-size:17.5px;line-height:29px;color:var(--steel)}
+.cfr-say ul{list-style:none;margin-top:var(--s24);display:flex;flex-direction:column;gap:10px}
+.cfr-say li{position:relative;padding-left:24px;font-size:16px;line-height:25px;color:var(--steel)}
+.cfr-say li::before{content:'';position:absolute;left:0;top:11px;width:12px;height:2px;background:var(--amber)}
+.cfr-say li b{color:var(--graphite);font-weight:600}
+
+@media(max-width:960px){
+  .cfr{grid-template-columns:1fr;gap:var(--s32);padding:var(--s48) 0}
+  .cfr-fig .ph,.cfr--flip .cfr-fig .ph{width:100vw;margin-left:-24px;margin-right:0}
+  .cfr--flip .cfr-fig{order:0}
+  .cfr--flip .cfr-say{order:0}
+}
+
+/* ── смуга без картинки: великий текст на всю ширину ── */
+.say{padding:var(--s64) 0;text-align:center;max-width:24ch;margin:0 auto}
+.say h2{font-size:clamp(28px,3.6vw,46px);line-height:1.1;letter-spacing:-.02em}
+.say p{margin-top:var(--s24);font-size:18px;line-height:29px;color:var(--steel);max-width:52ch;
+  margin-left:auto;margin-right:auto}
+.say--wide{max-width:none}
+
+/* ── сітка ознак на сірому ── */
+.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--s32)}
+.tiles .t{border-top:2px solid var(--graphite);padding-top:var(--s16)}
+.tiles .t .k{font-family:var(--fm);font-size:11px;font-weight:600;letter-spacing:.12em;color:var(--amber)}
+.tiles .t h4{font-size:19px;line-height:1.25;margin:8px 0 6px}
+.tiles .t p{font-size:15px;line-height:23px;color:var(--steel)}
+@media(max-width:900px){.tiles{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.tiles{grid-template-columns:1fr}}
+
+/* ── галерея-мозаїка з кадрів ── */
+.mosaic{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--s16)}
+.mosaic .ph{aspect-ratio:1/1}
+.mosaic .ph.w2{grid-column:span 2;aspect-ratio:2/1}
+@media(max-width:820px){.mosaic{grid-template-columns:repeat(2,1fr)}.mosaic .ph.w2{grid-column:span 2}}
+
+/* ── темна смуга з переліком машин ── */
+.dark{background:var(--graphite);color:#fff;padding:var(--s64) 0}
+.dark h2{color:#fff}
+.dark .cols{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s32);margin-top:var(--s48)}
+.dark .cols div{border-top:1px solid rgba(255,255,255,.2);padding-top:var(--s16)}
+.dark .cols .k{font-family:var(--fm);font-size:11px;font-weight:600;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--amber)}
+.dark .cols p{margin-top:10px;font-size:15px;line-height:23px;color:rgba(255,255,255,.62)}
+@media(max-width:820px){.dark .cols{grid-template-columns:1fr}}
+
+.endband{background:var(--graphite);color:#fff;text-align:center;padding:var(--s64) 0}
+.endband h2{color:#fff;font-size:clamp(26px,3.2vw,40px);max-width:20ch;margin:var(--s16) auto}
+.endband p{color:rgba(255,255,255,.68);max-width:52ch;margin:0 auto var(--s32)}
+</style>
+</head>
+<body>
+
+<div class="labbar"><div class="labbar-in">
+  <b>Шнеки · каркас</b>
+  <span class="hint">текст-затички, реальні тільки назви розділів</span>
+  <nav><a href="/lab/screws-ab/a.html">A Тракт</a><a href="/lab/screws-ab/b.html">B Аркуш</a><a class="on" href="/lab/screws-ab/c.html">C Кадри</a><a href="/lab/screws-ab/d.html">D Питання</a></nav>
+</div></div>
+
+<!-- ── ГЕРОЙ ─────────────────────────────────────────────────────── -->
+<section class="cfr-hero">
+  <div class="ph ph--dark"><div class="ph-cap"></div></div>
+  <div class="cfr-veil"></div>
+  <div class="cfr-hero-in">
+    <div class="crumb"><a href="/">Головна</a> / <a href="/products/">Продукти</a> / <a href="/products/osnastka/">Оснастка</a> / Шнеки</div>
+    <span class="eyebrow">Оснастка · вузол комплекту</span>
+    <h1>Шнеки поділу потоку</h1>
+    <p class="lead">Один-два рядки про те, що робить цей вузол і чому він робиться під конкретну пляшку, а не береться з каталогу.</p>
+  </div>
+</section>
+
+<div class="wrap">
+  <div class="stamp" style="margin-top:0;border-top:0">
+    <div><b>Геометрія</b><span>Коротка теза в чотири-п'ять слів</span></div>
+    <div><b>Вихідні дані</b><span>Коротка теза в чотири-п'ять слів</span></div>
+    <div><b>Без креслень</b><span>Коротка теза в чотири-п'ять слів</span></div>
+    <div><b>Строк</b><span>Коротка теза в чотири-п'ять слів</span></div>
+  </div>
+</div>
+
+<!-- ── ТЕЗА НА ВСЮ ШИРИНУ ── -->
+<div class="wrap">
+  <div class="say">
+    <h2>Роль у лінії — одним великим рядком</h2>
+    <p class="fill">Абзац про роль вузла, три-чотири рядки. Довжина цього тексту приблизно така, як буде у фіналі, щоб було видно ритм смуги.</p>
+  </div>
+</div>
+
+<!-- ── СМУГА 01 · ВИКОНАННЯ ── -->
+<div class="wrap">
+  <section class="cfr">
+    <div class="cfr-fig"><div class="ph"><div class="ph-cap"><b>Кадр 01</b><span>Шнек у лінії, великий план</span></div></div></div>
+    <div class="cfr-say">
+      <span class="no">01</span>
+      <h2>Виконання</h2>
+      <p class="fill">Один абзац підводки, два-три рядки.</p>
+      <ul>
+        <li><b>Перший тип.</b> Один рядок пояснення.</li>
+        <li><b>Другий тип.</b> Один рядок пояснення.</li>
+        <li><b>Третій тип.</b> Один рядок пояснення.</li>
+        <li><b>Четвертий тип.</b> Один рядок пояснення.</li>
+        <li><b>П'ятий тип.</b> Один рядок пояснення.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ── СМУГА 02 · МАТЕРІАЛИ (дзеркально) ── -->
+  <section class="cfr cfr--flip">
+    <div class="cfr-fig"><div class="ph"><div class="ph-cap"><b>Кадр 02</b><span>Рендер деталі на білому</span></div></div></div>
+    <div class="cfr-say">
+      <span class="no">02</span>
+      <h2>Матеріали</h2>
+      <p class="fill">Один абзац про принцип вибору, два-три рядки.</p>
+      <table class="spec">
+        <tr><td>Матеріал перший</td><td>Коротке пояснення</td></tr>
+        <tr><td>Матеріал другий</td><td>Коротке пояснення</td></tr>
+        <tr><td>Матеріал третій</td><td>Коротке пояснення</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <!-- ── СМУГА 03 · ПОСАДКА Й ПРИВІД ── -->
+  <section class="cfr">
+    <div class="cfr-fig"><div class="ph"><div class="ph-cap"><b>Кадр 03</b><span>Посадкова частина, крупно</span></div></div></div>
+    <div class="cfr-say">
+      <span class="no">03</span>
+      <h2>Посадка, привід і умови роботи</h2>
+      <ul>
+        <li><b>Перший пункт.</b> Один-два рядки пояснення.</li>
+        <li><b>Другий пункт.</b> Один-два рядки пояснення.</li>
+        <li><b>Третій пункт.</b> Один-два рядки пояснення.</li>
+        <li><b>Четвертий пункт.</b> Один-два рядки пояснення.</li>
+        <li><b>П'ятий пункт.</b> Один-два рядки пояснення.</li>
+      </ul>
+    </div>
+  </section>
+</div>
+
+<!-- ── ОЗНАКИ ЗНОСУ на сірому ── -->
+<section class="section section--mist">
+  <div class="container">
+    <div class="say" style="text-align:left;max-width:none;padding-top:0">
+      <span class="eyebrow eyebrow--muted">Коли міняти</span>
+      <h2 style="max-width:20ch">Заголовок розділу одним рядком</h2>
+      <p class="fill" style="margin-left:0;text-align:left">Абзац-підводка, два-три рядки.</p>
+    </div>
+    <div class="tiles">
+      <div class="t"><span class="k">01</span><h4>Перша ознака</h4><p class="fill">Один короткий рядок.</p></div>
+      <div class="t"><span class="k">02</span><h4>Друга ознака</h4><p class="fill">Один короткий рядок.</p></div>
+      <div class="t"><span class="k">03</span><h4>Третя ознака</h4><p class="fill">Один короткий рядок.</p></div>
+      <div class="t"><span class="k">04</span><h4>Четверта ознака</h4><p class="fill">Один короткий рядок.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── З ЧОГО ПОЧИНАЄМО ── -->
+<div class="wrap">
+  <section class="cfr cfr--flip">
+    <div class="cfr-fig"><div class="ph"><div class="ph-cap"><b>Кадр 04</b><span>Заміри на місці або креслення</span></div></div></div>
+    <div class="cfr-say">
+      <span class="no">04</span>
+      <h2>З чого починаємо</h2>
+      <p class="fill">Абзац про основний шлях, два-три рядки.</p>
+      <ul>
+        <li><b>Спосіб другий.</b> Один рядок.</li>
+        <li><b>Спосіб третій.</b> Один рядок.</li>
+        <li><b>Спосіб четвертий.</b> Один рядок.</li>
+      </ul>
+    </div>
+  </section>
+</div>
+
+<!-- ── ГАЛЕРЕЯ ── -->
+<section class="section">
+  <div class="container">
+    <div class="sec-head">
+      <span class="eyebrow eyebrow--muted">Наші вироби</span>
+      <h2>Заголовок галереї одним рядком</h2>
+    </div>
+    <div class="mosaic">
+      <div class="ph w2"><div class="ph-cap"><b>01</b><span>підпис до кадру</span></div></div>
+      <div class="ph"><div class="ph-cap"><b>02</b><span>підпис</span></div></div>
+      <div class="ph"><div class="ph-cap"><b>03</b><span>підпис</span></div></div>
+      <div class="ph"><div class="ph-cap"><b>04</b><span>підпис</span></div></div>
+      <div class="ph"><div class="ph-cap"><b>05</b><span>підпис</span></div></div>
+      <div class="ph w2"><div class="ph-cap"><b>06</b><span>підпис до кадру</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── ЦИФРИ ── -->
+<section class="section section--mist">
+  <div class="container">
+    <div class="sec-head"><span class="eyebrow eyebrow--muted">Досвід</span><h2>Заголовок розділу одним рядком</h2></div>
+    <div class="stats" style="grid-template-columns:repeat(3,1fr)">
+      <div class="stat"><div class="n">000</div><div class="l fill">підпис до цифри</div></div>
+      <div class="stat"><div class="n">000</div><div class="l fill">підпис до цифри</div></div>
+      <div class="stat"><div class="n">000</div><div class="l fill">підпис до цифри</div></div>
+    </div>
+    <p class="mono fill" style="margin-top:var(--s32);font-size:13.5px;line-height:1.9">перелік · через · крапку · що · саме · охоплюємо · за · тарою</p>
+  </div>
+</section>
+
+<!-- ── ПІД ЯКІ МАШИНИ ── -->
+<section class="dark">
+  <div class="container">
+    <span class="eyebrow" style="color:var(--amber)">Сумісність</span>
+    <h2 style="max-width:20ch;margin-top:var(--s16)">Заголовок розділу одним рядком</h2>
+    <div class="cols">
+      <div><span class="k">Група перша</span><p>Назва · назва · назва · назва · назва · назва · назва</p></div>
+      <div><span class="k">Група друга</span><p>Назва · назва · назва</p></div>
+      <div><span class="k">Група третя</span><p>Назва · назва · назва · назва</p></div>
+      <div><span class="k">Група четверта</span><p>Назва · назва · назва</p></div>
+      <div><span class="k">Група п'ята</span><p>Назва · назва · назва · назва</p></div>
+      <div><span class="k">Група шоста</span><p>Назва</p></div>
+    </div>
+    <p class="mono" style="margin-top:var(--s32);font-size:15px;color:#fff">— обов'язковий рядок-хвіст про машини поза переліком</p>
+  </div>
+</section>
+
+<!-- ── ПИТАННЯ ── -->
+<section class="section">
+  <div class="container">
+    <div class="sec-head"><span class="eyebrow eyebrow--muted">Питання</span><h2>Заголовок розділу одним рядком</h2></div>
+    <div class="grid grid--2">
+      <div class="card"><h4>«Питання клієнта одним рядком»</h4><p class="fill">Відповідь у два-три рядки, приблизно такої довжини, як буде у фіналі.</p></div>
+      <div class="card"><h4>«Питання клієнта одним рядком»</h4><p class="fill">Відповідь у два-три рядки, приблизно такої довжини, як буде у фіналі.</p></div>
+      <div class="card"><h4>«Питання клієнта одним рядком»</h4><p class="fill">Відповідь у два-три рядки, приблизно такої довжини, як буде у фіналі.</p></div>
+      <div class="card"><h4>«Питання клієнта одним рядком»</h4><p class="fill">Відповідь у два-три рядки, приблизно такої довжини, як буде у фіналі.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="endband">
+  <div class="container">
+    <span class="eyebrow" style="color:var(--amber)">Наступний крок</span>
+    <h2>Заклик у кінці, один рядок</h2>
+    <p class="fill--dark">Два рядки про те, що надіслати, щоб отримати відповідь.</p>
+    <span class="btn btn--primary btn--lg">Дія одним рядком</span>
+  </div>
+</section>
+
+<div class="wrap" style="padding-top:var(--s48);padding-bottom:var(--s64)">
+  <p class="mono" style="font-size:12px;color:var(--steel)">Каркас C. Текст — затички, реальні тільки назви розділів. Не входить у збірку сайту.</p>
+</div>
+
+</body>
+</html>
