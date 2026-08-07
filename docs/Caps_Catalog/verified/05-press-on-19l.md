@@ -27,7 +27,35 @@ Material», за даними виробника), ущільнювальний 
 конструкцією кришка несумісна з різьбовим («screw top») горлом і
 навпаки.
 
+### Родина HOD у Pelliconi (джерело дав власник 07-08)
+
+Виробник веде цей тип окремою родиною **HOD** і дає по ній більше, ніж
+роздрібні каталоги.
+
+- **Один типорозмір горла на всю зворотну тару:** «Neck: 55 mm» для бутлів
+  **3, 4, 5 і 6 галонів**. Тобто 55 мм — не розмір «19-літрової кришки», а
+  розмір усієї родини бутлів.
+- **Три виконання:** `HOD 55 LONG` — суцільнолита кришка з ущільнювальним
+  вкладишем; `HOD 55 SHORT` — те саме з нижчою спідницею; `HOD 55 LINERLESS` —
+  **зовсім без вкладиша**, ущільнення дають **дві контактні зони на горлі**
+  («2 contact areas on the bottle neck», внутрішня й зовнішня кромка).
+- **Вкладиш заливний** («flexible flow-in liner») — і виробник прямо каже
+  навіщо: він «пристосовується до дрібних недосконалостей» багатооборотної
+  тари. Це не загальна фраза про герметичність, а відповідь на конкретну
+  проблему: горло бутля за багато циклів миття й розливу отримує дрібні
+  пошкодження.
+- **Термозапаяна етикетка поверх центру** — «prevents external contaminants
+  from entering the central cavity». Кришку не знімають: голка кулера
+  проколює центр крізь неї.
+- **Матеріал** — PE, гнучкий сорт із контролем смаку й запаху.
+- Тара описана як «unidirectional and reusable» — одноходова й багатооборотна.
+- ⬛ `[ спосіб посадки на сторінці Pelliconi не описаний ]`
+
 **Джерела.**
+- https://www.pelliconi.com/product/hod-caps-for-still-water-containers/ —
+  родина HOD: горло 55 мм, три виконання, заливний вкладиш проти
+  недосконалостей зворотної тари, безвкладишеве виконання на дві контактні
+  зони, термозапаяна етикетка. Джерело дав власник 07-08.
 - [drink-pack.com — Disposable 55mm Snap-On Cap for 5 Gallon Bottle](https://www.drink-pack.com/product/bottle-caps/disposable-55mm-snap-on-cap-for-5-gallon-bottle.html) — матеріал, конструкція (3 частини), розміри кришки.
 - [Brio Water — 5-Gallon Polycarbonate Crown Top Water Bottle](https://briowater.com/products/5-gallon-pc-crown-top-with-handle-sku-bt511pc) — бутель PC, crown top, 55 мм горло.
 - [cnpromanmachine.en.made-in-china.com — 55mm Neck Standard 5 Gallon 19L Plastic Water Bottle Caps](https://cnpromanmachine.en.made-in-china.com/product/DfMYBQzdhRcq/China-55mm-Neck-Standard-Proof-5-Gallon-19L-Plastic-Water-Bottle-Caps-with-Foil-Liner-Sealing.html) — підтвердження 55 мм як стандарту горла для 19L/5-gallon тари.
