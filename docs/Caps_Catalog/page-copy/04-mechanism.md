@@ -2,8 +2,8 @@
 
 Готові абзаци для вставки на сторінку сайту. Джерело фактів і звірка —
 `docs/Caps_Catalog/verified/04-mechanism.md`. Фотографії, на які тут є
-посилання, лежать у `docs/Caps_Catalog/images/` і зареєстровані в
-`docs/Caps_Catalog/images/ATTRIBUTION.md`.
+посилання, лежать у `images/` і зареєстровані в
+`images/ATTRIBUTION.md`.
 
 ---
 
@@ -54,7 +54,7 @@
 відносно простої гвинтової пробки. У конструкціях з рухомим (висувним) штоком
 його положення — втягнуте чи висунуте — змінює загальну висоту деталі.
 
-Фото: `images/sport-cap.jpg` — Фото: Mikael Häggström, CC0 1.0 (суспільне
+Фото: `images/sport-cap.jpg` — Mikael Häggström, CC0 1.0 (суспільне
 надбання), https://commons.wikimedia.org/wiki/File:Sports_cap_(bottle)_-_open.jpg
 
 ---
@@ -94,7 +94,7 @@
 рівно на площину захоплення — найскладніший випадок подачі розсипом серед
 закриттів з механізмом.
 
-Фото: `images/spray-pump.jpg` — Фото: Plasticbottlesupplier, CC BY-SA 4.0,
+Фото: `images/spray-pump.jpg` — Plasticbottlesupplier, CC BY-SA 4.0,
 https://commons.wikimedia.org/wiki/File:250ml_amber_pump_plastic_bottle.jpg
 
 ---
@@ -107,7 +107,7 @@ https://commons.wikimedia.org/wiki/File:250ml_amber_pump_plastic_bottle.jpg
 бути повернений у заданий бік, інакше неправильно зорієнтована деталь здатна
 заклинити фасувальну машину.
 
-Фото: `images/trigger-sprayer.jpg` — Фото: Plasticbottlesupplier, CC BY-SA 4.0,
+Фото: `images/trigger-sprayer.jpg` — Plasticbottlesupplier, CC BY-SA 4.0,
 https://commons.wikimedia.org/wiki/File:1_liter_amber_trigger_spray_bottle.jpg
 
 ---
@@ -121,7 +121,7 @@ https://commons.wikimedia.org/wiki/File:1_liter_amber_trigger_spray_bottle.jpg
 вже після наповнення й закочення клапана, а не є укупорювальним елементом у
 звичному сенсі.
 
-Фото: `images/aerosol-cap.jpg` — Фото: K Flach, суспільне надбання (Public
+Фото: `images/aerosol-cap.jpg` — K Flach, суспільне надбання (Public
 Domain), https://commons.wikimedia.org/wiki/File:Aerosol_tops.JPG
 
 ---
