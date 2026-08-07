@@ -25,7 +25,7 @@
 сторінки це забагато, перед вставкою стиснути.
 
 - `crown-cork-steel.jpg` · автор KMJ · GNU FDL 1.2+ / CC BY-SA 3.0 · https://commons.wikimedia.org/wiki/File:Kronenkorken_01_KMJ.jpg
-- `ring-pull.jpg` ✅ **іде до позиції «кронен-пробка з язичком»** — на фото кронен із **відривним язичком**. Ім'я файла історичне: воно з часів, коли ця позиція звалась `Ring pull`. Після поділу позицій 07-08 фото стало на своє місце; **для класичного ring pull без коронки воно не годиться** · автор Carl Steinbeisser · суспільне надбання (Public Domain) · https://commons.wikimedia.org/wiki/File:Kronkorken_mit_Abziehlasche.JPG
+- `crown-cap-pull-tab.jpg` ✅ **іде до позиції «кронен-пробка з язичком»** — на фото кронен із **відривним язичком**. Ім'я файла історичне: воно з часів, коли ця позиція звалась `Ring pull`. Після поділу позицій 07-08 фото стало на своє місце; **для класичного ring pull без коронки воно не годиться** · автор Carl Steinbeisser · суспільне надбання (Public Domain) · https://commons.wikimedia.org/wiki/File:Kronkorken_mit_Abziehlasche.JPG
 - `twist-off-lug.jpg` · автор Frank C. Müller · CC BY-SA 3.0 · https://commons.wikimedia.org/wiki/File:Gurkenglas_mit_Nockendeckel_(fcm).jpg
 - `ropp-aluminum.jpg` · автор Wnissen · CC BY-SA 3.0 (також доступне за CC BY-SA 2.5 і GFDL 1.2+) · https://commons.wikimedia.org/wiki/File:Dissasembled_Stelvin_screwcap_from_wine_bottle.jpg
 - `sport-cap.jpg` · автор Mikael Häggström · CC0 1.0 (суспільне надбання) · https://commons.wikimedia.org/wiki/File:Sports_cap_(bottle)_-_open.jpg
