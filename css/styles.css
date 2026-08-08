@@ -25,6 +25,15 @@ p{max-width:66ch}
 .section{padding:var(--s64) 0}
 .section--mist{background:var(--mist)}
 .section--dark{background:var(--graphite);color:var(--white)}
+/* Компоненти .sec-head, .feat і .ctype-list пофарбовані під світлий фон:
+   підписи в них ідуть сталевим сірим. На графіті це дає контраст близько 2:1 —
+   текст читається як вимкнений. Тому в темній смузі перефарбовуємо. */
+.section--dark .sec-head p,
+.section--dark .feat .item p,
+.section--dark .ctype-list li{color:rgba(255,255,255,.68)}
+.section--dark .feat .item h4,
+.section--dark .ctype-list li b{color:#fff}
+.section--dark .feat .item h4 .k{color:var(--amber)}
 .eyebrow{font-family:var(--fm);font-size:13px;line-height:20px;font-weight:500;
   letter-spacing:.14em;text-transform:uppercase;color:var(--amber)}
 .eyebrow--muted{color:var(--steel)}
@@ -217,6 +226,10 @@ a.card:hover .more{color:var(--amber)}
 .fig img{width:100%;height:100%;display:block;transition:transform .45s cubic-bezier(.2,.6,.2,1)}
 .fig--product img{object-fit:contain;padding:8%;mix-blend-mode:multiply}
 .fig--scene img{object-fit:cover}
+/* Підпис під кадром. Усередину .fig його класти не можна: там overflow:hidden
+   і задана пропорція, тож текст обрізало б. Тому окремим рядком під фігурою. */
+.fig-note{margin-top:var(--s8);font-family:var(--fm);font-size:12px;
+  letter-spacing:.06em;text-transform:uppercase;color:var(--steel)}
 .fig--43{aspect-ratio:4/3}
 .fig--169{aspect-ratio:16/9}
 .fig--21{aspect-ratio:2/1}
@@ -229,6 +242,10 @@ a.card:hover .fig img{transform:scale(1.05)}
 @media(prefers-reduced-motion:reduce){.fig img{transition:none}a.card:hover .fig img{transform:none}}
 /* ---------- numbers strip ---------- */
 .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--gutter)}
+/* Цифр про компанію рівно три (8-Н1: «з 2019», «сотні», «100+») — без цього
+   модифікатора вони сідали б у три колонки з чотирьох і смуга виглядала б
+   обрізаною справа. */
+.stats--3{grid-template-columns:repeat(3,1fr)}
 .stat .n{font-size:clamp(26px,2.6vw,44px);font-weight:700;letter-spacing:-.02em;line-height:1.05}
 /* нерозривною робимо ЛИШЕ одиницю виміру («б/год»), а не все значення:
    інакше довгі текстові значення розпирають колонку й ламають сусідні. */
@@ -279,6 +296,9 @@ a.card:hover .fig img{transform:scale(1.05)}
 .band::after{content:'';position:absolute;right:-40px;top:-40px;width:280px;height:280px;
   background:radial-gradient(circle,rgba(240,124,26,.22),transparent 68%)}
 .band h3{color:#fff}.band p{color:rgba(255,255,255,.72);margin-top:var(--s8)}
+/* Смуга без кнопки: другої колонки немає, тож текст має брати всю ширину,
+   інакше він тулиться в 1.3fr і півсмуги стоїть порожньою. */
+.band--solo{grid-template-columns:1fr}
 .band .z{position:relative;z-index:2}
 /* ---------- feature list (inner pages) ---------- */
 .feat{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--s32) var(--s48)}
@@ -605,6 +625,10 @@ a.card:hover .fig img{transform:scale(1.05)}
 .cband-head h2{margin-top:var(--s8)}
 /* Кроки — на волосяних лініях, без карток: картка закрила б полотно площею. */
 .cband-steps{list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s32)}
+/* Затверджений порядок роботи (A5) має чотири кроки, а не три: зв'язок →
+   заміри → виробництво → доставка й монтаж. */
+.cband-steps--4{grid-template-columns:repeat(4,1fr)}
+@media(max-width:1000px){.cband-steps--4{grid-template-columns:repeat(2,1fr)}}
 .cband-steps li{border-top:2px solid var(--graphite);padding-top:var(--s16)}
 .cband-steps b{display:block;font-family:var(--fm);font-size:11px;font-weight:600;
   letter-spacing:.12em;color:var(--amber)}
@@ -754,6 +778,12 @@ body[data-page="contract"] [data-nav="contract"]{color:var(--amber)}
    верхнього рівня вони не мають */
 body[data-page="conveyor"] [data-nav="products"],
 body[data-page="custom-equipment"] [data-nav="products"]{color:var(--amber)}
+/* п'ять сторінок вузлів усередині оснастки підсвічують «Оснастка» */
+body[data-page="osnastka-screws"] [data-nav="osnastka"],
+body[data-page="osnastka-turnstiles"] [data-nav="osnastka"],
+body[data-page="osnastka-caps"] [data-nav="osnastka"],
+body[data-page="osnastka-labeling"] [data-nav="osnastka"],
+body[data-page="osnastka-holding"] [data-nav="osnastka"]{color:var(--amber)}
 
 /* ============================================================
    ГОЛОВНА — повноекранний герой і покажчик напрямів.
